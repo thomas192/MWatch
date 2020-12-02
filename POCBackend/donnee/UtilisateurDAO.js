@@ -26,7 +26,7 @@ class UtilisateurDAO {
     })
     // Gestion des erreurs
     .catch(function(objetErreur) {
-      console.log("   code d'erreur: " + objetErreur.code)
+      console.log("   Code d'erreur: " + objetErreur.code)
       retour = objetErreur.code
     });
     return retour;
@@ -39,7 +39,7 @@ class UtilisateurDAO {
     await firebase.auth().signInWithEmailAndPassword(email, motDePasse)
     // Gestion des erreurs
     .catch(function(objetErreur) {
-      console.log("   code d'erreur: " + objetErreur.code)
+      console.log("   Code d'erreur: " + objetErreur.code)
       retour = objetErreur.code
     });
     return retour;
@@ -94,7 +94,7 @@ class UtilisateurDAO {
     })
     // Gestion des erreurs
     .catch(function(objetErreur) {
-      console.log("   code d'erreur: " + objetErreur.code)
+      console.log("   Code d'erreur: " + objetErreur.code)
       retour = objetErreur.code
     });
 
@@ -123,10 +123,49 @@ class UtilisateurDAO {
     })
     // Gestion des erreurs
     .catch(function(objetErreur) {
-      console.log("   code d'erreur: " + objetErreur.code)
+      console.log("   Code d'erreur: " + objetErreur.code)
       retour = objetErreur.code
     });
 
+    return retour;
+  }
+
+  async supprimerCompte(idUtilisateur, motDePasse) {
+    console.log("UtilisateurDAO->supprimerCompte()");
+    var retour = "true";
+    // Initialiser les références
+    var utilisateur = await firebase.auth().currentUser;
+    var snapshotUtilisateur = await db.collection("Utilisateur").where("idUtilisateur",
+      "==", idUtilisateur).get();
+    var snapshotGenreAime = await db.collection("GenreAime").where("idUtilisateur",
+      "==", idUtilisateur).get();
+    // Initialiser l'objet de reconnexion
+    var credential = await firebase.auth.EmailAuthProvider.credential(
+      utilisateur.email,
+      motDePasse
+    );
+    // Réauthentifier l'utilisateur
+    await utilisateur.reauthenticateWithCredential(credential)
+    .then(async function() {
+      // Supprimer les genres aimés par l'utilisateur
+      snapshotGenreAime.forEach(async doc => {
+        await db.collection("GenreAime").doc(doc.id).delete()
+        console.log("   Genres aimés par l'utilisateur supprimés");
+      })
+      // Supprimer l'utilisateur de Firestore
+      snapshotUtilisateur.forEach(async doc => {
+        await db.collection("Utilisateur").doc(doc.id).delete()
+        console.log("   Utilisateur supprimé de Firestore");
+      })
+      // Supprimer l'utilisateur de FirebaseAuth
+      await utilisateur.delete();
+      console.log("   Utilisateur supprimé de FirebaseAuth");
+    })
+    // Gestion des erreurs
+    .catch(function(objetErreur) {
+      console.log("   Code d'erreur: " + objetErreur.code)
+      retour = objetErreur.code
+    });
     return retour;
   }
 
