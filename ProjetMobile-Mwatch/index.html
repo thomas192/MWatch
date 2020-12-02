@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>MWatch</title>
+	<link rel="stylesheet" href="decoration/application.css">
+	<link rel="stylesheet" href="decoration/inscription.css">
+	<link rel="stylesheet" href="decoration/connecter.css">
+
+	
+	<style></style>
+	
+	<!-- <script src="modele/JeuVideo.js"></script>
+	<script src="donnee/JeuxVideoDAO.js"></script>
+	
+	<script src="vue/VueJeuVideo.js"></script>
+	<script src="vue/VueAjouterJeuVideo.js"></script>
+	<script src="vue/VueModifierJeuVideo.js"></script>
+	<script src="vue/VueListeJeuxVideo.js"></script> -->
+	
+	
+	<script defer src ="Application.js"></script>
+</head>
+<body>
+
+	<script type="plain/text" id="html-vue-inscription">
+		<div id="page-chargement-application">Chargement</div>
+		
+			<div class="page">
+				<button href = "#" type="button" class="connectionbtn">Se Connecter</button>
+				<h1>Inscription</h1>
+				<form action="/action_page.php">
+					<div class="container">
+						<p>S'il vous plait, veuillex remplir le formulaire pour vous inscrire.</p>
+						<hr>
+
+						<label for="courriel"><b>Courriel</b></label>
+						<input type="text" placeholder="Saisir courriel" name="email" required>
+
+						<label for="psw"><b>Mot de passe</b></label>
+						<input type="password" placeholder="Saisir mot de passe" name="psw" required>
+
+						<label for="psw-repeat"><b>Resaisir le Mot de passe</b></label>
+						<input type="password" placeholder="resaisir le mot de passe" name="psw-repeat" required>
+						
+						
+						<p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+						<div class="clearfix">
+							<button type="submit" class="validerbtn">Enregistrer</button>
+						  <button href = "#" type="button" class="annulerbtn">Annuler</button>
+						  
+						</div>
+				  </div>
+				</form>
+			</div>
+	</script>
+	
+	
+	
+	
+		<div class="page">
+			<h1>Connection</h1>
+
+			<form action="/action_page.php" method="post">
+			  <div class="imgcontainer">
+				<img src="decoration\illustration\avatar.png" alt="Avatar" class="avatar">
+			  </div>
+
+			  <div class="container">
+				<label for="uname"><b>Pseudo</b></label>
+				<input type="text" placeholder="Entrer Pseudo" name="uname" required>
+
+				<label for="psw"><b>Mot de passe</b></label>
+				<input type="password" placeholder="Entrer Mot de passe" name="psw" required>
+					
+				<button type="submit" class="validerbtn">Se connecter</button>
+				<label>
+				  <input type="checkbox" checked="checked" name="remember"> Se souvenir de moi
+				</label>
+			  </div>
+				<button type="button" class="annulerbtn">Annuler</button>
+				<span class="psw">Mot de passe oublié <a href="#">mot de passe?</a></span>
+			</form>
+		</div>
+		
+		
+		<div class="page">
+			<h1>Liste des Amis</h1>
+			<button type="button" class="action" href="#ajouter-un-ami">Ajouter un Ami</button>
+			<ul id="liste-des-amis">
+			  <li>
+			   <a href="#" class="liste-des-amis-items>{}"></a>		  
+			  </li>
+			</ul>
+		</div>
+		
+		<div class="page">
+			<h1>Ajouter un jeu video</h1>
+			<form class="example" action="/action_page.php">
+			  <input type="text" placeholder="Search.." name="search">
+			  <button  type="submit"><i class="fa fa-search"></i></button>
+			</form>
+			 <ul id="liste-resultat-recherche">
+			  <li>
+				<a href="#" class="liste-des-amis-items>{}"></a>		  
+			  </li>
+			</ul>
+
+			  <button class="action" type="submit" id="enregistrer" value="Enregistrer"> Ajouter</button>
+
+			<a href="#" class="action">Annuler et revenir &agrave; la liste</a>
+	  </div>
+		
+		
+	
+
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+	:root {
+  --theme-rouge: #fd341f;
+  --theme-blanc-transparent: rgba(255,255,255,0.3);
+  --theme-bleu-pale: rgba(151,219,246,1);
+  --theme-bleu-fonce: rgba(63,155,191,1);
+  --theme-vert: #408450;
+  --theme-blanc: white;
+  --theme-noir: black;
+
+  --theme-bordure-rondeur: 0.5rem;
+  
+}
+	
+	.page {
+  position:relative;
+  background-color:var(--theme-noir);
+  padding:5%;
+  min-height: 100vh;
+  box-sizing: border-box;
+
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+  background-size: absolute;
+  color:var(--theme-rouge);
+}
+
+.page h1{
+  font-family:'The Perfect Christmas', sans-serif;
+  text-align:center;
+  font-size:2rem;
+  font-family:'The Perfect Christmas', sans-serif;
+  font-weight:normal;
+  line-height:1.8rem;
+  color:white;
+  text-shadow: 2px 2px var(--theme-blanc);
+
+}
+
+button {
+  background-color: #E5A90A;
+  color: white;
+  padding: 14px 20px;
+  margin: 12px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity: 1;
+}
+
+.annulerbtn {
+  width: auto;
+  padding: 10px 90px;
+  background-color: #f44336;
+  margin-left:310px;
+    
+}
+
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .annulerbtn {
+     width: 100%;
+  }
+}
+
+.connectionbtn{
+  width: auto;
+  padding: 10px 90px;
+  background-color: #f44336;
+  margin-left: 605px;
+    
+}
+
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .connectionbtn {
+     width: 100%;
+  }
+}
+
+
+
+
+
+
+
