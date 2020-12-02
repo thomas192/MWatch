@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="application.css">
+  <style></style>
+
+  <!-- Firebase -->
+  <script defer src="firebase/firebase-app.js"></script>
+  <script defer src="firebase/firebase-auth.js"></script>
+  <script defer src="firebase/firebase-firestore.js"></script>
+  <script defer src="donnee/init-firebase.js"></script>
+
+  <script src="langues/francais.js"></script>
+  <script src="lib/fonctionDeBase.js"></script>
+  <script src="donnee/UtilisateurDAO.js"></script>
+  <script src="modele/Utilisateur.js"></script>
+  <script src="vue/VueInscription.js"></script>
+  <script src="vue/VueConnexion.js"></script>
+  <script src="vue/VueProfil.js"></script>
+
+  <script defer src="Application.js"></script>
+
+</head>
+
+<body>
+  <header>
+    <div class="menu">
+      <a class="action" id="menu-item-inscription" href="#inscription">Inscription</a>
+      <a class="action" id="menu-item-connexion" href="#">Connexion</a>
+      <a class="action" id="menu-item-profil" href="#profil">Profil</a>
+    </div>
+  </header>
+
+  <contenu>
+    <script type="plain/text" id="html-vue-inscription">
+      <div class="page">
+        <h1>Inscription</h1>
+        <form class = "formulaire" id="formulaire">
+            <div>
+              <label for="pseudo">Pseudo</label>
+              <input type="text" id="pseudo" required/>
+            </div>
+            <div>
+              <label for="email">Adresse email</label>
+              <input type="email" id="email" required/>
+            </div>
+            <div>
+              <label for="mot-de-passe">Mot de passe</label>
+              <input type="password" id="mot-de-passe" required/>
+            </div>
+          <input class="action" type="submit" id="action-inscrire" value="S'inscrire"/>
+        </form>
+      </div>
+    </script>
+
+    <script type="plain/text" id="html-vue-connexion">
+      <div class="page">
+        <h1>Connexion</h1>
+        <form class = "formulaire" id="formulaire">
+            <div>
+              <label for="email">Adresse email</label>
+              <input type="text" id="email" required/>
+            </div>
+            <div>
+              <label for="mot-de-passe">Mot de passe</label>
+              <input type="password" id="mot-de-passe" required/>
+            </div>
+          <input class="action" type="submit" id="action-connexion" value="Se connecter"/>
+        </form>
+      </div>
+    </script>
+
+    <script type="plain/text" id="html-vue-profil">
+      <div class="page">
+        <h1>Profil</h1>
+        <button class="action" id="deconnexion" type="button">Déconnexion</button>
+        <div id="formulaires">
+            <h2>Genre aimés</h2>
+            <form class = "formulaire" id="formulaire-genre-aime">
+              <div id="genre">
+                <input type="checkbox" id="{Genre.id}" name="{Genre.id}" value="{Genre.id}">
+                <label for="{Genre.id}">{Genre.nom}</label>
+              </div>
+              <input class="action" type="submit" id="action-formulaire-genre-aime" value="Enregistrer"/>
+            </form>
+            <h2>Informations personnelles</h2>
+            <form class = "formulaire" id="formulaire-information-personnelle">
+              <div>
+                <label for="pseudo">Pseudo</label>
+                <input type="text" id="pseudo" required/>
+              </div>
+              <div>
+                <label for="email">Adresse email</label>
+                <input type="email" id="email" required/>
+              </div>
+              <div>
+                <label for="mot-de-passe-actuel">Mot de passe actuel</label>
+                <input type="password" id="mot-de-passe-actuel" required/>
+              </div>
+              <div>
+                <label for="nouveau-mot-de-passe">Nouveau mot de passe</label>
+                <input type="password" id="nouveau-mot-de-passe"/>
+              </div>
+              <input class="action" type="submit" id="action-formulaire-information-personnelle" value="Mettre à jour"/>
+            </form>
+          </div>
+        </div>
+    </script>
+
+    <script type="plain/text" id="html-vue-amis">
+      <div class="page">
+        <h1>Amis</h1>
+        <form id="formulaire">
+          <div>
+            <label for="pseudo">Ajouter un amis</label>
+            <input type="text" id="pseudo" required/>
+          </div>
+          <div id="genre">
+            <input type="checkbox" id="{Genre.id}" name="{Genre.id}" value="{Genre.id}">
+            <label for="{Genre.id}">{Genre.nom}</label>
+          </div>
+          <input class="action" type="submit" id="action-preference" value="Enregistrer"/>
+        </form>
+      </div>
+    </script>
+
+  </contenu>
+</body>
+</html>

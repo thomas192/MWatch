@@ -1,0 +1,4 @@
+NOTES
+
+Scripts de vue à mettre dans des fichiers
+Listener onAuthStateChanged à déplacer dans le DAO
