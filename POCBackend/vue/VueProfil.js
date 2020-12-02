@@ -8,6 +8,8 @@ class VueProfil {
     this.actionMettreAJourInformationPersonnelle = null;
     // Fonction prêtée par le controleur
     this.actionMettreAJourGenreAime = null;
+    // Fonction prêtée par le controleur
+    this.actionSupprimerCompte = null;
   }
 
   /** Initialise la liste des genres */
@@ -30,6 +32,11 @@ class VueProfil {
     this.actionDeconnecter = actionDeconnecter;
   }
 
+  /** Initialise la fonction actionSupprimerCompte */
+  initialiserActionSupprimerCompte(actionSupprimerCompte) {
+    this.actionSupprimerCompte = actionSupprimerCompte;
+  }
+
   /** Gère l'affichage de la vue */
   afficher() {
     console.log("VueProfil->afficher()");
@@ -37,13 +44,17 @@ class VueProfil {
     document.getElementById("deconnexion").addEventListener("click",
     evenement => this.deconnecter(evenement));
 
-    // Ecouteur du formulaire des informations personnelles
+    // Ecouteur du formulaire informations personnelles
     document.getElementById("formulaire-information-personnelle").addEventListener("submit",
     evenement => this.mettreAJourInformationPersonnelle(evenement));
 
-    // Ecouteur du formulaire des genres aimés
+    // Ecouteur du formulaire genres aimés
     document.getElementById("formulaire-genre-aime").addEventListener("submit",
     evenement => this.mettreAJourGenreAime(evenement));
+
+    // Ecouteur du formulaire supprimer compte
+    document.getElementById("formulaire-supprimer-compte").addEventListener("submit",
+    evenement => this.supprimerCompte(evenement));
 
     // Affichage dynamique du pseudo
     document.getElementById("pseudo").value = firebase.auth().currentUser.displayName;
@@ -55,7 +66,7 @@ class VueProfil {
     let formulaireGenre = document.getElementById("genre");
     const formulaireGenreItemHtml = formulaireGenre.innerHTML;
     let formulaireGenreHtmlRemplacement = "";
-    for(var genre in this.listeGenreDonnee) {
+    for (var genre in this.listeGenreDonnee) {
       let formulaireGenreItemHtmlRemplacement = formulaireGenreItemHtml;
       // id
       formulaireGenreItemHtmlRemplacement =
@@ -87,7 +98,7 @@ class VueProfil {
   async mettreAJourInformationPersonnelle(evenement) {
     console.log("VueProfil->mettreAJourInformationPersonnelle()");
     evenement.preventDefault();
-
+    // Récupérer l'id de l'utilisateur
     var idUtilisateur = firebase.auth().currentUser.uid;
     // Récupérer les valeurs des champs
     var pseudo = document.getElementById("pseudo").value;
@@ -97,7 +108,7 @@ class VueProfil {
     // Effectuer la mise à jour des informations personnelles
     var resultat = await this.actionMettreAJourInformationPersonnelle(idUtilisateur,
       pseudo, email, motDePasseActuel, nouveauMotDePasse);
-    if(resultat != "true") {
+    if (resultat != "true") {
       choixAlerte(resultat);
     }
   }
@@ -107,13 +118,13 @@ class VueProfil {
   async mettreAJourGenreAime(evenement) {
     console.log("VueProfil->mettreAJourGenreAime()");
     evenement.preventDefault();
-
+    // Récupérer l'id de l'utilisateur
     var idUtilisateur = firebase.auth().currentUser.uid;
     // Récupérer les champs cochés
     var listeGenreAime = []
-    for(var index in this.listeGenreDonnee) {
+    for (var index in this.listeGenreDonnee) {
       let checkbox = document.getElementById(this.listeGenreDonnee[index].id);
-      if(checkbox.checked) {
+      if (checkbox.checked) {
             listeGenreAime.push(this.listeGenreDonnee[index].id);
       }
     }
@@ -123,6 +134,22 @@ class VueProfil {
       choixAlerte(resultat);
     }
   }
+
+  /** Récupère le mot de passe renseigné par l'utilisateur et appelle le
+    * controleur */
+    async supprimerCompte(evenement) {
+      console.log("VueProfil->supprimerCompte()");
+      evenement.preventDefault();
+      // Récupérer l'id de l'utilisateur
+      var idUtilisateur = firebase.auth().currentUser.uid;
+      // Récupérer le mot de passe
+      var motDePasseActuel = document.getElementById("mot-de-passe").value;
+      // Supprimer l'utilisateur
+      var resultat = await this.actionSupprimerCompte(idUtilisateur, motDePasseActuel);
+      if(resultat != "true") {
+        choixAlerte(resultat);
+      }
+    }
 
   /** Appelle le controleur qui déconnecte l'utilisateur */
   deconnecter(evenement) {

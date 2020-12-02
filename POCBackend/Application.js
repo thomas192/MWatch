@@ -25,6 +25,10 @@ class Application {
       listeGenreAime) => this.actionMettreAJourGenreAime(idUtilisateur,
         listeGenreAime));
 
+    // Initialise la fonction actionSupprimerCompte dans VueProfil
+    this.vueProfil.initialiserActionSupprimerCompte((idUtilisateur, motDePasse) =>
+      this.actionSupprimerCompte(idUtilisateur, motDePasse));
+
     // Initialise la fonction actionDeconnecter dans VueProfil
     this.vueProfil.initialiserActionDeconnecter(() => this.actionDeconnecter());
 
@@ -39,7 +43,7 @@ class Application {
       // Ecouteur qui met à jour l'interface utilisateur automatiquement à chaque
       // fois que l'utilisateur se connecte ou se déconnecte
       firebase.auth().onAuthStateChanged(function(user) {
-        console.log("onAuthStateChanged");
+        console.log("Event onAuthStateChanged");
         if(user != null) {
           console.log("   Utilisateur connecté");
           document.getElementById("menu-item-inscription").style.display = "none";
@@ -58,11 +62,11 @@ class Application {
     console.log("Application->naviguer()");
     let hash = window.location.hash;
 
-    if(!hash) {
+    if (!hash) {
       this.vueConnexion.afficher();
-    } else if(hash.match(/^#inscription/)) {
+    } else if (hash.match(/^#inscription/)) {
       this.vueInscription.afficher();
-    } else if(hash.match(/^#profil/)) {
+    } else if (hash.match(/^#profil/)) {
       this.vueProfil.initialiserListeGenre(this.utilisateurDAO.listerGenre());
       this.vueProfil.afficher();
     }
@@ -71,8 +75,9 @@ class Application {
   async actionInscrire(pseudo, email, motDePasse) {
     console.log("Application->actionInscrire()");
     var resultat = await this.utilisateurDAO.inscrire(pseudo, email, motDePasse);
-    var user = firebase.auth().currentUser;
-    if(user != null) {
+    var user = await firebase.auth().currentUser;
+    // Redirection
+    if (user != null) {
       this.window.location.hash = "#profil";
     }
     return resultat;
@@ -81,8 +86,9 @@ class Application {
   async actionConnecter(email, motDePasse) {
     console.log("Application->actionConnecter()");
     var resultat = await this.utilisateurDAO.connecter(email, motDePasse);
-    var user = firebase.auth().currentUser;
-    if(user != null) {
+    var user = await firebase.auth().currentUser;
+    // Redirection
+    if (user != null) {
       this.window.location.hash = "#profil";
     }
     return resultat;
@@ -106,6 +112,16 @@ class Application {
     console.log("Application->actionMettreAJourGenreAime()");
     return await this.utilisateurDAO.mettreAJourGenreAime(idUtilisateur,
       listeGenreAime);
+  }
+
+    async actionSupprimerCompte(idUtilisateur, motDePasse) {
+    console.log("Application->actionSupprimerCompte()");
+    var resultat = await this.utilisateurDAO.supprimerCompte(idUtilisateur, motDePasse);
+    // Redirection
+    if (resultat == "true") {
+      this.window.location.hash = "#";
+    }
+    return resultat;
   }
 
 }
