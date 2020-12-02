@@ -1,33 +1,36 @@
 class VueProfil {
   constructor() {
     this.html = document.getElementById("html-vue-profil").innerHTML;
-    this.actionDeconnecter = null;
-    this.actionMettreAJourInformationPersonnelle = null;
-    this.actionMettreAJourGenreAime = null;
     this.listeGenreDonnee = null;
+    // Fonction prêtée par le controleur
+    this.actionDeconnecter = null;
+    // Fonction prêtée par le controleur
+    this.actionMettreAJourInformationPersonnelle = null;
+    // Fonction prêtée par le controleur
+    this.actionMettreAJourGenreAime = null;
   }
 
-  // Initialise la liste des genres
+  /** Initialise la liste des genres */
   initialiserListeGenre(listeGenreDonnee) {
     this.listeGenreDonnee = listeGenreDonnee;
     }
 
-  // Initialise la fonction actionMettreAJourInformationPersonnelle
+  /** Initialise la fonction actionMettreAJourInformationPersonnelle */
   initialiserActionMettreAJourInformationPersonnelle(actionMettreAJourInformationPersonnelle) {
     this.actionMettreAJourInformationPersonnelle = actionMettreAJourInformationPersonnelle;
   }
 
-  // Initialise la fonction actionMettreAJourGenreAime
+  /** Initialise la fonction actionMettreAJourGenreAime */
   initialiserActionMettreAJourGenreAime(actionMettreAJourGenreAime) {
     this.actionMettreAJourGenreAime = actionMettreAJourGenreAime;
   }
 
-  // Initialise la fonction actionDeconnecter
+  /** Initialise la fonction actionDeconnecter */
   initialiserActionDeconnecter(actionDeconnecter) {
     this.actionDeconnecter = actionDeconnecter;
   }
 
-  // Gère l'affichage de la vue
+  /** Gère l'affichage de la vue */
   afficher() {
     console.log("VueProfil->afficher()");
     document.getElementsByTagName("contenu")[0].innerHTML = this.html;
@@ -54,26 +57,33 @@ class VueProfil {
     let formulaireGenreHtmlRemplacement = "";
     for(var genre in this.listeGenreDonnee) {
       let formulaireGenreItemHtmlRemplacement = formulaireGenreItemHtml;
+      // id
       formulaireGenreItemHtmlRemplacement =
-        formulaireGenreItemHtmlRemplacement.replace("{Genre.id}",
+        formulaireGenreItemHtmlRemplacement.replace("{id}",
         this.listeGenreDonnee[genre].id)
+      // name
       formulaireGenreItemHtmlRemplacement =
-        formulaireGenreItemHtmlRemplacement.replace("{Genre.id}",
+        formulaireGenreItemHtmlRemplacement.replace("{name}",
         this.listeGenreDonnee[genre].id)
+      // value
       formulaireGenreItemHtmlRemplacement =
-        formulaireGenreItemHtmlRemplacement.replace("{Genre.id}",
-        this.listeGenreDonnee[genre].id)
+        formulaireGenreItemHtmlRemplacement.replace("{value}",
+        this.listeGenreDonnee[genre].nom)
+      // for
       formulaireGenreItemHtmlRemplacement =
-          formulaireGenreItemHtmlRemplacement.replace("{Genre.id}",
+          formulaireGenreItemHtmlRemplacement.replace("{for}",
           this.listeGenreDonnee[genre].id)
+      // label
       formulaireGenreItemHtmlRemplacement =
-        formulaireGenreItemHtmlRemplacement.replace("{Genre.nom}",
+        formulaireGenreItemHtmlRemplacement.replace("{label}",
         this.listeGenreDonnee[genre].nom)
      formulaireGenreHtmlRemplacement += formulaireGenreItemHtmlRemplacement;
     }
     formulaireGenre.innerHTML = formulaireGenreHtmlRemplacement;
   }
 
+  /** Récupère les informations personnelles renseignées par l'utilisateur et
+    * et les passe au controleur */
   async mettreAJourInformationPersonnelle(evenement) {
     console.log("VueProfil->mettreAJourInformationPersonnelle()");
     evenement.preventDefault();
@@ -92,10 +102,12 @@ class VueProfil {
     }
   }
 
+  /** Récupère les genre aimés par l'utilisateur et et les passe
+    * au controleur */
   async mettreAJourGenreAime(evenement) {
     console.log("VueProfil->mettreAJourGenreAime()");
     evenement.preventDefault();
-    
+
     var idUtilisateur = firebase.auth().currentUser.uid;
     // Récupérer les champs cochés
     var listeGenreAime = []
@@ -112,6 +124,7 @@ class VueProfil {
     }
   }
 
+  /** Appelle le controleur qui déconnecte l'utilisateur */
   deconnecter(evenement) {
     console.log("VueProfil->deconnecter()");
     evenement.preventDefault();

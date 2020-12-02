@@ -79,8 +79,8 @@
             <h2>Genre aimés</h2>
             <form class = "formulaire" id="formulaire-genre-aime">
               <div id="genre">
-                <input type="checkbox" id="{Genre.id}" name="{Genre.id}" value="{Genre.id}">
-                <label for="{Genre.id}">{Genre.nom}</label>
+              <input type="checkbox" id="{id}" name="{name}" value="{value}">
+              <label for="{for}">{label}</label>
               </div>
               <input class="action" type="submit" id="action-formulaire-genre-aime" value="Enregistrer"/>
             </form>
@@ -115,10 +115,6 @@
           <div>
             <label for="pseudo">Ajouter un amis</label>
             <input type="text" id="pseudo" required/>
-          </div>
-          <div id="genre">
-            <input type="checkbox" id="{Genre.id}" name="{Genre.id}" value="{Genre.id}">
-            <label for="{Genre.id}">{Genre.nom}</label>
           </div>
           <input class="action" type="submit" id="action-preference" value="Enregistrer"/>
         </form>
