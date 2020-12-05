@@ -24,7 +24,28 @@ function choixAlerte(codeErreur) {
     case "auth/requires-recent-login":
       alert(ERREUR_CONNEXION_RECENTE_REQUISE);
       break;
+    case "utilisateur_inconnu":
+      alert(ERREUR_UTILISATEUR_INCONNU);
+      break;
+    case "ajout_de_soi_en_ami":
+      alert(ERREUR_AJOUT_DE_SOI_EN_AMI);
+      break;
+    case "demande_ami_deja_envoyee":
+      alert(ERREUR_DEMANDE_AMI_DEJA_ENVOYEE);
+      break;
+    case "deja_ami":
+      alert(ERREUR_DEJA_AMI);
+      break;
     default:
       alert(codeErreur);
   }
+}
+
+
+// Créé un objet erreur personnalisé
+function exceptionPersonnalisee(code) {
+  console.log("   exceptionPersonnalisee()");
+  const objetErreur = new Error("Erreur personnalisée");
+  objetErreur.code = code;
+  throw objetErreur;
 }

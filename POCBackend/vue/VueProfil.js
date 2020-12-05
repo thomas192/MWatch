@@ -97,7 +97,7 @@ class VueProfil {
   async mettreAJourInformationPersonnelle(evenement) {
     console.log("VueProfil->mettreAJourInformationPersonnelle()");
     evenement.preventDefault();
-    // Récupérer l'id de l'utilisateur
+    // Récupérer l'id de l'utilisateur connecté
     var idUtilisateur = firebase.auth().currentUser.uid;
     // Récupérer les valeurs des champs
     var pseudo = document.getElementById("pseudo").value;

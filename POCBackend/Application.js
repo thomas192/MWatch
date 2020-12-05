@@ -7,31 +7,35 @@ class Application {
     this.vueProfil = vueProfil;
     this.vueAmis = vueAmis;
 
-    // Initialise la fonction actionInscrire dans VueInscription
+    // Initialiser la fonction actionInscrire dans VueInscription
     this.vueInscription.initialiserActionInscrire((pseudo, email, motDePasse) =>
       this.actionInscrire(pseudo, email, motDePasse));
 
-    // Initialise la fonction actionConnecter dans VueConnexion
+    // Initialiser la fonction actionConnecter dans VueConnexion
     this.vueConnexion.initialiserActionConnecter((email, motDePasse) =>
       this.actionConnecter(email, motDePasse));
 
-    // Initialise la fonction actionMettreAJourInformationPersonnelle dans VueProfil
+    // Initialiser la fonction actionMettreAJourInformationPersonnelle dans VueProfil
     this.vueProfil.initialiserActionMettreAJourInformationPersonnelle((idUtilisateur,
       pseudo, email, motDePasseActuel, nouveauMotDePasse) =>
         this.actionMettreAJourInformationPersonnelle(idUtilisateur, pseudo, email,
           motDePasseActuel, nouveauMotDePasse));
 
-    // Initialise la fonction actionMettreAJourGenreAime dans VueProfil
+    // Initialiser la fonction actionMettreAJourGenreAime dans VueProfil
     this.vueProfil.initialiserActionMettreAJourGenreAime((idUtilisateur,
       listeGenreAime) => this.actionMettreAJourGenreAime(idUtilisateur,
         listeGenreAime));
 
-    // Initialise la fonction actionSupprimerCompte dans VueProfil
+    // Initialiser la fonction actionSupprimerCompte dans VueProfil
     this.vueProfil.initialiserActionSupprimerCompte((idUtilisateur, motDePasse) =>
       this.actionSupprimerCompte(idUtilisateur, motDePasse));
 
-    // Initialise la fonction actionDeconnecter dans VueProfil
+    // Initialiser la fonction actionDeconnecter dans VueProfil
     this.vueProfil.initialiserActionDeconnecter(() => this.actionDeconnecter());
+
+    // Initialiser la fonction actionSupprimerCompte dans VueProfil
+    this.vueAmis.initialiserActionAjouterAmi((idUtilisateur, emailUtilisateurAjoute) =>
+      this.actionAjouterAmi(idUtilisateur, emailUtilisateurAjoute));
 
     this.initialiserApplication();
   }
@@ -119,7 +123,7 @@ class Application {
       listeGenreAime);
   }
 
-    async actionSupprimerCompte(idUtilisateur, motDePasse) {
+  async actionSupprimerCompte(idUtilisateur, motDePasse) {
     console.log("Application->actionSupprimerCompte()");
     var resultat = await this.utilisateurDAO.supprimerCompte(idUtilisateur, motDePasse);
     // Redirection
@@ -127,6 +131,11 @@ class Application {
       this.window.location.hash = "#";
     }
     return resultat;
+  }
+
+  async actionAjouterAmi(idUtilisateur, emailUtilisateurAjoute) {
+    console.log("Application->actionAjouterAmi()");
+    return await this.utilisateurDAO.ajouterAmi(idUtilisateur, emailUtilisateurAjoute);
   }
 
 }
