@@ -1,10 +1,11 @@
 class Application {
-  constructor(window, utilisateurDAO, vueInscription, vueConnexion, vueProfil) {
+  constructor(window, utilisateurDAO, vueInscription, vueConnexion, vueProfil, vueAmis) {
     this.window = window;
     this.utilisateurDAO = utilisateurDAO;
     this.vueInscription = vueInscription;
     this.vueConnexion = vueConnexion;
     this.vueProfil = vueProfil;
+    this.vueAmis = vueAmis;
 
     // Initialise la fonction actionInscrire dans VueInscription
     this.vueInscription.initialiserActionInscrire((pseudo, email, motDePasse) =>
@@ -49,11 +50,13 @@ class Application {
           document.getElementById("menu-item-inscription").style.display = "none";
           document.getElementById("menu-item-connexion").style.display = "none";
           document.getElementById("menu-item-profil").style.display = "block";
+          document.getElementById("menu-item-amis").style.display = "block";
         } else {
           console.log("   Utilisateur non connecté");
           document.getElementById("menu-item-inscription").style.display = "block";
           document.getElementById("menu-item-connexion").style.display = "block";
           document.getElementById("menu-item-profil").style.display = "none";
+          document.getElementById("menu-item-amis").style.display = "none";
         }
       });
   }
@@ -69,6 +72,8 @@ class Application {
     } else if (hash.match(/^#profil/)) {
       this.vueProfil.initialiserListeGenre(this.utilisateurDAO.listerGenre());
       this.vueProfil.afficher();
+    } else if (hash.match(/^#amis/)) {
+      this.vueAmis.afficher();
     }
   }
 
@@ -126,4 +131,4 @@ class Application {
 
 }
 
-new Application(window, new UtilisateurDAO(), new VueInscription(), new VueConnexion(), new VueProfil());
+new Application(window, new UtilisateurDAO(), new VueInscription(), new VueConnexion(), new VueProfil(), new VueAmis());

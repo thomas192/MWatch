@@ -2,13 +2,10 @@ class VueProfil {
   constructor() {
     this.html = document.getElementById("html-vue-profil").innerHTML;
     this.listeGenreDonnee = null;
-    // Fonction prêtée par le controleur
+    // Fonctions prêtées par le controleur
     this.actionDeconnecter = null;
-    // Fonction prêtée par le controleur
     this.actionMettreAJourInformationPersonnelle = null;
-    // Fonction prêtée par le controleur
     this.actionMettreAJourGenreAime = null;
-    // Fonction prêtée par le controleur
     this.actionSupprimerCompte = null;
   }
 
@@ -41,6 +38,8 @@ class VueProfil {
   afficher() {
     console.log("VueProfil->afficher()");
     document.getElementsByTagName("contenu")[0].innerHTML = this.html;
+
+    // Ecouteur du bouton de déconnexion
     document.getElementById("deconnexion").addEventListener("click",
     evenement => this.deconnecter(evenement));
 

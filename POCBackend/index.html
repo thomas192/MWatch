@@ -18,6 +18,7 @@
   <script src="vue/VueInscription.js"></script>
   <script src="vue/VueConnexion.js"></script>
   <script src="vue/VueProfil.js"></script>
+  <script src="vue/VueAmis.js"></script>
 
   <script defer src="Application.js"></script>
 
@@ -29,6 +30,7 @@
       <a class="action" id="menu-item-inscription" href="#inscription">Inscription</a>
       <a class="action" id="menu-item-connexion" href="#">Connexion</a>
       <a class="action" id="menu-item-profil" href="#profil">Profil</a>
+      <a class="action" id="menu-item-amis" href="#amis">Amis</a>
     </div>
   </header>
 
@@ -120,12 +122,13 @@
     <script type="plain/text" id="html-vue-amis">
       <div class="page">
         <h1>Amis</h1>
-        <form id="formulaire">
+        <h2>Ajouter un ami</h2>
+        <form class="formulaire" id="formulaire-ajouter-ami">
           <div>
-            <label for="pseudo">Ajouter un amis</label>
-            <input type="text" id="pseudo" required/>
+            <label for="email">Email</label>
+            <input type="email" id="email" required/>
           </div>
-          <input class="action" type="submit" id="action-preference" value="Enregistrer"/>
+          <input class="action" type="submit" id="action-ajouter" value="Ajouter"/>
         </form>
       </div>
     </script>
