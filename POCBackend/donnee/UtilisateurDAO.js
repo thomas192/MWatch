@@ -130,6 +130,57 @@ class UtilisateurDAO {
     return retour;
   }
 
+  async ajouterAmi(idUtilisateur, emailUtilisateurAjoute) {
+    console.log("UtilisateurDAO->ajouterAmi()");
+    var retour = "true";
+    // Récupérer l'utilisateur connecté
+    var utilisateur = await firebase.auth().currentUser;
+    // Récupérer le snapshot contenant le document de l'utilisateur ajouté
+    await db.collection("Utilisateur").where("email", "==", emailUtilisateurAjoute).get()
+    .then(async function(snapshotUtilisateurAjoute) {
+      // Récupérer le document de l'utilisateur ajouté
+      var utilisateurAjoute;
+      snapshotUtilisateurAjoute.forEach(async doc => {
+        utilisateurAjoute = doc.data();
+      })
+      // Vérifier si l'utilisateur ajouté existe
+      if (utilisateurAjoute == null) {
+        console.log("   Utilisateur ajouté inconnu");
+        return new exceptionPersonnalisee("utilisateur_inconnu");
+      }
+      // Vérifier si l'utilisateur ne s'ajoute pas lui-même en ami
+      if (utilisateur.email == emailUtilisateurAjoute) {
+        console.log("   L'utilisateur s'ajoute lui-même en ami");
+        return new exceptionPersonnalisee("ajout_de_soi_en_ami");
+      }
+      // Vérifier si l'utilisateur n'a pas déjà envoyé une demande d'ami à l'utilisateur ajouté
+      var demande = await db.collection("Ami").doc(utilisateur.uid)
+        .collection("Demande").doc(utilisateurAjoute.idUtilisateur).get();
+      if (demande.exists) {
+        console.log("   Demande d'ami déjà envoyée à cet utilisateur");
+        return new exceptionPersonnalisee("demande_ami_deja_envoyee");
+      }
+      // Vérifier si l'utilisateur n'est pas déjà ami avec l'utilisateur ajouté
+      var relation = await db.collection("Ami").doc(utilisateur.uid)
+        .collection("Relation").doc(utilisateurAjoute.idUtilisateur).get();
+      if (relation.exists) {
+        console.log("   Utilisateur déjà ami avec l'utilisateur ajouté");
+        return new exceptionPersonnalisee("deja_ami");
+      }
+      // Enregistrer la demande d'ami
+      db.collection("Ami").doc(utilisateur.uid).collection("Demande")
+        .doc(utilisateurAjoute.idUtilisateur).set({});
+    })
+    // Gestion des erreurs
+    .catch(function(objetErreur) {
+      console.log(objetErreur);
+      console.log("   Code d'erreur: " + objetErreur.code)
+      retour = objetErreur.code
+    });
+
+    return retour;
+  }
+
   async supprimerCompte(idUtilisateur, motDePasse) {
     console.log("UtilisateurDAO->supprimerCompte()");
     var retour = "true";
