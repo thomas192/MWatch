@@ -7,21 +7,20 @@ class UtilisateurDAO {
     var retour = "true";
     // Créer l'utilisateur
     await firebase.auth().createUserWithEmailAndPassword(email, motDePasse)
-    .then(function() {
-      // Ajouter le pseudo
+    .then(async function() {
       console.log("   Utilisateur créé")
-      return firebase.auth().currentUser.updateProfile({ displayName: pseudo })
-    })
-    .then(function() {
+      // Récupérer l'utilisateur connecté
+      var utilisateur = await firebase.auth().currentUser
+      // Ajouter le pseudo
+      await utilisateur.updateProfile({ displayName: pseudo })
       console.log("   Pseudo ajouté")
       // Ajouter l'utilisateur dans firestore
-      return db.collection('Utilisateur').add({
+      await db.collection('Utilisateur').doc(utilisateur.uid)
+      .set({
         idUtilisateur: firebase.auth().currentUser.uid,
         pseudo: pseudo,
         email: email
       })
-    })
-    .then(function() {
       console.log("   Utilisateur ajouté dans Firestore");
     })
     // Gestion des erreurs
