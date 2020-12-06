@@ -65,7 +65,7 @@ class Application {
       });
   }
 
-  naviguer() {
+  async naviguer() {
     console.log("Application->naviguer()");
     let hash = window.location.hash;
 
@@ -77,6 +77,7 @@ class Application {
       this.vueProfil.initialiserListeGenre(this.utilisateurDAO.listerGenre());
       this.vueProfil.afficher();
     } else if (hash.match(/^#amis/)) {
+      this.vueAmis.initialiserListeDemandeAmi(await this.utilisateurDAO.listerDemandeAmi())
       this.vueAmis.afficher();
     }
   }

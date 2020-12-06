@@ -12,7 +12,7 @@ class VueProfil {
   /** Initialise la liste des genres */
   initialiserListeGenre(listeGenreDonnee) {
     this.listeGenreDonnee = listeGenreDonnee;
-    }
+  }
 
   /** Initialise la fonction actionMettreAJourInformationPersonnelle */
   initialiserActionMettreAJourInformationPersonnelle(actionMettreAJourInformationPersonnelle) {

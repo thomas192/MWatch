@@ -81,8 +81,8 @@
             <h2>Genre aimés</h2>
             <form class = "formulaire" id="formulaire-genre-aime">
               <div id="genre">
-              <input type="checkbox" id="{id}" name="{name}" value="{value}">
-              <label for="{for}">{label}</label>
+                <input type="checkbox" id="{id}" name="{name}" value="{value}">
+                <label for="{for}">{label}</label>
               </div>
               <input class="action" type="submit" id="action-formulaire-genre-aime" value="Enregistrer"/>
             </form>
@@ -122,6 +122,17 @@
     <script type="plain/text" id="html-vue-amis">
       <div class="page">
         <h1>Amis</h1>
+        <div id="liste-demande-ami">
+          <div id="demande-ami">
+            <a>{a.texte}</a>
+            <button class="action" id="action-accepter" value="{boutonAccepter.value}" type="button">
+              {boutonAccepter.texte}
+            </button>
+            <button class="action" id="action-refuser" value="{boutonRefuser.value}" type="button">
+              {boutonRefuser.texte}
+            </button>
+          </div>
+        </div>
         <h2>Ajouter un ami</h2>
         <form class="formulaire" id="formulaire-ajouter-ami">
           <div>
