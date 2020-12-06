@@ -47,7 +47,6 @@ class UtilisateurDAO {
   async mettreAJourInformationPersonnelle(idUtilisateur, pseudo, email,
     motDePasseActuel, nouveauMotDePasse) {
     console.log("UtilisateurDAO->mettreAJourPseudoEtEmail()");
-    // On retourne par défaut true s'il n'y a pas d'erreur
     var retour = "true";
     // Initialiser les références
     var utilisateur = await firebase.auth().currentUser;
@@ -139,7 +138,7 @@ class UtilisateurDAO {
     .then(async function(snapshotUtilisateurAjoute) {
       // Récupérer le document de l'utilisateur ajouté
       var utilisateurAjoute;
-      snapshotUtilisateurAjoute.forEach(async doc => {
+      snapshotUtilisateurAjoute.forEach(doc => {
         utilisateurAjoute = doc.data();
       })
       // Vérifier si l'utilisateur ajouté existe
@@ -167,17 +166,38 @@ class UtilisateurDAO {
         return new exceptionPersonnalisee("deja_ami");
       }
       // Enregistrer la demande d'ami
-      db.collection("Ami").doc(utilisateur.uid).collection("Demande")
-        .doc(utilisateurAjoute.idUtilisateur).set({});
+      db.collection("Ami").doc(utilisateurAjoute.idUtilisateur).collection("DemandeRecu")
+        .doc(utilisateur.uid).set({});
     })
     // Gestion des erreurs
     .catch(function(objetErreur) {
-      console.log(objetErreur);
       console.log("   Code d'erreur: " + objetErreur.code)
       retour = objetErreur.code
     });
 
     return retour;
+  }
+
+  /** Renvoie une liste d'objet utilisateur */
+  async listerDemandeAmi() {
+    console.log("UtilisateurDAO->listerDemandeAmi()");
+    // Récupérer l'utilisateur connecté
+    var utilisateur = await firebase.auth().currentUser;
+    // Récupérer la liste des utilisateurs qui ont envoyé une demande d'ami
+    var snapshotDemandeRecu = await db.collection("Ami").doc(utilisateur.uid)
+      .collection("DemandeRecu").get();
+    // Récupérer les id des utilisateurs
+    var listeIdUtilisateur = [];
+    snapshotDemandeRecu.forEach(doc => {
+      listeIdUtilisateur.push(doc.id);
+    });
+    // Récupérer les objets utilisateur à partir de leur id
+    var listeUtilisateur = [];
+    for (var index in listeIdUtilisateur) {
+      let utilisateur = await db.collection("Utilisateur").doc(listeIdUtilisateur[index]).get();
+      listeUtilisateur.push(utilisateur.data());
+    }
+    return listeUtilisateur;
   }
 
   async supprimerCompte(idUtilisateur, motDePasse) {
