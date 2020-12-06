@@ -203,7 +203,6 @@ class UtilisateurDAO {
       console.log("   Code d'erreur: " + objetErreur.code)
       retour = objetErreur.code
     });
-    console.log("retour: "+retour);
     return retour;
   }
 

@@ -4,11 +4,17 @@ class VueAmis {
     this.listeDemandeAmi = null;
     // Fonctions prêtées par le controleur
     this.actionAjouterAmi = null;
+    this.actionGererDemandeAmi = null;
   }
 
   /** Initialise la liste des utilisateurs qui ont envoyé une demande d'ami */
   initialiserListeDemandeAmi(listeDemandeAmi) {
     this.listeDemandeAmi = listeDemandeAmi;
+  }
+
+  /** Initialise la fonction actionGererDemandeAmi */
+  initialiserActionGererDemandeAmi(actionGererDemandeAmi) {
+    this.actionGererDemandeAmi = actionGererDemandeAmi;
   }
 
   /** Initialise la fonction actionAjouterAmi */
@@ -24,6 +30,7 @@ class VueAmis {
     // Ecouteur du formulaire de demande d'ami
     document.getElementById("formulaire-ajouter-ami").addEventListener("submit",
     evenement => this.ajouterAmi(evenement));
+
     // Affichage des demandes d'ami
     if (this.listeDemandeAmi.length > 0) {
       document.getElementById("liste-demande-ami").style.display = "block";
@@ -35,13 +42,16 @@ class VueAmis {
       for (var index in this.listeDemandeAmi) {
         let listeDemandeAmiHtmlItemRemplacement = demandeAmiHtml;
         listeDemandeAmiHtmlItemRemplacement =
-          listeDemandeAmiHtmlItemRemplacement.replace("{a.texte}",
-          this.listeDemandeAmi[index].pseudo + " souhaite devenir votre ami");
-        listeDemandeAmiHtmlItemRemplacement =
-          listeDemandeAmiHtmlItemRemplacement.replace("{boutonAccepter.value}",
+          listeDemandeAmiHtmlItemRemplacement.replace("{div.id}",
           this.listeDemandeAmi[index].idUtilisateur);
         listeDemandeAmiHtmlItemRemplacement =
-          listeDemandeAmiHtmlItemRemplacement.replace("{boutonRefuser.value}",
+          listeDemandeAmiHtmlItemRemplacement.replace("{a.texte}",
+          "Demande d'ami de " + this.listeDemandeAmi[index].pseudo);
+        listeDemandeAmiHtmlItemRemplacement =
+          listeDemandeAmiHtmlItemRemplacement.replace("{boutonAccepter.id}",
+          this.listeDemandeAmi[index].idUtilisateur);
+        listeDemandeAmiHtmlItemRemplacement =
+          listeDemandeAmiHtmlItemRemplacement.replace("{boutonRefuser.id}",
           this.listeDemandeAmi[index].idUtilisateur);
         listeDemandeAmiHtmlItemRemplacement =
           listeDemandeAmiHtmlItemRemplacement.replace("{boutonAccepter.texte}",
@@ -49,10 +59,20 @@ class VueAmis {
         listeDemandeAmiHtmlItemRemplacement =
           listeDemandeAmiHtmlItemRemplacement.replace("{boutonRefuser.texte}",
           "Refuser");
-
        listeDemandeAmiHtmlRemplacement += listeDemandeAmiHtmlItemRemplacement;
       }
       listeDemandeAmiHtml.innerHTML = listeDemandeAmiHtmlRemplacement;
+
+      // Ajout d'un écouteur pour chaque bouton de chaque demande
+      var listeBouton = document.getElementsByTagName("button");
+      var nombreBouton = listeBouton.length;
+      for (var i=0; i<nombreBouton; i++) {
+        let idBouton = listeBouton[i].id;
+        let valeurBouton = listeBouton[i].value;
+        console.log(listeBouton[i]);
+        listeBouton[i].addEventListener("click",
+          evenement => this.gererDemandeAmi(evenement, idBouton, valeurBouton));
+      }
     } else {
       document.getElementById("liste-demande-ami").style.display = "none";
     }
@@ -67,8 +87,21 @@ class VueAmis {
     var emailUtilisateurAjoute = document.getElementById("email").value;
     // Ajouter ami
     var resultat = await this.actionAjouterAmi(idUtilisateur, emailUtilisateurAjoute);
-    if(resultat != "true") {
+    if (resultat != "true") {
       choixAlerte(resultat);
+    }
+  }
+
+  async gererDemandeAmi(evenement, idUtilisateurAccepte, reponse) {
+    console.log("reponse: " + reponse);
+    evenement.preventDefault();
+    console.log("VueProfil->accepterDemandeAmi()");
+    var resultat = await this.actionGererDemandeAmi(idUtilisateurAccepte, reponse);
+    if (resultat != "true") {
+      choixAlerte(resultat);
+    } else {
+      // Mettre à jour l'html
+      document.getElementById("demande-ami-de-" + idUtilisateurAccepte).innerHTML = "";
     }
   }
 }

@@ -37,6 +37,10 @@ class Application {
     this.vueAmis.initialiserActionAjouterAmi((idUtilisateur, emailUtilisateurAjoute) =>
       this.actionAjouterAmi(idUtilisateur, emailUtilisateurAjoute));
 
+    // Initialiser la fonction actionGererDemandeAmi dans VueAmis
+    this.vueAmis.initialiserActionGererDemandeAmi((idUtilisateurAccepte, reponse) =>
+      this.actionGererDemandeAmi(idUtilisateurAccepte, reponse));
+
     this.initialiserApplication();
   }
 
@@ -137,6 +141,11 @@ class Application {
   async actionAjouterAmi(idUtilisateur, emailUtilisateurAjoute) {
     console.log("Application->actionAjouterAmi()");
     return await this.utilisateurDAO.ajouterAmi(idUtilisateur, emailUtilisateurAjoute);
+  }
+
+  async actionGererDemandeAmi(idUtilisateurAccepte, reponse) {
+    console.log("Application->actionGererDemandeAmi()");
+    return await this.utilisateurDAO.gererDemandeAmi(idUtilisateurAccepte, reponse);
   }
 
 }
