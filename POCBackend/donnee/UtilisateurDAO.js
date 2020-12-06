@@ -166,8 +166,9 @@ class UtilisateurDAO {
         return new exceptionPersonnalisee("deja_ami");
       }
       // Enregistrer la demande d'ami
-      db.collection("Ami").doc(utilisateurAjoute.idUtilisateur).collection("DemandeRecu")
+      await db.collection("Ami").doc(utilisateurAjoute.idUtilisateur).collection("DemandeRecu")
         .doc(utilisateur.uid).set({});
+      console.log("   Demande d'ami envoyée");
     })
     // Gestion des erreurs
     .catch(function(objetErreur) {
@@ -175,6 +176,34 @@ class UtilisateurDAO {
       retour = objetErreur.code
     });
 
+    return retour;
+  }
+
+  async gererDemandeAmi(idUtilisateurAccepte, reponse) {
+    console.log("UtilisateurDAO->gererDemandeAmi()");
+    var retour = "true";
+    // Récupérer l'utilisateur connecté
+    var utilisateur = await firebase.auth().currentUser;
+    // Supprimer la demande d'ami
+    await db.collection("Ami").doc(utilisateur.uid).collection("DemandeRecu")
+      .doc(idUtilisateurAccepte).delete()
+    .then(async function() {
+      console.log("   Demande d'ami supprimée")
+      if (reponse == "acceptee") {
+        // Ajouter la relation d'amitié
+        await db.collection("Ami").doc(utilisateur.uid).collection("Relation")
+          .doc(idUtilisateurAccepte).set({})
+        await db.collection("Ami").doc(idUtilisateurAccepte).collection("Relation")
+          .doc(utilisateur.uid).set({});
+        console.log("   Relation d'amitié enregistrée")
+      }
+    })
+    // Gestion des erreurs
+    .catch(function(objetErreur) {
+      console.log("   Code d'erreur: " + objetErreur.code)
+      retour = objetErreur.code
+    });
+    console.log("retour: "+retour);
     return retour;
   }
 
