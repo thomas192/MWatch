@@ -289,6 +289,12 @@ class UtilisateurDAO {
     return retour;
   }
 
+  async getUtilisateur(idUtilisateur) {
+    console.log("UtilisateurDAO->getUtilisateur()");
+    var utilisateur = await db.collection("Utilisateur").doc(idUtilisateur).get();
+    return utilisateur.data();
+  }
+
   listerGenre() {
     console.log("UtilisateurDAO->listerGenre()");
     let listeGenre = [{id:"drame", nom:"Drame"}, {id:"comedie", nom:"Comédie"},
