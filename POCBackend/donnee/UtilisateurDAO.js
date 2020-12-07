@@ -206,6 +206,27 @@ class UtilisateurDAO {
     return retour;
   }
 
+  async supprimerAmi(idAmi) {
+    console.log("UtilisateurDAO->supprimerAmi()");
+    var retour = "true";
+    // Récupérer l'utilisateur connecté
+    var utilisateur = await firebase.auth().currentUser;
+    // Supprimer la relation d'amitié
+    await db.collection("Ami").doc(utilisateur.uid).collection("Relation")
+      .doc(idAmi).delete()
+    .then(async function() {
+      await db.collection("Ami").doc(idAmi).collection("Relation")
+        .doc(utilisateur.uid).delete()
+    })
+    // Gestion des erreurs
+    .catch(function(objetErreur) {
+      console.log("   Code d'erreur: " + objetErreur.code)
+      retour = objetErreur.code
+    });
+    console.log("   Ami supprimé");
+    return retour;
+  }
+
   /** Retourne une liste d'objet utilisateur */
   async listerDemandeAmi() {
     console.log("UtilisateurDAO->listerDemandeAmi()");
