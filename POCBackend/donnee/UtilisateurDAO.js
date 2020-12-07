@@ -8,25 +8,25 @@ class UtilisateurDAO {
     // Créer l'utilisateur
     await firebase.auth().createUserWithEmailAndPassword(email, motDePasse)
     .then(async function() {
-      console.log("   Utilisateur créé")
+      console.log("   Utilisateur créé");
       // Récupérer l'utilisateur connecté
-      var utilisateur = await firebase.auth().currentUser
+      var utilisateur = await firebase.auth().currentUser;
       // Ajouter le pseudo
-      await utilisateur.updateProfile({ displayName: pseudo })
-      console.log("   Pseudo ajouté")
+      await utilisateur.updateProfile({ displayName: pseudo });
+      console.log("   Pseudo ajouté");
       // Ajouter l'utilisateur dans firestore
       await db.collection('Utilisateur').doc(utilisateur.uid)
       .set({
         idUtilisateur: firebase.auth().currentUser.uid,
         pseudo: pseudo,
         email: email
-      })
+      });
       console.log("   Utilisateur ajouté dans Firestore");
     })
     // Gestion des erreurs
     .catch(function(objetErreur) {
-      console.log("   Code d'erreur: " + objetErreur.code)
-      retour = objetErreur.code
+      console.log("   Code d'erreur: " + objetErreur.code);
+      retour = objetErreur.code;
     });
     return retour;
   }
@@ -38,8 +38,8 @@ class UtilisateurDAO {
     await firebase.auth().signInWithEmailAndPassword(email, motDePasse)
     // Gestion des erreurs
     .catch(function(objetErreur) {
-      console.log("   Code d'erreur: " + objetErreur.code)
-      retour = objetErreur.code
+      console.log("   Code d'erreur: " + objetErreur.code);
+      retour = objetErreur.code;
     });
     return retour;
   }
@@ -48,10 +48,9 @@ class UtilisateurDAO {
     motDePasseActuel, nouveauMotDePasse) {
     console.log("UtilisateurDAO->mettreAJourPseudoEtEmail()");
     var retour = "true";
-    // Initialiser les références
+
     var utilisateur = await firebase.auth().currentUser;
-    var snapshotUtilisateur = await db.collection("Utilisateur").where("idUtilisateur",
-      "==", utilisateur.uid).get();
+    var utilisateurRef = await db.collection("Utilisateur").doc(idUtilisateur);
     // Initialiser l'objet de reconnexion
     var credential = await firebase.auth.EmailAuthProvider.credential(
       utilisateur.email,
@@ -62,40 +61,32 @@ class UtilisateurDAO {
     .then(async function() {
       if(pseudo != utilisateur.displayName) {
         // Mettre à jour le pseudo dans FirebaseAuth
-        await utilisateur.updateProfile({displayName: pseudo})
-        console.log("   Pseudo mis à jour FirebaseAuth")
+        await utilisateur.updateProfile({ displayName: pseudo });
+        console.log("   Pseudo mis à jour FirebaseAuth");
         // Mettre à jour le pseudo dans Firestore
-        snapshotUtilisateur.forEach(async doc => {
-          await db.collection("Utilisateur").doc(doc.id).update({
-            pseudo: firebase.auth().currentUser.displayName
-          })
-        })
-        console.log("   Pseudo mis à jour dans Firestore")
+        utilisateurRef.update({ pseudo: utilisateur.displayName });
+        console.log("   Pseudo mis à jour dans Firestore");
       }
       if(email != utilisateur.email) {
         // Mettre à jour l'email dans FirebaseAuth
-        await utilisateur.updateEmail(email)
-        console.log("   Email mis à jour dans FirebaseAuth")
+        await utilisateur.updateEmail(email);
+        console.log("   Email mis à jour dans FirebaseAuth");
         // Mettre à jour l'email dans Firestore
-        snapshotUtilisateur.forEach(async doc => {
-          await db.collection("Utilisateur").doc(doc.id).update({
-            email: firebase.auth().currentUser.email,
-          })
-        })
-        console.log("   Email mis à jour dans Firestore")
+        utilisateurRef.update({ email: utilisateur.email });
+        console.log("   Email mis à jour dans Firestore");
       }
       if(nouveauMotDePasse != "") {
         // Mettre à jour le mot de passe
-        await utilisateur.updatePassword(nouveauMotDePasse)
+        await utilisateur.updatePassword(nouveauMotDePasse);
         console.log("   Mot de passe mis à jour");
       }
     })
     // Gestion des erreurs
     .catch(function(objetErreur) {
-      console.log("   Code d'erreur: " + objetErreur.code)
-      retour = objetErreur.code
+      console.log(objetErreur);
+      console.log("   Code d'erreur: " + objetErreur.code);
+      retour = objetErreur.code;
     });
-
     return retour;
   }
 
