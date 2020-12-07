@@ -5,7 +5,7 @@ class VueProfil {
     // Fonctions prêtées par le controleur
     this.actionDeconnecter = null;
     this.actionMettreAJourInformationPersonnelle = null;
-    this.actionMettreAJourGenreAime = null;
+    this.actionEnregistrerListeGenreAime = null;
     this.actionSupprimerCompte = null;
   }
 
@@ -19,9 +19,9 @@ class VueProfil {
     this.actionMettreAJourInformationPersonnelle = actionMettreAJourInformationPersonnelle;
   }
 
-  /** Initialise la fonction actionMettreAJourGenreAime */
-  initialiserActionMettreAJourGenreAime(actionMettreAJourGenreAime) {
-    this.actionMettreAJourGenreAime = actionMettreAJourGenreAime;
+  /** Initialise la fonction actionEnregistrerListeGenreAime */
+  initialiserActionEnregistrerListeGenreAime(actionEnregistrerListeGenreAime) {
+    this.actionEnregistrerListeGenreAime = actionEnregistrerListeGenreAime;
   }
 
   /** Initialise la fonction actionDeconnecter */
@@ -49,7 +49,7 @@ class VueProfil {
 
     // Ecouteur du formulaire genres aimés
     document.getElementById("formulaire-genre-aime").addEventListener("submit",
-    evenement => this.mettreAJourGenreAime(evenement));
+    evenement => this.enregistrerListeGenreAime(evenement));
 
     // Ecouteur du formulaire supprimer compte
     document.getElementById("formulaire-supprimer-compte").addEventListener("submit",
@@ -114,8 +114,8 @@ class VueProfil {
 
   /** Récupère les genre aimés par l'utilisateur et et les passe
     * au controleur */
-  async mettreAJourGenreAime(evenement) {
-    console.log("VueProfil->mettreAJourGenreAime()");
+  async enregistrerListeGenreAime(evenement) {
+    console.log("VueProfil->enregistrerListeGenreAime()");
     evenement.preventDefault();
     // Récupérer l'id de l'utilisateur
     var idUtilisateur = firebase.auth().currentUser.uid;
@@ -128,7 +128,7 @@ class VueProfil {
       }
     }
     // Enregistrer les genres aimés
-    var resultat = await this.actionMettreAJourGenreAime(idUtilisateur, listeGenreAime);
+    var resultat = await this.actionEnregistrerListeGenreAime(idUtilisateur, listeGenreAime);
     if(resultat != "true") {
       choixAlerte(resultat);
     }

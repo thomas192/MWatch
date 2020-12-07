@@ -90,32 +90,17 @@ class UtilisateurDAO {
     return retour;
   }
 
-  async mettreAJourGenreAime(idUtilisateur, listeGenreAime) {
-    console.log("UtilisateurDAO->mettreAJourGenreAime()");
+  async enregistrerListeGenreAime(idUtilisateur, listeGenreAime) {
+    console.log("UtilisateurDAO->enregistrerListeGenreAime()");
     var retour = "true";
-    // Récupérer le document s'il existe
-    await db.collection("GenreAime").where("idUtilisateur", "==", idUtilisateur).get()
-    .then(async function(snapshot) {
-      // Supprimer le document
-      snapshot.forEach(async doc => {
-        await db.collection("GenreAime").doc(doc.id).delete();
-      })
-      // Créer le document
-      await db.collection("GenreAime").add({ idUtilisateur: idUtilisateur })
-      // Récupérer le document
-      snapshot = await db.collection("GenreAime").where("idUtilisateur", "==", idUtilisateur).get()
-      // Ajouter les genres aimés au document
-      snapshot.forEach(async doc => {
-        await db.collection("GenreAime").doc(doc.id).update({ listeGenreAime: listeGenreAime })
-        console.log("   Genre aimés mis à jours");
-      })
-    })
+    // Créer le document
+    await db.collection("GenreAime").doc(idUtilisateur).set({ listeGenreAime: listeGenreAime })
     // Gestion des erreurs
     .catch(function(objetErreur) {
       console.log("   Code d'erreur: " + objetErreur.code)
       retour = objetErreur.code
     });
-
+    console.log("   Genres aimés enregistrés");
     return retour;
   }
 

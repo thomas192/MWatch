@@ -22,9 +22,9 @@ class Application {
         this.actionMettreAJourInformationPersonnelle(idUtilisateur, pseudo, email,
           motDePasseActuel, nouveauMotDePasse));
 
-    // Initialiser la fonction actionMettreAJourGenreAime dans VueProfil
-    this.vueProfil.initialiserActionMettreAJourGenreAime((idUtilisateur,
-      listeGenreAime) => this.actionMettreAJourGenreAime(idUtilisateur,
+    // Initialiser la fonction actionEnregistrerListeGenreAime dans VueProfil
+    this.vueProfil.initialiserActionEnregistrerListeGenreAime((idUtilisateur,
+      listeGenreAime) => this.actionEnregistrerListeGenreAime(idUtilisateur,
         listeGenreAime));
 
     // Initialiser la fonction actionSupprimerCompte dans VueProfil
@@ -132,9 +132,9 @@ class Application {
       pseudo, email, motDePasseActuel, nouveauMotDePasse);
   }
 
-  async actionMettreAJourGenreAime(idUtilisateur, listeGenreAime) {
-    console.log("Application->actionMettreAJourGenreAime()");
-    return await this.utilisateurDAO.mettreAJourGenreAime(idUtilisateur,
+  async actionEnregistrerListeGenreAime(idUtilisateur, listeGenreAime) {
+    console.log("Application->actionEnregistrerListeGenreAime()");
+    return await this.utilisateurDAO.enregistrerListeGenreAime(idUtilisateur,
       listeGenreAime);
   }
 
