@@ -82,6 +82,7 @@ class Application {
       this.vueProfil.afficher();
     } else if (hash.match(/^#amis/)) {
       this.vueAmis.initialiserListeDemandeAmi(await this.utilisateurDAO.listerDemandeAmi())
+      this.vueAmis.initialiserListeAmi(await this.utilisateurDAO.listerAmi())
       this.vueAmis.afficher();
     }
   }

@@ -2,6 +2,7 @@ class VueAmis {
   constructor() {
     this.html = document.getElementById("html-vue-amis").innerHTML;
     this.listeDemandeAmi = null;
+    this.listeAmi = null;
     // Fonctions prêtées par le controleur
     this.actionAjouterAmi = null;
     this.actionGererDemandeAmi = null;
@@ -10,6 +11,11 @@ class VueAmis {
   /** Initialise la liste des utilisateurs qui ont envoyé une demande d'ami */
   initialiserListeDemandeAmi(listeDemandeAmi) {
     this.listeDemandeAmi = listeDemandeAmi;
+  }
+
+  /** Initialise la liste d'amis */
+  initialiserListeAmi(listeAmi) {
+    this.listeAmi = listeAmi;
   }
 
   /** Initialise la fonction actionGererDemandeAmi */
@@ -75,6 +81,32 @@ class VueAmis {
       }
     } else {
       document.getElementById("liste-demande-ami").style.display = "none";
+    }
+
+    // Affichage de la liste d'ami
+    if (this.listeAmi.length > 0) {
+      document.getElementById("liste-ami-vide").style.display = "none";
+
+      let listeAmiHtml = document.getElementById("liste-ami");
+      const amiHtml = listeAmiHtml.innerHTML;
+      let listeAmiHtmlRemplacement = "";
+
+      for (var index in this.listeAmi) {
+        let listeAmiHtmlItemRemplacement = amiHtml;
+        listeAmiHtmlItemRemplacement =
+          listeAmiHtmlItemRemplacement.replace("{div.id}",
+          this.listeAmi[index].idUtilisateur);
+        listeAmiHtmlItemRemplacement =
+          listeAmiHtmlItemRemplacement.replace("{a.href}",
+          this.listeAmi[index].idUtilisateur);
+        listeAmiHtmlItemRemplacement =
+          listeAmiHtmlItemRemplacement.replace("{a.texte}",
+          this.listeAmi[index].pseudo);
+       listeAmiHtmlRemplacement += listeAmiHtmlItemRemplacement;
+      }
+      listeAmiHtml.innerHTML = listeAmiHtmlRemplacement;
+    } else {
+      document.getElementById("liste-ami").style.display = "none";
     }
   }
 
