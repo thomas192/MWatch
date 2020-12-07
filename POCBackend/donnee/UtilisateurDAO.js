@@ -152,8 +152,8 @@ class UtilisateurDAO {
         return new exceptionPersonnalisee("ajout_de_soi_en_ami");
       }
       // Vérifier si l'utilisateur n'a pas déjà envoyé une demande d'ami à l'utilisateur ajouté
-      var demande = await db.collection("Ami").doc(utilisateur.uid)
-        .collection("Demande").doc(utilisateurAjoute.idUtilisateur).get();
+      var demande = await db.collection("Ami").doc(utilisateurAjoute.idUtilisateur)
+        .collection("DemandeRecu").doc(utilisateur.uid).get();
       if (demande.exists) {
         console.log("   Demande d'ami déjà envoyée à cet utilisateur");
         return new exceptionPersonnalisee("demande_ami_deja_envoyee");
