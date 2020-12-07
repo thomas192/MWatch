@@ -144,29 +144,29 @@ class UtilisateurDAO {
       // Vérifier si l'utilisateur ajouté existe
       if (utilisateurAjoute == null) {
         console.log("   Utilisateur ajouté inconnu");
-        return new exceptionPersonnalisee("utilisateur_inconnu");
+        return exceptionPersonnalisee("utilisateur_inconnu");
       }
       // Vérifier si l'utilisateur ne s'ajoute pas lui-même en ami
       if (utilisateur.email == emailUtilisateurAjoute) {
         console.log("   L'utilisateur s'ajoute lui-même en ami");
-        return new exceptionPersonnalisee("ajout_de_soi_en_ami");
+        return exceptionPersonnalisee("ajout_de_soi_en_ami");
       }
       // Vérifier si l'utilisateur n'a pas déjà envoyé une demande d'ami à l'utilisateur ajouté
       var demande = await db.collection("Ami").doc(utilisateurAjoute.idUtilisateur)
-        .collection("DemandeRecu").doc(utilisateur.uid).get();
+        .collection("DemandeRecue").doc(utilisateur.uid).get();
       if (demande.exists) {
         console.log("   Demande d'ami déjà envoyée à cet utilisateur");
-        return new exceptionPersonnalisee("demande_ami_deja_envoyee");
+        return exceptionPersonnalisee("demande_ami_deja_envoyee");
       }
       // Vérifier si l'utilisateur n'est pas déjà ami avec l'utilisateur ajouté
       var relation = await db.collection("Ami").doc(utilisateur.uid)
         .collection("Relation").doc(utilisateurAjoute.idUtilisateur).get();
       if (relation.exists) {
         console.log("   Utilisateur déjà ami avec l'utilisateur ajouté");
-        return new exceptionPersonnalisee("deja_ami");
+        return exceptionPersonnalisee("deja_ami");
       }
       // Enregistrer la demande d'ami
-      await db.collection("Ami").doc(utilisateurAjoute.idUtilisateur).collection("DemandeRecu")
+      await db.collection("Ami").doc(utilisateurAjoute.idUtilisateur).collection("DemandeRecue")
         .doc(utilisateur.uid).set({});
       console.log("   Demande d'ami envoyée");
     })
@@ -185,7 +185,7 @@ class UtilisateurDAO {
     // Récupérer l'utilisateur connecté
     var utilisateur = await firebase.auth().currentUser;
     // Supprimer la demande d'ami
-    await db.collection("Ami").doc(utilisateur.uid).collection("DemandeRecu")
+    await db.collection("Ami").doc(utilisateur.uid).collection("DemandeRecue")
       .doc(idUtilisateurAccepte).delete()
     .then(async function() {
       console.log("   Demande d'ami supprimée")
@@ -234,7 +234,7 @@ class UtilisateurDAO {
     var utilisateur = await firebase.auth().currentUser;
     // Récupérer la liste des utilisateurs qui ont envoyé une demande d'ami
     var snapshotDemandeRecu = await db.collection("Ami").doc(utilisateur.uid)
-      .collection("DemandeRecu").get();
+      .collection("DemandeRecue").get();
     // Récupérer les id des utilisateurs
     var listeIdUtilisateur = [];
     snapshotDemandeRecu.forEach(doc => {
@@ -290,22 +290,32 @@ class UtilisateurDAO {
     .then(async function() {
       // Supprimer les genres aimés par l'utilisateur
       snapshotGenreAime.forEach(async doc => {
-        await db.collection("GenreAime").doc(doc.id).delete()
+        await db.collection("GenreAime").doc(doc.id).delete();
         console.log("   Genres aimés par l'utilisateur supprimés");
-      })
+      });
       // Supprimer l'utilisateur de Firestore
       snapshotUtilisateur.forEach(async doc => {
-        await db.collection("Utilisateur").doc(doc.id).delete()
+        await db.collection("Utilisateur").doc(doc.id).delete();
         console.log("   Utilisateur supprimé de Firestore");
-      })
+      });
+      // Récupérer la liste des amis
+      var snapshotRelation = await db.collection("Ami").doc(utilisateur.uid)
+        .collection("Relation").get();
+      // Supprimer les relations d'amitié
+      snapshotRelation.forEach(async doc => {
+        await db.collection("Ami").doc(doc.id)
+          .collection("Relation").doc(utilisateur.uid).delete();
+        await db.collection("Ami").doc(utilisateur.uid)
+          .collection("Relation").doc(doc.id).delete();
+      });
       // Supprimer l'utilisateur de FirebaseAuth
       await utilisateur.delete();
       console.log("   Utilisateur supprimé de FirebaseAuth");
     })
     // Gestion des erreurs
     .catch(function(objetErreur) {
-      console.log("   Code d'erreur: " + objetErreur.code)
-      retour = objetErreur.code
+      console.log("   Code d'erreur: " + objetErreur.code);
+      retour = objetErreur.code;
     });
     return retour;
   }
