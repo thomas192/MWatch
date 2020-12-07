@@ -206,7 +206,7 @@ class UtilisateurDAO {
     return retour;
   }
 
-  /** Renvoie une liste d'objet utilisateur */
+  /** Retourne une liste d'objet utilisateur */
   async listerDemandeAmi() {
     console.log("UtilisateurDAO->listerDemandeAmi()");
     // Récupérer l'utilisateur connecté
@@ -217,6 +217,28 @@ class UtilisateurDAO {
     // Récupérer les id des utilisateurs
     var listeIdUtilisateur = [];
     snapshotDemandeRecu.forEach(doc => {
+      listeIdUtilisateur.push(doc.id);
+    });
+    // Récupérer les objets utilisateur à partir de leur id
+    var listeUtilisateur = [];
+    for (var index in listeIdUtilisateur) {
+      let utilisateur = await db.collection("Utilisateur").doc(listeIdUtilisateur[index]).get();
+      listeUtilisateur.push(utilisateur.data());
+    }
+    return listeUtilisateur;
+  }
+
+  /** Retourne une liste d'objet utilisateur */
+  async listerAmi() {
+    console.log("UtilisateurDAO->listerAmi()");
+    // Récupérer l'utilisateur connecté
+    var utilisateur = await firebase.auth().currentUser;
+    // Récupérer la liste des amis
+    var snapshotRelation = await db.collection("Ami").doc(utilisateur.uid)
+      .collection("Relation").get();
+    // Récupérer les id des utilisateurs
+    var listeIdUtilisateur = [];
+    snapshotRelation.forEach(doc => {
       listeIdUtilisateur.push(doc.id);
     });
     // Récupérer les objets utilisateur à partir de leur id
