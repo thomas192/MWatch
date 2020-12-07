@@ -42,6 +42,9 @@ class Application {
     this.vueAmis.initialiserActionGererDemandeAmi((idUtilisateurAccepte, reponse) =>
       this.actionGererDemandeAmi(idUtilisateurAccepte, reponse));
 
+    // Initialiser la fonction actionSupprimerAmi dans VueAmi
+    this.vueAmi.initialiserActionSupprimerAmi((idAmi) => this.actionSupprimerAmi(idAmi));
+
     this.initialiserApplication();
   }
 
@@ -153,6 +156,16 @@ class Application {
   async actionGererDemandeAmi(idUtilisateurAccepte, reponse) {
     console.log("Application->actionGererDemandeAmi()");
     return await this.utilisateurDAO.gererDemandeAmi(idUtilisateurAccepte, reponse);
+  }
+
+  async actionSupprimerAmi(idAmi) {
+    console.log("Application->actionSupprimerAmi()");
+    var resultat = await this.utilisateurDAO.supprimerAmi(idAmi);
+    // Redirection
+    if (resultat == "true") {
+      this.window.location.hash = "#amis";
+    }
+    return resultat;
   }
 
 }

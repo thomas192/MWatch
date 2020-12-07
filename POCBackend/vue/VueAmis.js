@@ -75,7 +75,6 @@ class VueAmis {
       for (var i=0; i<nombreBouton; i++) {
         let idBouton = listeBouton[i].id;
         let valeurBouton = listeBouton[i].value;
-        console.log(listeBouton[i]);
         listeBouton[i].addEventListener("click",
           evenement => this.gererDemandeAmi(evenement, idBouton, valeurBouton));
       }
@@ -111,7 +110,7 @@ class VueAmis {
   }
 
   async ajouterAmi(evenement) {
-    console.log("VueProfil->actionAjouterAmi()");
+    console.log("VueAmis->actionAjouterAmi()");
     evenement.preventDefault();
     // Récupérer l'id de l'utilisateur connecté
     var idUtilisateur = firebase.auth().currentUser.uid;
@@ -125,9 +124,8 @@ class VueAmis {
   }
 
   async gererDemandeAmi(evenement, idUtilisateurAccepte, reponse) {
-    console.log("reponse: " + reponse);
+    console.log("VueAmis->accepterDemandeAmi()");
     evenement.preventDefault();
-    console.log("VueProfil->accepterDemandeAmi()");
     var resultat = await this.actionGererDemandeAmi(idUtilisateurAccepte, reponse);
     if (resultat != "true") {
       choixAlerte(resultat);
