@@ -1,11 +1,12 @@
 class Application {
-  constructor(window, utilisateurDAO, vueInscription, vueConnexion, vueProfil, vueAmis) {
+  constructor(window, utilisateurDAO, vueInscription, vueConnexion, vueProfil, vueAmis, vueAmi) {
     this.window = window;
     this.utilisateurDAO = utilisateurDAO;
     this.vueInscription = vueInscription;
     this.vueConnexion = vueConnexion;
     this.vueProfil = vueProfil;
     this.vueAmis = vueAmis;
+    this.vueAmi = vueAmi;
 
     // Initialiser la fonction actionInscrire dans VueInscription
     this.vueInscription.initialiserActionInscrire((pseudo, email, motDePasse) =>
@@ -84,6 +85,11 @@ class Application {
       this.vueAmis.initialiserListeDemandeAmi(await this.utilisateurDAO.listerDemandeAmi())
       this.vueAmis.initialiserListeAmi(await this.utilisateurDAO.listerAmi())
       this.vueAmis.afficher();
+    } else if (hash.match(/^#ami\/(.*)/)) {
+      let navigation = hash.match(/^#ami\/(.*)/);
+      let idAmi = navigation[1];
+      this.vueAmi.initialiserAmi(await this.utilisateurDAO.getUtilisateur(idAmi));
+      this.vueAmi.afficher();
     }
   }
 
@@ -151,4 +157,4 @@ class Application {
 
 }
 
-new Application(window, new UtilisateurDAO(), new VueInscription(), new VueConnexion(), new VueProfil(), new VueAmis());
+new Application(window, new UtilisateurDAO(), new VueInscription(), new VueConnexion(), new VueProfil(), new VueAmis(), new VueAmi());
