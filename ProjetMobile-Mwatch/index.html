@@ -28,7 +28,7 @@
 			<div class="page">
 				<button href = "#" type="button" class="connectionbtn">Se Connecter</button>
 				<h1>Inscription</h1>
-				<form action="/action_page.php">
+				<form id="formulaire-inscription">
 					<div class="container">
 						<p>S'il vous plait, veuillex remplir le formulaire pour vous inscrire.</p>
 						<hr>
@@ -36,11 +36,11 @@
 						<label for="courriel"><b>Courriel</b></label>
 						<input type="text" placeholder="Saisir courriel" name="email" required>
 
-						<label for="psw"><b>Mot de passe</b></label>
-						<input type="password" placeholder="Saisir mot de passe" name="psw" required>
+						<label for="mdp"><b>Mot de passe</b></label>
+						<input type="password" placeholder="Saisir mot de passe" name="mdp" required>
 
-						<label for="psw-repeat"><b>Resaisir le Mot de passe</b></label>
-						<input type="password" placeholder="resaisir le mot de passe" name="psw-repeat" required>
+						<label for="repeter-mdp"><b>Resaisir le Mot de passe</b></label>
+						<input type="password" placeholder="resaisir le mot de passe" name="repeter-mdp" required>
 						
 						
 						<p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
@@ -57,7 +57,7 @@
 	
 	
 	
-	
+	<script type="plain/text" id="html-vue-connexion">
 		<div class="page">
 			<h1>Connection</h1>
 
@@ -82,8 +82,9 @@
 				<span class="psw">Mot de passe oublié <a href="#">mot de passe?</a></span>
 			</form>
 		</div>
+	</script>
 		
-		
+	<script type="plain/text" id="html-vue-liste-amis">
 		<div class="page">
 			<h1>Liste des Amis</h1>
 			<button type="button" class="action" href="#ajouter-un-ami">Ajouter un Ami</button>
@@ -93,9 +94,11 @@
 			  </li>
 			</ul>
 		</div>
-		
+	</script>
+	
+	<script type="plain/text" id="html-vue-ajouter-ami">
 		<div class="page">
-			<h1>Ajouter un jeu video</h1>
+			<h1>Ajouter un ami</h1>
 			<form class="example" action="/action_page.php">
 			  <input type="text" placeholder="Search.." name="search">
 			  <button  type="submit"><i class="fa fa-search"></i></button>
@@ -110,10 +113,9 @@
 
 			<a href="#" class="action">Annuler et revenir &agrave; la liste</a>
 	  </div>
+	</script>
 		
 		
 	
-
-
 </body>
 </html>

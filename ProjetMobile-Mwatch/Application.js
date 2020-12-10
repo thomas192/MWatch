@@ -1,15 +1,12 @@
 class Application{
 	constructor(window, ){
 		this.window = window;
-		this.jeuxVideoDAO = jeuxVideoDAO;
-		/*this.vueListeJeuxVideo = vueListeJeuxVideo;
-		this.vueAjouterJeuVideo = vueAjouterJeuVideo;
-		this.vueModifierJeuVideo = vueModifierJeuVideo;
+		//this.jeuxVideoDAO = jeuxVideoDAO;
+/*
 		this.vueAjouterJeuVideo.initialiserActionAjouterJeuVideo(jeuVideo=>this.actionAjouterJeuVideo(jeuVideo));
 		this.vueModifierJeuVideo.initialiserActionModifierJeuVideo(jeuVideo=>this.actionModifierJeuVideo(jeuVideo));*/
 		
-		/*this.vueListeJeuxVideo.initialiserListeJeuxVideo(this.jeuxVideoDAO.lister());
-		this.vueListeJeuxVideo.afficher();*/
+
 		
 		this.vueJeuVideo = vueJeuVideo;
 		
@@ -27,7 +24,7 @@ class Application{
 			this.vueListeJeuxVideo.initialiserListeJeuxVideo(this.jeuxVideoDAO.lister());
 			this.vueListeJeuxVideo.afficher();
 		}
-		else if(hash.match(/^#ajouter-jeuVideo/)){
+		/*else if(hash.match(/^#ajouter-jeuVideo/)){
 			this.vueAjouterJeuVideo.afficher();
 		}
 		else if(hash.match(/^#modifier-jeuVideo\/([0-9]+)/)){
@@ -49,7 +46,7 @@ class Application{
 			
 			this.vueJeuVideo.initialiserJeuVideo(this.jeuxVideoDAO.lister()[idJeuVideo]);
 			this.vueJeuVideo.afficher();
-		}
+		}*/
 	}
 	
 	actionAjouterJeuVideo(jeuVideo){
