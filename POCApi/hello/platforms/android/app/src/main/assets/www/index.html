@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title> MWatch </title>
+    <link rel="stylesheet" href="decoration/index.css">
+    <style></style>
+    <script src="lib/zingtouch-1.0.6/dist/zingtouch.min.js"></script>
+    <script src="cordova.js"></script>
+    <script src="cordova_plugins.js"></script>
+
+    <script src="vue/VuePrincipale.js"></script>
+    <script src="donnee/BddSimuleeDAO.js"></script>
+    <script src="donnee/FilmDAO.js"></script>
+    <script src="modele/Film.js"></script>
+
+    <script defer src="Application.js"></script>
+  </head>
+  <body>
+    <header>
+    </header>
+    <script type="plain/text" id="html-vue-principale">
+      <div id="parent">
+        <div class="name">P</div>
+        <div id="child">
+          <div class="name"></div>
+          <label id="titre-film">En attente du film</label>
+        </div>
+      <button>?</button>
+      </div>
+      <div id="output">
+        Nombre de swipes depuis le début 0
+      </div>
+    </script>
+  </body> 
+</html>

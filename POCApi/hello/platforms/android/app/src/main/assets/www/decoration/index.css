@@ -1,0 +1,78 @@
+@import 'https://fonts.googleapis.com/css?family=Open+Sans';
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans";
+}
+
+header{
+
+    text-align: center;
+    vertical-align: middle;
+    background-image: url("illustrations/logo.png");
+    background-size: 30%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #EAA317;
+    height: 12.5%;
+    width: 100%;
+    color: white;
+  }
+
+
+*{
+  box-sizing: border-box;
+}
+
+#parent {
+  display: flex;
+  background-color: #679AEF;
+  padding: 0.5rem;
+/*   max-width: 555px; */
+  width: 100%;
+  height: 95%;
+  color: #FFF;
+}
+
+#child {
+  display: flex;
+  background-color: #99BEF9;
+  background-image: url("https://www.studiogazoline.com/sites/default/files/styles/700x/public/field/image/shutterstock_253521943.jpg?itok=A9D6SvW6");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 1rem;
+  margin: 1rem;
+  color: #FFF;
+  height: 75%;
+  width: 100%;
+}
+
+button{
+  position: absolute;
+  background-color: #EAA317;
+  bottom:5%;
+  right:5%;
+  font-size: 2rem;
+}
+
+.name {
+  font-size: 1rem;
+  height: 1rem;
+}
+
+#titre-film {
+  text-align: center;
+}
+
+#output {
+  background-color: #333;
+  width: 100%;
+/*   max-width: 555px; */
+  display: block;
+  min-height: 30px;
+  padding: 10px;
+  font-size: 0.8em;
+  color: white;
+}
