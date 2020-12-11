@@ -288,13 +288,13 @@ class UtilisateurDAO {
     return retour;
   }
 
-  async gererSwipe(idFilm, reponse) {
+  async gererSwipe(film, reponse) {
     console.log("UtilisateurDAO->swiperFilm()");
     let retour = "true";
     // Récupérer l'utilisateur connecté
     const utilisateur = await firebase.auth().currentUser;
     await db.collection("Utilisateur").doc(utilisateur.uid).collection("FilmSwipe")
-        .doc(idFilm.toString()).set({idFilm: idFilm, etat: reponse})
+        .doc(film.id.toString()).set({id: film.id, titre: film.titre, etat: reponse})
     // Gestion des erreurs
     .catch(function(objetErreur) {
       console.log("   Code d'erreur: " + objetErreur.code)
@@ -358,6 +358,30 @@ class UtilisateurDAO {
         return filmASwiper;
       }
     }
+  }
+
+  /** Retourne la liste des films en commun (non vus et aimés) */
+  async listerFilmEnCommun (idAmi) {
+    console.log("UtilisateurDAO->listerFilmEnCommun()");
+    // Récupérer l'utilisateur connecté
+    const utilisateur = await firebase.auth().currentUser;
+    // Récupérer les films non vus et aimés par l'utilisateur
+    let snapshotFilmsUtilisateur = await db.collection("Utilisateur").doc(utilisateur.uid)
+        .collection("FilmSwipe").where("etat", "==", "nonVuAime").get();
+    // Récupérer les films non vus et aimés par l'ami
+    let snapshotFilmsAmi = await db.collection("Utilisateur").doc(idAmi)
+        .collection("FilmSwipe").where("etat", "==", "nonVuAime").get();
+    // Récupérer les films en commun
+    let listeFilmEnCommun = [];
+    snapshotFilmsUtilisateur.forEach(filmUtilisateur => {
+      snapshotFilmsAmi.forEach(filmAmi => {
+        if (filmUtilisateur.id === filmAmi.id) {
+          let filmEnCommun = filmUtilisateur.data();
+          listeFilmEnCommun.push({id: filmEnCommun.id, titre: filmEnCommun.titre});
+        }
+      })
+    })
+    return listeFilmEnCommun;
   }
 
 }
