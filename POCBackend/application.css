@@ -42,3 +42,34 @@
 .page #deconnexion {
   margin-bottom: 3%;
 }
+
+.page #swipe {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 60%;
+}
+
+.page #swipe button {
+  max-height: 0.03%;
+  width: 10%;
+}
+
+.page #swipe #flex-haut {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.page #swipe #flex-bas {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.page #swipe #flex-milieu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}

@@ -1,5 +1,5 @@
 class Application {
-  constructor(window, utilisateurDAO, vueInscription, vueConnexion, vueProfil, vueAmis, vueAmi) {
+  constructor(window, utilisateurDAO, vueInscription, vueConnexion, vueProfil, vueAmis, vueAmi, vueSwipe) {
     this.window = window;
     this.utilisateurDAO = utilisateurDAO;
     this.vueInscription = vueInscription;
@@ -7,6 +7,7 @@ class Application {
     this.vueProfil = vueProfil;
     this.vueAmis = vueAmis;
     this.vueAmi = vueAmi;
+    this.vueSwipe = vueSwipe;
 
     // Initialiser la fonction actionInscrire dans VueInscription
     this.vueInscription.initialiserActionInscrire((pseudo, email, motDePasse) =>
@@ -93,13 +94,16 @@ class Application {
       let idAmi = navigation[1];
       this.vueAmi.initialiserAmi(await this.utilisateurDAO.getUtilisateur(idAmi));
       this.vueAmi.afficher();
+    } else if (hash.match(/^#swipe/)) {
+      this.vueSwipe.intialiserFilmASwiper(this.utilisateurDAO.obtenirFilmASwiper());
+      this.vueSwipe.afficher();
     }
   }
 
   async actionInscrire(pseudo, email, motDePasse) {
     console.log("Application->actionInscrire()");
-    var resultat = await this.utilisateurDAO.inscrire(pseudo, email, motDePasse);
-    var user = await firebase.auth().currentUser;
+    let resultat = await this.utilisateurDAO.inscrire(pseudo, email, motDePasse);
+    let user = await firebase.auth().currentUser;
     // Redirection
     if (user != null) {
       this.window.location.hash = "#profil";
@@ -109,8 +113,8 @@ class Application {
 
   async actionConnecter(email, motDePasse) {
     console.log("Application->actionConnecter()");
-    var resultat = await this.utilisateurDAO.connecter(email, motDePasse);
-    var user = await firebase.auth().currentUser;
+    let resultat = await this.utilisateurDAO.connecter(email, motDePasse);
+    let user = await firebase.auth().currentUser;
     // Redirection
     if (user != null) {
       this.window.location.hash = "#profil";
@@ -140,9 +144,9 @@ class Application {
 
   async actionSupprimerCompte(idUtilisateur, motDePasse) {
     console.log("Application->actionSupprimerCompte()");
-    var resultat = await this.utilisateurDAO.supprimerCompte(idUtilisateur, motDePasse);
+    let resultat = await this.utilisateurDAO.supprimerCompte(idUtilisateur, motDePasse);
     // Redirection
-    if (resultat == "true") {
+    if (resultat === "true") {
       this.window.location.hash = "#";
     }
     return resultat;
@@ -160,9 +164,9 @@ class Application {
 
   async actionSupprimerAmi(idAmi) {
     console.log("Application->actionSupprimerAmi()");
-    var resultat = await this.utilisateurDAO.supprimerAmi(idAmi);
+    let resultat = await this.utilisateurDAO.supprimerAmi(idAmi);
     // Redirection
-    if (resultat == "true") {
+    if (resultat === "true") {
       this.window.location.hash = "#amis";
     }
     return resultat;
@@ -170,4 +174,4 @@ class Application {
 
 }
 
-new Application(window, new UtilisateurDAO(), new VueInscription(), new VueConnexion(), new VueProfil(), new VueAmis(), new VueAmi());
+new Application(window, new UtilisateurDAO(), new VueInscription(), new VueConnexion(), new VueProfil(), new VueAmis(), new VueAmi(), new VueSwipe());

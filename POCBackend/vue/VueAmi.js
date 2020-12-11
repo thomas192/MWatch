@@ -1,13 +1,14 @@
 class VueAmi {
   constructor() {
     this.html = document.getElementById("html-vue-ami").innerHTML;
+    /** Ami à afficher */
     this.ami = null;
     this.listeFilmEnCommun = null;
     // Fonctions prêtées par le controleur
     this.actionSupprimerAmi = null;
   }
 
-  /** Initialise l'ami */
+  /** Initialise l'ami à afficher */
   initialiserAmi(ami) {
     this.ami = ami;
   }

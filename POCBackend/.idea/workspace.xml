@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="19fd17dd-f088-4c1c-9aca-a9714e96e367" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/POCBackend.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/donnee/UtilisateurDAO.js" beforeDir="false" afterPath="$PROJECT_DIR$/donnee/UtilisateurDAO.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/VueAmi.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueAmi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/VueAmis.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueAmis.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/VueConnexion.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueConnexion.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/VueInscription.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueInscription.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/VueProfil.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueProfil.js" afterDir="false" />
-    </list>
+    <list default="true" id="19fd17dd-f088-4c1c-9aca-a9714e96e367" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -42,7 +39,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1607690416417</updated>
-      <workItem from="1607690418136" duration="1839000" />
+      <workItem from="1607690418136" duration="9923000" />
     </task>
     <servers />
   </component>

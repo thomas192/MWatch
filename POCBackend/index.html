@@ -20,6 +20,7 @@
   <script src="vue/VueProfil.js"></script>
   <script src="vue/VueAmis.js"></script>
   <script src="vue/VueAmi.js"></script>
+  <script src="vue/VueSwipe.js"></script>
 
   <script defer src="Application.js"></script>
 
@@ -31,6 +32,7 @@
       <a class="action" id="menu-item-inscription" href="#inscription">Inscription</a>
       <a class="action" id="menu-item-connexion" href="#">Connexion</a>
       <a class="action" id="menu-item-profil" href="#profil">Profil</a>
+      <a class="acction" id="menu-item-swipe" href="#swipe">Swipe</a>
       <a class="action" id="menu-item-amis" href="#amis">Amis</a>
     </div>
   </header>
@@ -163,6 +165,26 @@
         </div>
         <div id="liste-film-en-commun-vide">
           <a>Vous n avez auncun film en commun, swipez !</a>
+        </div>
+      </div>
+    </script>
+
+    <script type="plain/text" id="html-vue-swipe">
+      <div class="page">
+        <div id=swipe>
+          <div id="flex-haut">
+            <button class="action" id="action-vu-aime" type="button">Vu et aimé</button>
+          </div>
+
+          <div id="flex-milieu">
+            <button class="action" id="action-pas-vu-non-aime" type="button">Non vu et non aimé</button>
+            <img src="{img.src}"></img>
+            <button class="action" id="action-pas-vu-aime" type="button">Non vu et aimé</button>
+          </div>
+
+          <div id="flex-bas">
+            <button class="action" id="action-vu-non-aime" type="button">Vu et non aimé</button>
+          </div>
         </div>
       </div>
     </script>
