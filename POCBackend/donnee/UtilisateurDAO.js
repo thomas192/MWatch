@@ -288,6 +288,21 @@ class UtilisateurDAO {
     return retour;
   }
 
+  async gererSwipe(idFilm, reponse) {
+    console.log("UtilisateurDAO->swiperFilm()");
+    let retour = "true";
+    // Récupérer l'utilisateur connecté
+    const utilisateur = await firebase.auth().currentUser;
+    await db.collection("Utilisateur").doc(utilisateur.uid).collection("FilmSwipe")
+        .doc(idFilm.toString()).set({idFilm: idFilm, etat: reponse})
+    // Gestion des erreurs
+    .catch(function(objetErreur) {
+      console.log("   Code d'erreur: " + objetErreur.code)
+      retour = objetErreur.code
+    });
+    return retour;
+  }
+
   async getUtilisateur(idUtilisateur) {
     console.log("UtilisateurDAO->getUtilisateur()");
     const utilisateur = await db.collection("Utilisateur").doc(idUtilisateur).get();
