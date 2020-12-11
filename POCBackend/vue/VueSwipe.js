@@ -3,7 +3,7 @@ class VueSwipe {
         this.html = document.getElementById("html-vue-swipe").innerHTML;
         /** Film à swiper */
         this.filmASwiper = null;
-        // Foncrions prêtées par le controleur
+        // Fonctions prêtées par le controleur
         this.actionGererSwipe = null;
         this.actionObtenirFilmASwiper = null;
     }
@@ -45,8 +45,7 @@ class VueSwipe {
 
     async gererSwipe(evenement, reponse) {
         console.log("VueSwipe->gererSwipe");
-        let idFilm = this.filmASwiper.id;
-        let resultat = await this.actionGererSwipe(idFilm, reponse);
+        let resultat = await this.actionGererSwipe(this.filmASwiper, reponse);
         if (resultat !== "true") {
             choixAlerte(resultat);
         } else {

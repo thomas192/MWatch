@@ -21,6 +21,9 @@ function choixAlerte(codeErreur) {
     case "auth/invalid-display-name":
       alert(ERREUR_PSEUDO_INVALIDE);
       break;
+    case "auth/user-not-found":
+      alert(ERREUR_EMAIL_INVALIDE);
+      break;
     case "auth/requires-recent-login":
       alert(ERREUR_CONNEXION_RECENTE_REQUISE);
       break;

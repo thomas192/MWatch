@@ -13,6 +13,11 @@ class VueAmi {
     this.ami = ami;
   }
 
+  /** Initialise la liste des films en commun */
+  initialiserListeFilmEnCommun(listeFilmEnCommun) {
+    this.listeFilmEnCommun = listeFilmEnCommun;
+  }
+
   /** Initialise la fonction actionSupprimerAmi */
   initialiserActionSupprimerAmi(actionSupprimerAmi) {
     this.actionSupprimerAmi = actionSupprimerAmi;
@@ -32,9 +37,27 @@ class VueAmi {
     evenement => this.supprimerAmi(evenement));
 
     // Affichage de la liste des films en commun
-    this.listeFilmEnCommun = [];
-    if (!this.listeFilmEnCommun.length > 0) {
-      document.getElementById("liste-film-en-commun-vide").style.display = "block";
+    if (this.listeFilmEnCommun.length > 0) {
+      document.getElementById("liste-film-en-commun-vide").style.display = "none";
+
+      let listeFilm = document.getElementById("liste-film-en-commun");
+      const filmHtml = listeFilm.innerHTML;
+      let listeFilmHtmlRemplacement = "";
+
+      for (let i in this.listeFilmEnCommun) {
+        let listeFilmItemHtmlRemplacement = filmHtml;
+        listeFilmItemHtmlRemplacement =
+            listeFilmItemHtmlRemplacement.replace("{a.href}",
+                this.listeFilmEnCommun[i].id);
+        listeFilmItemHtmlRemplacement =
+            listeFilmItemHtmlRemplacement.replace("{a.texte}",
+                this.listeFilmEnCommun[i].titre);
+        listeFilmHtmlRemplacement += listeFilmItemHtmlRemplacement;
+      }
+      listeFilm.innerHTML = listeFilmHtmlRemplacement;
+
+    } else {
+      document.getElementById("liste-film-en-commun").style.display = "none";
     }
   }
 

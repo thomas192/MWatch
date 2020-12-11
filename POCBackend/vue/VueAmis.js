@@ -45,20 +45,20 @@ class VueAmis {
       const demandeAmiHtml = listeDemandeAmiHtml.innerHTML;
       let listeDemandeAmiHtmlRemplacement = "";
 
-      for (let index in this.listeDemandeAmi) {
+      for (let i in this.listeDemandeAmi) {
         let listeDemandeAmiHtmlItemRemplacement = demandeAmiHtml;
         listeDemandeAmiHtmlItemRemplacement =
           listeDemandeAmiHtmlItemRemplacement.replace("{div.id}",
-          this.listeDemandeAmi[index].idUtilisateur);
+          this.listeDemandeAmi[i].idUtilisateur);
         listeDemandeAmiHtmlItemRemplacement =
           listeDemandeAmiHtmlItemRemplacement.replace("{a.texte}",
-          "Demande d'ami de " + this.listeDemandeAmi[index].pseudo);
+          "Demande d'ami de " + this.listeDemandeAmi[i].pseudo);
         listeDemandeAmiHtmlItemRemplacement =
           listeDemandeAmiHtmlItemRemplacement.replace("{boutonAccepter.id}",
-          this.listeDemandeAmi[index].idUtilisateur);
+          this.listeDemandeAmi[i].idUtilisateur);
         listeDemandeAmiHtmlItemRemplacement =
           listeDemandeAmiHtmlItemRemplacement.replace("{boutonRefuser.id}",
-          this.listeDemandeAmi[index].idUtilisateur);
+          this.listeDemandeAmi[i].idUtilisateur);
         listeDemandeAmiHtmlItemRemplacement =
           listeDemandeAmiHtmlItemRemplacement.replace("{boutonAccepter.texte}",
           "Accepter");
@@ -89,20 +89,21 @@ class VueAmis {
       const amiHtml = listeAmiHtml.innerHTML;
       let listeAmiHtmlRemplacement = "";
 
-      for (let index in this.listeAmi) {
+      for (let i in this.listeAmi) {
         let listeAmiHtmlItemRemplacement = amiHtml;
         listeAmiHtmlItemRemplacement =
           listeAmiHtmlItemRemplacement.replace("{div.id}",
-          this.listeAmi[index].idUtilisateur);
+          this.listeAmi[i].idUtilisateur);
         listeAmiHtmlItemRemplacement =
           listeAmiHtmlItemRemplacement.replace("{a.href}",
-          this.listeAmi[index].idUtilisateur);
+          this.listeAmi[i].idUtilisateur);
         listeAmiHtmlItemRemplacement =
           listeAmiHtmlItemRemplacement.replace("{a.texte}",
-          this.listeAmi[index].pseudo);
+          this.listeAmi[i].pseudo);
        listeAmiHtmlRemplacement += listeAmiHtmlItemRemplacement;
       }
       listeAmiHtml.innerHTML = listeAmiHtmlRemplacement;
+
     } else {
       document.getElementById("liste-ami").style.display = "none";
     }

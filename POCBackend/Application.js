@@ -50,7 +50,7 @@ class Application {
     this.vueSwipe.initialiserActionObtenirFilmASwiper(() => this.actionObtenirFilmASwiper());
 
     // Intialiser la fonction actionGererSwipe dans VueSwipe
-    this.vueSwipe.initialiserActionGererSwipe((idFilm, reponse) => this.actionGererSwipe(idFilm, reponse));
+    this.vueSwipe.initialiserActionGererSwipe((film, reponse) => this.actionGererSwipe(film, reponse));
 
     this.initialiserApplication();
   }
@@ -70,12 +70,14 @@ class Application {
           document.getElementById("menu-item-connexion").style.display = "none";
           document.getElementById("menu-item-profil").style.display = "block";
           document.getElementById("menu-item-amis").style.display = "block";
+          document.getElementById("menu-item-swipe").style.display = "block";
         } else {
           console.log("   Utilisateur non connecté");
           document.getElementById("menu-item-inscription").style.display = "block";
           document.getElementById("menu-item-connexion").style.display = "block";
           document.getElementById("menu-item-profil").style.display = "none";
           document.getElementById("menu-item-amis").style.display = "none";
+          document.getElementById("menu-item-swipe").style.display = "none";
         }
       });
   }
@@ -86,20 +88,26 @@ class Application {
 
     if (!hash) {
       this.vueConnexion.afficher();
+
     } else if (hash.match(/^#inscription/)) {
       this.vueInscription.afficher();
+
     } else if (hash.match(/^#profil/)) {
       this.vueProfil.initialiserListeGenre(this.utilisateurDAO.listerGenre());
       this.vueProfil.afficher();
+
     } else if (hash.match(/^#amis/)) {
       this.vueAmis.initialiserListeDemandeAmi(await this.utilisateurDAO.listerDemandeAmi())
       this.vueAmis.initialiserListeAmi(await this.utilisateurDAO.listerAmi())
       this.vueAmis.afficher();
+
     } else if (hash.match(/^#ami\/(.*)/)) {
       let navigation = hash.match(/^#ami\/(.*)/);
       let idAmi = navigation[1];
       this.vueAmi.initialiserAmi(await this.utilisateurDAO.getUtilisateur(idAmi));
+      this.vueAmi.initialiserListeFilmEnCommun(await this.utilisateurDAO.listerFilmEnCommun(idAmi));
       this.vueAmi.afficher();
+
     } else if (hash.match(/^#swipe/)) {
       this.vueSwipe.afficher();
     }
@@ -182,9 +190,9 @@ class Application {
     return await this.utilisateurDAO.obtenirFilmASwiper();
   }
 
-  async actionGererSwipe(idFilm, reponse) {
+  async actionGererSwipe(film, reponse) {
     console.log("Application->actionGererSwipe()");
-    return await this.utilisateurDAO.gererSwipe(idFilm, reponse);
+    return await this.utilisateurDAO.gererSwipe(film, reponse);
   }
 }
 
