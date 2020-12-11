@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="19fd17dd-f088-4c1c-9aca-a9714e96e367" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application.js" beforeDir="false" afterPath="$PROJECT_DIR$/Application.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/donnee/UtilisateurDAO.js" beforeDir="false" afterPath="$PROJECT_DIR$/donnee/UtilisateurDAO.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/VueAmis.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueAmis.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/VueProfil.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueProfil.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/VueSwipe.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueSwipe.js" afterDir="false" />
-    </list>
+    <list default="true" id="19fd17dd-f088-4c1c-9aca-a9714e96e367" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,7 +39,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1607690416417</updated>
-      <workItem from="1607690418136" duration="16940000" />
+      <workItem from="1607690418136" duration="20850000" />
+      <workItem from="1607713782558" duration="2398000" />
     </task>
     <servers />
   </component>
@@ -64,6 +57,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

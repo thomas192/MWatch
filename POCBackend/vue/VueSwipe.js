@@ -5,11 +5,12 @@ class VueSwipe {
         this.filmASwiper = null;
         // Foncrions prêtées par le controleur
         this.actionGererSwipe = null;
+        this.actionObtenirFilmASwiper = null;
     }
 
-    /** Initialise un film à swiper */
-    intialiserFilmASwiper(film) {
-        this.filmASwiper = film;
+    /** Initialise la fonction actionObtenirFilmASwiper */
+    initialiserActionObtenirFilmASwiper(actionObtenirFilmASwiper) {
+        this.actionObtenirFilmASwiper = actionObtenirFilmASwiper;
     }
 
     /** Initialise la fonction actionGererSwipe */
@@ -18,9 +19,11 @@ class VueSwipe {
     }
 
     /** Gère l'affichage de la vue */
-    afficher() {
+    async afficher() {
         console.log("VueSwipe->afficher()");
         document.getElementsByTagName("contenu")[0].innerHTML = this.html;
+
+        await this.afficherFilmASwiper();
 
         // Ajout d'un écouteur pour chaque bouton de la vue
         let listeBouton = document.getElementsByTagName("button");
@@ -29,16 +32,15 @@ class VueSwipe {
             listeBouton[i].addEventListener("click",
                 evenement => this.gererSwipe(evenement, valeurBouton));
         }
-
-        this.afficherFilmASwiper();
     }
 
     /** Affiche un film à swiper */
-    afficherFilmASwiper() {
-        console.log("VueSwipe->afficherFilm()");
+    async afficherFilmASwiper() {
+        console.log("VueSwipe->afficherFilmASwiper()");
+        // Récupérer le film à swiper
+        this.filmASwiper = await this.actionObtenirFilmASwiper();
         // Affichage de l'affiche
-        document.getElementById("img").innerHTML = document.getElementById("img")
-            .innerHTML.replace("{img.src}", this.filmASwiper.affiche);
+        document.getElementById("affiche").src = this.filmASwiper.affiche;
     }
 
     async gererSwipe(evenement, reponse) {
@@ -47,6 +49,8 @@ class VueSwipe {
         let resultat = await this.actionGererSwipe(idFilm, reponse);
         if (resultat !== "true") {
             choixAlerte(resultat);
+        } else {
+            await this.afficherFilmASwiper();
         }
     }
 }

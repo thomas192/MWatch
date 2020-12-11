@@ -318,7 +318,7 @@ class UtilisateurDAO {
       {id: "aventure", nom: "Aventure"}, {id: "mystere", nom: "Mystère"}];
   }
 
-  /** Renvoie un film à swiper pour l'utilisateur */
+  /** Retourne un film à swiper pour l'utilisateur */
   async obtenirFilmASwiper() {
     // Récupérer l'utilisateur connecté
     const utilisateur = await firebase.auth().currentUser;
