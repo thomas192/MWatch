@@ -98,14 +98,14 @@ class VueProfil {
     console.log("VueProfil->mettreAJourInformationPersonnelle()");
     evenement.preventDefault();
     // Récupérer l'id de l'utilisateur connecté
-    var idUtilisateur = firebase.auth().currentUser.uid;
+    let idUtilisateur = firebase.auth().currentUser.uid;
     // Récupérer les valeurs des champs
-    var pseudo = document.getElementById("pseudo").value;
-    var email = document.getElementById("email").value;
-    var motDePasseActuel = document.getElementById("mot-de-passe-actuel").value;
-    var nouveauMotDePasse = document.getElementById("nouveau-mot-de-passe").value;
+    let pseudo = document.getElementById("pseudo").value;
+    let email = document.getElementById("email").value;
+    let motDePasseActuel = document.getElementById("mot-de-passe-actuel").value;
+    let nouveauMotDePasse = document.getElementById("nouveau-mot-de-passe").value;
     // Effectuer la mise à jour des informations personnelles
-    var resultat = await this.actionMettreAJourInformationPersonnelle(idUtilisateur,
+    let resultat = await this.actionMettreAJourInformationPersonnelle(idUtilisateur,
       pseudo, email, motDePasseActuel, nouveauMotDePasse);
     if (resultat !== "true") {
       choixAlerte(resultat);
@@ -118,10 +118,10 @@ class VueProfil {
     console.log("VueProfil->enregistrerListeGenreAime()");
     evenement.preventDefault();
     // Récupérer l'id de l'utilisateur
-    var idUtilisateur = firebase.auth().currentUser.uid;
+    let idUtilisateur = firebase.auth().currentUser.uid;
     // Récupérer les champs cochés
-    var listeGenreAime = []
-    for (var index in this.listeGenreDonnee) {
+    let listeGenreAime = []
+    for (let index in this.listeGenreDonnee) {
       let checkbox = document.getElementById(this.listeGenreDonnee[index].id);
       if (checkbox.checked) {
             listeGenreAime.push(this.listeGenreDonnee[index].id);

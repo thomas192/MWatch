@@ -46,6 +46,9 @@ class Application {
     // Initialiser la fonction actionSupprimerAmi dans VueAmi
     this.vueAmi.initialiserActionSupprimerAmi((idAmi) => this.actionSupprimerAmi(idAmi));
 
+    // Intialiser la fonction actionGererSwipe dans VueSwipe
+    this.vueSwipe.initialiserActionGererSwipe((idFilm, reponse) => this.actionGererSwipe(idFilm, reponse));
+
     this.initialiserApplication();
   }
 
@@ -172,6 +175,10 @@ class Application {
     return resultat;
   }
 
+  async actionGererSwipe(idFilm, reponse) {
+    console.log("Application->actionGererSwipe()");
+    return await this.utilisateurDAO.gererSwipe(idFilm, reponse);
+  }
 }
 
 new Application(window, new UtilisateurDAO(), new VueInscription(), new VueConnexion(), new VueProfil(), new VueAmis(), new VueAmi(), new VueSwipe());

@@ -173,17 +173,19 @@
       <div class="page">
         <div id=swipe>
           <div id="flex-haut">
-            <button class="action" id="action-vu-aime" type="button">Vu et aimé</button>
+            <button class="action" id="action-vu-aime" value="vuAime" type="button">Vu et aimé</button>
           </div>
 
           <div id="flex-milieu">
-            <button class="action" id="action-pas-vu-non-aime" type="button">Non vu et non aimé</button>
-            <img src="{img.src}"></img>
-            <button class="action" id="action-pas-vu-aime" type="button">Non vu et aimé</button>
+            <button class="action" id="action-non-vu-non-aime" value="nonVuNonAime" type="button">Non vu et non aimé</button>
+            <div id="img">
+              <img src="{img.src}"></img>
+            </div>
+            <button class="action" id="action-non-vu-aime" value="nonVuAime" type="button">Non vu et aimé</button>
           </div>
 
           <div id="flex-bas">
-            <button class="action" id="action-vu-non-aime" type="button">Vu et non aimé</button>
+            <button class="action" id="action-vu-non-aime" value="vuNonAime" type="button">Vu et non aimé</button>
           </div>
         </div>
       </div>

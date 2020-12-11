@@ -71,8 +71,7 @@ class VueAmis {
 
       // Ajout d'un écouteur pour chaque bouton de chaque demande
       let listeBouton = document.getElementsByTagName("button");
-      let nombreBouton = listeBouton.length;
-      for (let i=0; i<nombreBouton; i++) {
+      for (let i=0; i<listeBouton.length; i++) {
         let idBouton = listeBouton[i].id;
         let valeurBouton = listeBouton[i].value;
         listeBouton[i].addEventListener("click",
