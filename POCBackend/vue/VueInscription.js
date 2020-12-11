@@ -21,8 +21,8 @@ class VueInscription {
     let email = document.getElementById("email").value;
     let motDePasse = document.getElementById("mot-de-passe").value;
 
-    var resultat = await this.actionInscrire(pseudo, email, motDePasse);
-    if(resultat == "true") {
+    let resultat = await this.actionInscrire(pseudo, email, motDePasse);
+    if(resultat === "true") {
       console.log("   Utilisateur inscrit et connecté");
     } else{
       choixAlerte(resultat);

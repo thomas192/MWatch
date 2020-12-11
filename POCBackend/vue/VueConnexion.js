@@ -21,8 +21,8 @@ class VueConnexion {
     let email = document.getElementById("email").value;
     let motDePasse = document.getElementById("mot-de-passe").value;
 
-    var resultat = await this.actionConnecter(email, motDePasse);
-    if(resultat == "true") {
+    let resultat = await this.actionConnecter(email, motDePasse);
+    if(resultat === "true") {
       console.log("   Utilisateur connecté");
     } else{
       choixAlerte(resultat);

@@ -1,13 +1,11 @@
 class Application{
+
+	import Vue from "vue";
+	import App from "./App";
+
 	constructor(window, ){
 		this.window = window;
-		//this.jeuxVideoDAO = jeuxVideoDAO;
-/*
-		this.vueAjouterJeuVideo.initialiserActionAjouterJeuVideo(jeuVideo=>this.actionAjouterJeuVideo(jeuVideo));
-		this.vueModifierJeuVideo.initialiserActionModifierJeuVideo(jeuVideo=>this.actionModifierJeuVideo(jeuVideo));*/
-		
-
-		
+			
 		this.vueJeuVideo = vueJeuVideo;
 		
 		
@@ -58,7 +56,17 @@ class Application{
 		this.jeuxVideoDAO.modifier(jeuVideo);
 		this.window.location.hash = "#";
 	}
+
+	Vue.config.productionTip = false;
+
+	new Vue({
+		el: "#app",
+		components: { App },
+		template: "<App/>"
+	});
 	
+	
+	new Application(window, new JeuxVideoDAO(), new VueListeJeuxVideo(), new VueAjouterJeuVideo(), new VueJeuVideo(), new VueModifierJeuVideo());
+
 }
-new Application(window, new JeuxVideoDAO(), new VueListeJeuxVideo(), new VueAjouterJeuVideo(), new VueJeuVideo(), new VueModifierJeuVideo());
 
