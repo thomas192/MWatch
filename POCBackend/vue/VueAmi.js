@@ -23,9 +23,8 @@ class VueAmi {
     document.getElementsByTagName("contenu")[0].innerHTML = this.html;
 
     // Affichage du pseudo de l'ami
-    var pageHtmlRemplacement = document.getElementsByClassName("page")[0]
-      .innerHTML.replace("{h1.texte}", this.ami.pseudo);
-    document.getElementsByClassName("page")[0].innerHTML = pageHtmlRemplacement;
+    document.getElementsByClassName("page")[0].innerHTML = document.getElementsByClassName("page")[0]
+        .innerHTML.replace("{h1.texte}", this.ami.pseudo);
 
     // Ecouteur du bouton supprimer ami
     document.getElementById("action-supprimer-ami").addEventListener("click",
@@ -41,8 +40,8 @@ class VueAmi {
   async supprimerAmi(evenement) {
     console.log("VueAmi->supprimerAmi()");
     evenement.preventDefault();
-    var resultat = await this.actionSupprimerAmi(this.ami.idUtilisateur);
-    if (resultat != "true") {
+    let resultat = await this.actionSupprimerAmi(this.ami.idUtilisateur);
+    if (resultat !== "true") {
       choixAlerte(resultat);
     }
   }

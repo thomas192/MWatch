@@ -45,7 +45,7 @@ class VueAmis {
       const demandeAmiHtml = listeDemandeAmiHtml.innerHTML;
       let listeDemandeAmiHtmlRemplacement = "";
 
-      for (var index in this.listeDemandeAmi) {
+      for (let index in this.listeDemandeAmi) {
         let listeDemandeAmiHtmlItemRemplacement = demandeAmiHtml;
         listeDemandeAmiHtmlItemRemplacement =
           listeDemandeAmiHtmlItemRemplacement.replace("{div.id}",
@@ -70,9 +70,9 @@ class VueAmis {
       listeDemandeAmiHtml.innerHTML = listeDemandeAmiHtmlRemplacement;
 
       // Ajout d'un écouteur pour chaque bouton de chaque demande
-      var listeBouton = document.getElementsByTagName("button");
-      var nombreBouton = listeBouton.length;
-      for (var i=0; i<nombreBouton; i++) {
+      let listeBouton = document.getElementsByTagName("button");
+      let nombreBouton = listeBouton.length;
+      for (let i=0; i<nombreBouton; i++) {
         let idBouton = listeBouton[i].id;
         let valeurBouton = listeBouton[i].value;
         listeBouton[i].addEventListener("click",
@@ -90,7 +90,7 @@ class VueAmis {
       const amiHtml = listeAmiHtml.innerHTML;
       let listeAmiHtmlRemplacement = "";
 
-      for (var index in this.listeAmi) {
+      for (let index in this.listeAmi) {
         let listeAmiHtmlItemRemplacement = amiHtml;
         listeAmiHtmlItemRemplacement =
           listeAmiHtmlItemRemplacement.replace("{div.id}",
@@ -113,12 +113,12 @@ class VueAmis {
     console.log("VueAmis->actionAjouterAmi()");
     evenement.preventDefault();
     // Récupérer l'id de l'utilisateur connecté
-    var idUtilisateur = firebase.auth().currentUser.uid;
+    let idUtilisateur = firebase.auth().currentUser.uid;
     // Récupérer les valeurs des champs
-    var emailUtilisateurAjoute = document.getElementById("email").value;
+    let emailUtilisateurAjoute = document.getElementById("email").value;
     // Ajouter ami
-    var resultat = await this.actionAjouterAmi(idUtilisateur, emailUtilisateurAjoute);
-    if (resultat != "true") {
+    let resultat = await this.actionAjouterAmi(idUtilisateur, emailUtilisateurAjoute);
+    if (resultat !== "true") {
       choixAlerte(resultat);
     }
   }
@@ -126,8 +126,8 @@ class VueAmis {
   async gererDemandeAmi(evenement, idUtilisateurAccepte, reponse) {
     console.log("VueAmis->accepterDemandeAmi()");
     evenement.preventDefault();
-    var resultat = await this.actionGererDemandeAmi(idUtilisateurAccepte, reponse);
-    if (resultat != "true") {
+    let resultat = await this.actionGererDemandeAmi(idUtilisateurAccepte, reponse);
+    if (resultat !== "true") {
       choixAlerte(resultat);
     } else {
       // Mettre à jour l'html

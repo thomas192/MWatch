@@ -65,28 +65,28 @@ class VueProfil {
     let formulaireGenre = document.getElementById("genre");
     const formulaireGenreItemHtml = formulaireGenre.innerHTML;
     let formulaireGenreHtmlRemplacement = "";
-    for (var genre in this.listeGenreDonnee) {
+    for (let index in this.listeGenreDonnee) {
       let formulaireGenreItemHtmlRemplacement = formulaireGenreItemHtml;
       // id
       formulaireGenreItemHtmlRemplacement =
         formulaireGenreItemHtmlRemplacement.replace("{id}",
-        this.listeGenreDonnee[genre].id)
+        this.listeGenreDonnee[index].id)
       // name
       formulaireGenreItemHtmlRemplacement =
         formulaireGenreItemHtmlRemplacement.replace("{name}",
-        this.listeGenreDonnee[genre].id)
+        this.listeGenreDonnee[index].id)
       // value
       formulaireGenreItemHtmlRemplacement =
         formulaireGenreItemHtmlRemplacement.replace("{value}",
-        this.listeGenreDonnee[genre].nom)
+        this.listeGenreDonnee[index].nom)
       // for
       formulaireGenreItemHtmlRemplacement =
           formulaireGenreItemHtmlRemplacement.replace("{for}",
-          this.listeGenreDonnee[genre].id)
+          this.listeGenreDonnee[index].id)
       // label
       formulaireGenreItemHtmlRemplacement =
         formulaireGenreItemHtmlRemplacement.replace("{label}",
-        this.listeGenreDonnee[genre].nom)
+        this.listeGenreDonnee[index].nom)
      formulaireGenreHtmlRemplacement += formulaireGenreItemHtmlRemplacement;
     }
     formulaireGenre.innerHTML = formulaireGenreHtmlRemplacement;
@@ -107,7 +107,7 @@ class VueProfil {
     // Effectuer la mise à jour des informations personnelles
     var resultat = await this.actionMettreAJourInformationPersonnelle(idUtilisateur,
       pseudo, email, motDePasseActuel, nouveauMotDePasse);
-    if (resultat != "true") {
+    if (resultat !== "true") {
       choixAlerte(resultat);
     }
   }
@@ -128,8 +128,8 @@ class VueProfil {
       }
     }
     // Enregistrer les genres aimés
-    var resultat = await this.actionEnregistrerListeGenreAime(idUtilisateur, listeGenreAime);
-    if(resultat != "true") {
+    let resultat = await this.actionEnregistrerListeGenreAime(idUtilisateur, listeGenreAime);
+    if(resultat !== "true") {
       choixAlerte(resultat);
     }
   }
@@ -140,12 +140,12 @@ class VueProfil {
       console.log("VueProfil->supprimerCompte()");
       evenement.preventDefault();
       // Récupérer l'id de l'utilisateur
-      var idUtilisateur = firebase.auth().currentUser.uid;
+      let idUtilisateur = firebase.auth().currentUser.uid;
       // Récupérer le mot de passe
-      var motDePasseActuel = document.getElementById("mot-de-passe").value;
+      let motDePasseActuel = document.getElementById("mot-de-passe").value;
       // Supprimer l'utilisateur
-      var resultat = await this.actionSupprimerCompte(idUtilisateur, motDePasseActuel);
-      if(resultat != "true") {
+      let resultat = await this.actionSupprimerCompte(idUtilisateur, motDePasseActuel);
+      if(resultat !== "true") {
         choixAlerte(resultat);
       }
     }
