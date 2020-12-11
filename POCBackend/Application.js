@@ -137,7 +137,7 @@ class Application {
 
   actionDeconnecter() {
     console.log("Application->actionDeconnecter()");
-    firebase.auth().signOut();
+    this.utilisateurDAO.deconnecter();
     console.log("   Utilisateur déconnecté");
     this.window.location.hash = "#";
   }

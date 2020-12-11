@@ -44,6 +44,10 @@ class UtilisateurDAO {
     return retour;
   }
 
+  deconnecter() {
+    firebase.auth().signOut();
+  }
+
   async mettreAJourInformationPersonnelle(idUtilisateur, pseudo, email,
     motDePasseActuel, nouveauMotDePasse) {
     console.log("UtilisateurDAO->mettreAJourPseudoEtEmail()");
