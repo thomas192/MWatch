@@ -41,10 +41,34 @@ class VueSwipe {
         this.filmASwiper = await this.actionObtenirFilmASwiper();
         // Affichage de l'affiche
         document.getElementById("affiche").src = this.filmASwiper.affiche;
+        // Affichage des détails du film
+        let detailsFilmHtml = document.getElementById("detailsFilm").innerHTML;
+        detailsFilmHtml = detailsFilmHtml.replace("{Film.titre}", this.filmASwiper.titre);
+        detailsFilmHtml = detailsFilmHtml.replace("{Film.annee}", this.filmASwiper.annee);
+        detailsFilmHtml = detailsFilmHtml.replace("{Film.description}", this.filmASwiper.description);
+        document.getElementById("detailsFilm").innerHTML = detailsFilmHtml;
+
+        document.getElementById("detailsFilm").style.display = "none";
+
+        document.getElementById("affiche").addEventListener("click",
+            evenement => this.afficherDetailsFilm(evenement));
+    }
+
+    afficherDetailsFilm(evenement) {
+        console.log("VueSwipe->afficherDetailsFilm");
+        evenement.preventDefault();
+
+        let style = window.getComputedStyle(document.getElementById("detailsFilm")).display;
+        if (style === "none") {
+            document.getElementById("detailsFilm").style.display = "block";
+        } else {
+            document.getElementById("detailsFilm").style.display = "none";
+        }
     }
 
     async gererSwipe(evenement, reponse) {
         console.log("VueSwipe->gererSwipe");
+        evenement.preventDefault();
         let resultat = await this.actionGererSwipe(this.filmASwiper, reponse);
         if (resultat !== "true") {
             choixAlerte(resultat);

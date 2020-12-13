@@ -87,3 +87,7 @@
   justify-content: space-around;
   align-items: center;
 }
+
+.page #swipe #detailsFilm #titre-film{
+  font-weight: bold;
+}
