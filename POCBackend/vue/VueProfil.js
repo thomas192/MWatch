@@ -121,10 +121,10 @@ class VueProfil {
     let idUtilisateur = firebase.auth().currentUser.uid;
     // Récupérer les champs cochés
     let listeGenreAime = []
-    for (let index in this.listeGenreDonnee) {
-      let checkbox = document.getElementById(this.listeGenreDonnee[index].id);
+    for (let i in this.listeGenreDonnee) {
+      let checkbox = document.getElementById(this.listeGenreDonnee[i].id);
       if (checkbox.checked) {
-            listeGenreAime.push(this.listeGenreDonnee[index].id);
+            listeGenreAime.push(this.listeGenreDonnee[i].id);
       }
     }
     // Enregistrer les genres aimés

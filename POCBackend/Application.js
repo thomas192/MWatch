@@ -56,6 +56,9 @@ class Application {
     // Intialiser la fonction actionGererSwipe dans VueSwipe
     this.vueSwipe.initialiserActionGererSwipe((film, reponse) => this.actionGererSwipe(film, reponse));
 
+    // Intialiser la fonction actionAjouterAMaListe dans VueSwipe
+    this.vueSwipe.initialiserActionAjouterAMaListe((film) => this.actionAjouterAMaListe(film));
+
     this.initialiserApplication();
   }
 
@@ -209,6 +212,11 @@ class Application {
   async actionGererSwipe(film, reponse) {
     console.log("Application->actionGererSwipe()");
     return await this.utilisateurDAO.gererSwipe(film, reponse);
+  }
+
+  async actionAjouterAMaListe(film) {
+    console.log("Application->actionAjouterAMaListe()");
+    return await this.utilisateurDAO.ajouterAMaListe(film);
   }
 }
 

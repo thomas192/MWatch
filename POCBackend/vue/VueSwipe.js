@@ -6,6 +6,7 @@ class VueSwipe {
         // Fonctions prêtées par le controleur
         this.actionGererSwipe = null;
         this.actionObtenirFilmASwiper = null;
+        this.actionAjouterAMaListe = null;
     }
 
     /** Initialise la fonction actionObtenirFilmASwiper */
@@ -16,6 +17,11 @@ class VueSwipe {
     /** Initialise la fonction actionGererSwipe */
     initialiserActionGererSwipe(actionGererSwipe) {
         this.actionGererSwipe = actionGererSwipe;
+    }
+
+    /** Initialise la fonction actionAjouterAMaListe */
+    initialiserActionAjouterAMaListe(actionAjouterAMaListe) {
+        this.actionAjouterAMaListe = actionAjouterAMaListe;
     }
 
     /** Gère l'affichage de la vue */
@@ -37,6 +43,7 @@ class VueSwipe {
     /** Affiche un film à swiper */
     async afficherFilmASwiper() {
         console.log("VueSwipe->afficherFilmASwiper()");
+        document.getElementById("detailsFilm").style.display = "none";
         // Récupérer le film à swiper
         this.filmASwiper = await this.actionObtenirFilmASwiper();
         // Affichage de l'affiche
@@ -46,9 +53,8 @@ class VueSwipe {
         detailsFilmHtml = detailsFilmHtml.replace("{Film.titre}", this.filmASwiper.titre);
         detailsFilmHtml = detailsFilmHtml.replace("{Film.annee}", this.filmASwiper.annee);
         detailsFilmHtml = detailsFilmHtml.replace("{Film.description}", this.filmASwiper.description);
-        document.getElementById("detailsFilm").innerHTML = detailsFilmHtml;
 
-        document.getElementById("detailsFilm").style.display = "none";
+        document.getElementById("detailsFilm").innerHTML = detailsFilmHtml;
 
         document.getElementById("affiche").addEventListener("click",
             evenement => this.afficherDetailsFilm(evenement));
@@ -69,6 +75,13 @@ class VueSwipe {
     async gererSwipe(evenement, reponse) {
         console.log("VueSwipe->gererSwipe");
         evenement.preventDefault();
+
+        let ajouterAMaListe = document.getElementById("ajouter-a-la-liste");
+        // Ajout du film à la liste de l'utilisateur
+        if (ajouterAMaListe.checked) {
+            await this.actionAjouterAMaListe(this.filmASwiper);
+        }
+
         let resultat = await this.actionGererSwipe(this.filmASwiper, reponse);
         if (resultat !== "true") {
             choixAlerte(resultat);
