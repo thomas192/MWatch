@@ -186,6 +186,7 @@
             <a>{Film.description}</a>
           </div>
         </div>
+        <button class="action" id="action-retour-ami" type="button">Retour</button>
       </div>
     </script>
 
@@ -200,6 +201,11 @@
             <button class="action" id="action-non-vu-non-aime" value="nonVuNonAime" type="button">Non vu et non aimé</button>
             <img id="affiche" src="{img.src}"></img>
             <button class="action" id="action-non-vu-aime" value="nonVuAime" type="button">Non vu et aimé</button>
+          </div>
+
+          <div id="detailsFilm">
+            <a id="titre-film">{Film.titre} ({Film.annee})</a>
+            <a>{Film.description}</a>
           </div>
 
           <div id="flex-bas">

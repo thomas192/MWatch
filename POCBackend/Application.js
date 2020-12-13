@@ -47,6 +47,9 @@ class Application {
     // Initialiser la fonction actionSupprimerAmi dans VueAmi
     this.vueAmi.initialiserActionSupprimerAmi((idAmi) => this.actionSupprimerAmi(idAmi));
 
+    // Intialiser la fonction actionRetourAmi dans VueAmi
+    this.vueFilm.initialiserActionRetourAmi((idAmi) => this.actionRetourAmi(idAmi));
+
     // Intialiser la fonction actionObtenirFilmASwiper dans VueSwipe
     this.vueSwipe.initialiserActionObtenirFilmASwiper(() => this.actionObtenirFilmASwiper());
 
@@ -107,6 +110,7 @@ class Application {
       let idAmi = navigation[1];
       this.vueAmi.initialiserAmi(await this.utilisateurDAO.getUtilisateur(idAmi));
       this.vueAmi.initialiserListeFilmEnCommun(await this.utilisateurDAO.listerFilmEnCommun(idAmi));
+      this.vueFilm.initialiserIdAmi(idAmi);
       this.vueAmi.afficher();
 
     } else if (hash.match(/^#film\/(.*)/)) {
@@ -190,6 +194,11 @@ class Application {
       this.window.location.hash = "#amis";
     }
     return resultat;
+  }
+
+  actionRetourAmi(idAmi) {
+    console.log("Application->actionRetourAmi()");
+    this.window.location.hash = "#ami/"+idAmi;
   }
 
   async actionObtenirFilmASwiper() {
