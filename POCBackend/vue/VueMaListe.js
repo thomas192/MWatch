@@ -36,7 +36,7 @@ class VueMaListe {
             listeFilm.innerHTML = listeFilmHtmlRemplacement;
 
         } else {
-            document.getElementById("ma-liste-vide").style.display = "none";
+            document.getElementById("ma-liste").style.display = "none";
         }
     }
 

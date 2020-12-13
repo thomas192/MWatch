@@ -339,11 +339,7 @@ class UtilisateurDAO {
     let film = await db.collection("Utilisateur").doc(utilisateur.uid)
         .collection("MaListe").doc(idFilm.toString()).get();
     console.log(film);
-    if (film.exists) {
-      return true;
-    } else {
-      return false;
-    }
+    return !!film.exists;
   }
 
   async getUtilisateur(idUtilisateur) {

@@ -51,6 +51,9 @@ class Application {
     // Intialiser la fonction actionRetourVueFilm dans VueFilm
     this.vueFilm.initialiserActionRetourVueFilm((idAmi) => this.actionRetourVueFilm(idAmi));
 
+    // Initialiser la fonction actionFaitPartieDeMaListe dans VueFilm
+    this.vueFilm.initialiserFaitPartieDeMaListe((idFilm) => this.faitPartieDeMaListe(idFilm));
+
     // Intialiser la fonction actionObtenirFilmASwiper dans VueSwipe
     this.vueSwipe.initialiserActionObtenirFilmASwiper(() => this.actionObtenirFilmASwiper());
 
@@ -208,6 +211,11 @@ class Application {
   async actionRetourVueFilm(vueAppelante) {
     console.log("Application->actionRetourVueFilm()");
     this.window.location.hash = vueAppelante;
+  }
+
+  async faitPartieDeMaListe(idFilm) {
+    console.log("Application->faitPartieDeMaListe()");
+    return await this.utilisateurDAO.faitPartieDeMaListe(idFilm)
   }
 
   async actionObtenirFilmASwiper() {
