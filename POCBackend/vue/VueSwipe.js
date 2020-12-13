@@ -28,9 +28,8 @@ class VueSwipe {
     async afficher() {
         console.log("VueSwipe->afficher()");
         document.getElementsByTagName("contenu")[0].innerHTML = this.html;
-
+        // Afficher le film à swiper
         await this.afficherFilmASwiper();
-
         // Ajout d'un écouteur pour chaque bouton de la vue
         let listeBouton = document.getElementsByTagName("button");
         for (let i=0; i<listeBouton.length; i++) {
@@ -53,9 +52,10 @@ class VueSwipe {
         detailsFilmHtml = detailsFilmHtml.replace("{Film.titre}", this.filmASwiper.titre);
         detailsFilmHtml = detailsFilmHtml.replace("{Film.annee}", this.filmASwiper.annee);
         detailsFilmHtml = detailsFilmHtml.replace("{Film.description}", this.filmASwiper.description);
-
         document.getElementById("detailsFilm").innerHTML = detailsFilmHtml;
-
+        // Réinitialiser la checkbox utilisée pour ajouter un film à Ma liste
+        document.getElementById("ajouter-a-ma-liste").checked = false;
+        // Affiche cliquée
         document.getElementById("affiche").addEventListener("click",
             evenement => this.afficherDetailsFilm(evenement));
     }
@@ -63,7 +63,6 @@ class VueSwipe {
     afficherDetailsFilm(evenement) {
         console.log("VueSwipe->afficherDetailsFilm");
         evenement.preventDefault();
-
         let style = window.getComputedStyle(document.getElementById("detailsFilm")).display;
         if (style === "none") {
             document.getElementById("detailsFilm").style.display = "block";
@@ -76,12 +75,12 @@ class VueSwipe {
         console.log("VueSwipe->gererSwipe");
         evenement.preventDefault();
 
-        let ajouterAMaListe = document.getElementById("ajouter-a-la-liste");
+        let ajouterAMaListe = document.getElementById("ajouter-a-ma-liste");
         // Ajout du film à la liste de l'utilisateur
         if (ajouterAMaListe.checked) {
             await this.actionAjouterAMaListe(this.filmASwiper);
         }
-
+        // Gérer swipe
         let resultat = await this.actionGererSwipe(this.filmASwiper, reponse);
         if (resultat !== "true") {
             choixAlerte(resultat);
