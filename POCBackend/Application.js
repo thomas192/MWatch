@@ -1,5 +1,5 @@
 class Application {
-  constructor(window, utilisateurDAO, vueInscription, vueConnexion, vueProfil, vueAmis, vueAmi, vueSwipe, vueFilm) {
+  constructor(window, utilisateurDAO, vueInscription, vueConnexion, vueProfil, vueAmis, vueAmi, vueSwipe, vueFilm, vueMaListe) {
     this.window = window;
     this.utilisateurDAO = utilisateurDAO;
     this.vueInscription = vueInscription;
@@ -9,6 +9,7 @@ class Application {
     this.vueAmi = vueAmi;
     this.vueSwipe = vueSwipe;
     this.vueFilm = vueFilm;
+    this.vueMaListe = vueMaListe;
 
     // Initialiser la fonction actionInscrire dans VueInscription
     this.vueInscription.initialiserActionInscrire((pseudo, email, motDePasse) =>
@@ -102,6 +103,10 @@ class Application {
     } else if (hash.match(/^#profil/)) {
       this.vueProfil.initialiserListeGenre(this.utilisateurDAO.listerGenre());
       this.vueProfil.afficher();
+
+    } else if (hash.match(/^#maliste/)) {
+      this.vueMaListe.initialiserListeFilm(await this.utilisateurDAO.obtenirMaListe());
+      this.vueMaListe.afficher();
 
     } else if (hash.match(/^#amis/)) {
       this.vueAmis.initialiserListeDemandeAmi(await this.utilisateurDAO.listerDemandeAmi())
@@ -199,7 +204,7 @@ class Application {
     return resultat;
   }
 
-  actionRetourAmi(idAmi) {
+  async actionRetourAmi(idAmi) {
     console.log("Application->actionRetourAmi()");
     this.window.location.hash = "#ami/"+idAmi;
   }
@@ -220,4 +225,4 @@ class Application {
   }
 }
 
-new Application(window, new UtilisateurDAO(), new VueInscription(), new VueConnexion(), new VueProfil(), new VueAmis(), new VueAmi(), new VueSwipe(), new VueFilm());
+new Application(window, new UtilisateurDAO(), new VueInscription(), new VueConnexion(), new VueProfil(), new VueAmis(), new VueAmi(), new VueSwipe(), new VueFilm(), new VueMaListe());
