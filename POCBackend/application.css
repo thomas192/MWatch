@@ -43,6 +43,20 @@
   margin-bottom: 3%;
 }
 
+.page #film {
+  display: flex;
+  flex-direction: column;
+  max-width: 60%;
+}
+
+.page #film div {
+  padding-bottom: 1%;
+}
+
+.page #film div img {
+  max-width: 35%;
+}
+
 .page #swipe {
   display: flex;
   flex-direction: column;

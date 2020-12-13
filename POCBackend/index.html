@@ -21,6 +21,7 @@
   <script src="vue/VueAmis.js"></script>
   <script src="vue/VueAmi.js"></script>
   <script src="vue/VueSwipe.js"></script>
+  <script src="vue/VueFilm.js"></script>
 
   <script defer src="Application.js"></script>
 
@@ -168,6 +169,22 @@
         </div>
         <div id="liste-film-en-commun-vide">
           <a>Vous n avez auncun film en commun, swipez !</a>
+        </div>
+      </div>
+    </script>
+
+    <script type="plain/text" id="html-vue-film">
+      <div class="page">
+        <div id="film">
+          <div>
+            <h1>{Film.titre} ({Film.annee})</h1>
+          </div>
+          <div>
+            <img src="{Film.affiche}"></img>
+          </div>
+          <div>
+            <a>{Film.description}</a>
+          </div>
         </div>
       </div>
     </script>

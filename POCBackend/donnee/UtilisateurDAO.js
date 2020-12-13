@@ -322,7 +322,7 @@ class UtilisateurDAO {
       {id: "aventure", nom: "Aventure"}, {id: "mystere", nom: "Mystère"}];
   }
 
-  /** Retourne un film à swiper pour l'utilisateur */
+  /** Retourne un film à swiper pour l'utilisateur (simulé) */
   async obtenirFilmASwiper() {
     // Récupérer l'utilisateur connecté
     const utilisateur = await firebase.auth().currentUser;
@@ -330,27 +330,31 @@ class UtilisateurDAO {
     let listeFilm = [{
       titre: "Enola Holmes",
       id: 497582,
+      annee: 2020,
       description: "Quand Enola Holmes, la jeune sœur de Sherlock, découvre que sa mère a disparu, elle s'improvise super-détective. Ne tardant pas à faire ses preuves, elle se montre même plus maligne que son illustre grand frère en mettant au jour le dangereux complot qui entoure un mystérieux jeune lord.",
       affiche: "https://image.tmdb.org/t/p/w342/2tfTE30QGr71g8XLUQefRdbbV4N.jpg"
     },
-      {
-        titre: "Mort Subite 2",
-        id: 741067,
-        description: "Jesse Freeman est un ancien officier des forces spéciales et expert en explosifs qui travaille maintenant comme agent de sécurité dans une arène de basket-ball à la pointe de la technologie. Des problèmes éclatent lorsqu'un groupe de terroristes kidnappe le propriétaire de l'équipe et la fille de Jesse lors de la soirée d'ouverture.",
-        affiche: "https://image.tmdb.org/t/p/w342/9lHBNpAkiFoqKNygC22217hSrqW.jpg"
-      },
-      {
-        titre: "Les chroniques de Noël 2",
-        id: 654028,
-        description: "Désormais ado et cynique, Kate Pierce fait une nouvelle fois équipe avec le père Noël quand un mystérieux fauteur de troubles menace de supprimer Noël... pour toujours.",
-        affiche: "https://image.tmdb.org/t/p/w342/AawUeviXf2hRi9d4K2IxgJUfUO9.jpg"
-      },
-      {
-        titre: "Sacrées sorcières",
-        id: 531219,
-        description: "Un jeune garçon et sa grand-mère, exilés en Angleterre, doivent lutter contre d'horribles sorcières. Contrairement aux idées reçues, les sorcières ne portent ni balai, ni verrue, ni chapeau pointu. Les démasquer représente donc une vraie difficulté pour le petit garçon, qui va devoir rivaliser d'ingéniosité pour échapper à la perfidie de ces vilaines créatures.",
-        affiche: "https://image.tmdb.org/t/p/w342/9wI1x4H86A1Cj2tuRdolZ0F7BPb.jpg"
-      }];
+    {
+      titre: "Mort Subite 2",
+      id: 741067,
+      annee: 2020,
+      description: "Jesse Freeman est un ancien officier des forces spéciales et expert en explosifs qui travaille maintenant comme agent de sécurité dans une arène de basket-ball à la pointe de la technologie. Des problèmes éclatent lorsqu'un groupe de terroristes kidnappe le propriétaire de l'équipe et la fille de Jesse lors de la soirée d'ouverture.",
+      affiche: "https://image.tmdb.org/t/p/w342/9lHBNpAkiFoqKNygC22217hSrqW.jpg"
+    },
+    {
+      titre: "Les chroniques de Noël 2",
+      id: 654028,
+      annee: 2020,
+      description: "Désormais ado et cynique, Kate Pierce fait une nouvelle fois équipe avec le père Noël quand un mystérieux fauteur de troubles menace de supprimer Noël... pour toujours.",
+      affiche: "https://image.tmdb.org/t/p/w342/AawUeviXf2hRi9d4K2IxgJUfUO9.jpg"
+    },
+    {
+      titre: "Sacrées sorcières",
+      id: 531219,
+      annee: 2020,
+      description: "Un jeune garçon et sa grand-mère, exilés en Angleterre, doivent lutter contre d'horribles sorcières. Contrairement aux idées reçues, les sorcières ne portent ni balai, ni verrue, ni chapeau pointu. Les démasquer représente donc une vraie difficulté pour le petit garçon, qui va devoir rivaliser d'ingéniosité pour échapper à la perfidie de ces vilaines créatures.",
+      affiche: "https://image.tmdb.org/t/p/w342/9wI1x4H86A1Cj2tuRdolZ0F7BPb.jpg"
+    }];
 
     let filmASwiper;
     while (true) {
@@ -362,6 +366,18 @@ class UtilisateurDAO {
         return filmASwiper;
       }
     }
+  }
+
+  /** Retourne un film (simulé) */
+  obtenirFilm(idFilm) {
+    console.log("UtilisateurDAO->obtenirFilm()");
+    return {
+      titre: "Sacrées sorcières",
+      id: 531219,
+      annee: 2020,
+      description: "Un jeune garçon et sa grand-mère, exilés en Angleterre, doivent lutter contre d'horribles sorcières. Contrairement aux idées reçues, les sorcières ne portent ni balai, ni verrue, ni chapeau pointu. Les démasquer représente donc une vraie difficulté pour le petit garçon, qui va devoir rivaliser d'ingéniosité pour échapper à la perfidie de ces vilaines créatures.",
+      affiche: "https://image.tmdb.org/t/p/w342/9wI1x4H86A1Cj2tuRdolZ0F7BPb.jpg"
+    };
   }
 
   /** Retourne la liste des films en commun (non vus et aimés) */

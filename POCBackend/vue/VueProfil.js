@@ -65,28 +65,28 @@ class VueProfil {
     let formulaireGenre = document.getElementById("genre");
     const formulaireGenreItemHtml = formulaireGenre.innerHTML;
     let formulaireGenreHtmlRemplacement = "";
-    for (let index in this.listeGenreDonnee) {
+    for (let i in this.listeGenreDonnee) {
       let formulaireGenreItemHtmlRemplacement = formulaireGenreItemHtml;
       // id
       formulaireGenreItemHtmlRemplacement =
         formulaireGenreItemHtmlRemplacement.replace("{id}",
-        this.listeGenreDonnee[index].id)
+        this.listeGenreDonnee[i].id)
       // name
       formulaireGenreItemHtmlRemplacement =
         formulaireGenreItemHtmlRemplacement.replace("{name}",
-        this.listeGenreDonnee[index].id)
+        this.listeGenreDonnee[i].id)
       // value
       formulaireGenreItemHtmlRemplacement =
         formulaireGenreItemHtmlRemplacement.replace("{value}",
-        this.listeGenreDonnee[index].nom)
+        this.listeGenreDonnee[i].nom)
       // for
       formulaireGenreItemHtmlRemplacement =
           formulaireGenreItemHtmlRemplacement.replace("{for}",
-          this.listeGenreDonnee[index].id)
+          this.listeGenreDonnee[i].id)
       // label
       formulaireGenreItemHtmlRemplacement =
         formulaireGenreItemHtmlRemplacement.replace("{label}",
-        this.listeGenreDonnee[index].nom)
+        this.listeGenreDonnee[i].nom)
      formulaireGenreHtmlRemplacement += formulaireGenreItemHtmlRemplacement;
     }
     formulaireGenre.innerHTML = formulaireGenreHtmlRemplacement;
