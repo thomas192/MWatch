@@ -48,8 +48,8 @@ class Application {
     // Initialiser la fonction actionSupprimerAmi dans VueAmi
     this.vueAmi.initialiserActionSupprimerAmi((idAmi) => this.actionSupprimerAmi(idAmi));
 
-    // Intialiser la fonction actionRetourAmi dans VueAmi
-    this.vueFilm.initialiserActionRetourAmi((idAmi) => this.actionRetourAmi(idAmi));
+    // Intialiser la fonction actionRetourVueFilm dans VueFilm
+    this.vueFilm.initialiserActionRetourVueFilm((idAmi) => this.actionRetourVueFilm(idAmi));
 
     // Intialiser la fonction actionObtenirFilmASwiper dans VueSwipe
     this.vueSwipe.initialiserActionObtenirFilmASwiper(() => this.actionObtenirFilmASwiper());
@@ -106,6 +106,7 @@ class Application {
 
     } else if (hash.match(/^#maliste/)) {
       this.vueMaListe.initialiserListeFilm(await this.utilisateurDAO.obtenirMaListe());
+      this.vueFilm.initialiserVueAppelante(hash);
       this.vueMaListe.afficher();
 
     } else if (hash.match(/^#amis/)) {
@@ -118,7 +119,7 @@ class Application {
       let idAmi = navigation[1];
       this.vueAmi.initialiserAmi(await this.utilisateurDAO.getUtilisateur(idAmi));
       this.vueAmi.initialiserListeFilmEnCommun(await this.utilisateurDAO.listerFilmEnCommun(idAmi));
-      this.vueFilm.initialiserIdAmi(idAmi);
+      this.vueFilm.initialiserVueAppelante(hash);
       this.vueAmi.afficher();
 
     } else if (hash.match(/^#film\/(.*)/)) {
@@ -204,9 +205,9 @@ class Application {
     return resultat;
   }
 
-  async actionRetourAmi(idAmi) {
-    console.log("Application->actionRetourAmi()");
-    this.window.location.hash = "#ami/"+idAmi;
+  async actionRetourVueFilm(vueAppelante) {
+    console.log("Application->actionRetourVueFilm()");
+    this.window.location.hash = vueAppelante;
   }
 
   async actionObtenirFilmASwiper() {

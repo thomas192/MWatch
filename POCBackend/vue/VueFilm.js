@@ -3,8 +3,8 @@ class VueFilm {
         this.html = document.getElementById("html-vue-film").innerHTML;
         /** Film à afficher */
         this.Film = null;
-        /** Id de l'ami du film en commun */
-        this.idAmi = null;
+        /** Vue appelante  */
+        this.vueAppelante = null;
         // Fonctions prêtées par le controleur
         this.actionRetourAmi = null;
     }
@@ -14,14 +14,14 @@ class VueFilm {
         this.Film = film;
     }
 
-    /** Initialise l'id de l'ami */
-    initialiserIdAmi(idAmi) {
-        this.idAmi = idAmi;
+    /** Initialise la vue appelante */
+    initialiserVueAppelante(vueAppelante) {
+        this.vueAppelante = vueAppelante;
     }
 
     /** Initialise la fonction actionRetourAmi */
-    initialiserActionRetourAmi(actionRetourAmi) {
-        this.actionRetourAmi = actionRetourAmi;
+    initialiserActionRetourVueFilm(actionRetourVueFilm) {
+        this.actionRetourAmi = actionRetourVueFilm;
     }
 
     /** Gère l'affichage de la vue */
@@ -35,14 +35,14 @@ class VueFilm {
 
         document.getElementsByTagName("contenu")[0].innerHTML = this.html;
 
-        document.getElementById("action-retour-ami").addEventListener("click",
-            evenement => this.retourAmi(evenement));
+        document.getElementById("action-retour-vue-film").addEventListener("click",
+            evenement => this.retourVueFilm(evenement));
     }
 
-    retourAmi(evenement) {
-        console.log("VueFilm->retourAmi()");
+    retourVueFilm(evenement) {
+        console.log("VueFilm->retourVueFilm()");
         evenement.preventDefault();
 
-        this.actionRetourAmi(this.idAmi);
+        this.actionRetourAmi(this.vueAppelante);
     }
 }
