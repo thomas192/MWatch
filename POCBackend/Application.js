@@ -54,6 +54,9 @@ class Application {
     // Initialiser la fonction actionFaitPartieDeMaListe dans VueFilm
     this.vueFilm.initialiserFaitPartieDeMaListe((idFilm) => this.faitPartieDeMaListe(idFilm));
 
+    // Initialiser la fonction actionSupprimerDeMaListe dans VueFilm
+    this.vueFilm.initialiserActionSupprimerDeMaListe((idFilm) => this.actionSupprimerDeMaListe(idFilm));
+
     // Intialiser la fonction actionObtenirFilmASwiper dans VueSwipe
     this.vueSwipe.initialiserActionObtenirFilmASwiper(() => this.actionObtenirFilmASwiper());
 
@@ -216,6 +219,11 @@ class Application {
   async faitPartieDeMaListe(idFilm) {
     console.log("Application->faitPartieDeMaListe()");
     return await this.utilisateurDAO.faitPartieDeMaListe(idFilm)
+  }
+
+  async actionSupprimerDeMaListe(idFilm) {
+    console.log("Application->actionSupprimerDeMaListe()");
+    return await this.utilisateurDAO.supprimerDeMaListe(idFilm);
   }
 
   async actionObtenirFilmASwiper() {

@@ -3,6 +3,7 @@ class VueAmi {
     this.html = document.getElementById("html-vue-ami").innerHTML;
     /** Ami à afficher */
     this.ami = null;
+    /** Films en commun à afficher */
     this.listeFilmEnCommun = null;
     // Fonctions prêtées par le controleur
     this.actionSupprimerAmi = null;

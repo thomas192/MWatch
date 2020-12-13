@@ -5,9 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application.js" beforeDir="false" afterPath="$PROJECT_DIR$/Application.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/donnee/UtilisateurDAO.js" beforeDir="false" afterPath="$PROJECT_DIR$/donnee/UtilisateurDAO.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/VueAmi.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueAmi.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/VueFilm.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueFilm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/VueMaListe.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueMaListe.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +47,7 @@
       <updated>1607690416417</updated>
       <workItem from="1607690418136" duration="20850000" />
       <workItem from="1607713782558" duration="7648000" />
-      <workItem from="1607850971989" duration="16631000" />
+      <workItem from="1607850971989" duration="17810000" />
     </task>
     <servers />
   </component>
