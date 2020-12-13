@@ -297,6 +297,7 @@ class UtilisateurDAO {
     let retour = "true";
     // Récupérer l'utilisateur connecté
     const utilisateur = await firebase.auth().currentUser;
+    // Enregistrer le swipe
     await db.collection("Utilisateur").doc(utilisateur.uid).collection("FilmSwipe")
         .doc(film.id.toString()).set({id: film.id, titre: film.titre, etat: reponse})
     // Gestion des erreurs
@@ -304,6 +305,7 @@ class UtilisateurDAO {
       console.log("   Code d'erreur: " + objetErreur.code)
       retour = objetErreur.code
     });
+    console.log("   Swipe enregistré");
     return retour;
   }
 
@@ -313,6 +315,16 @@ class UtilisateurDAO {
     const utilisateur = await firebase.auth().currentUser;
     await db.collection("Utilisateur").doc(utilisateur.uid)
         .collection("MaListe").doc(film.id.toString()).set({id: film.id, titre: film.titre});
+    console.log("   Film ajouté à Ma liste");
+  }
+
+  async supprimerDeMaListe(idFilm) {
+    console.log("UtilisateurDAO->ajouterFilmAMaListe()");
+    // Récupérer l'utilisateur connecté
+    const utilisateur = await firebase.auth().currentUser;
+    await db.collection("Utilisateur").doc(utilisateur.uid)
+        .collection("MaListe").doc(idFilm.toString()).delete();
+    console.log("   Film supprimé de Ma liste");
   }
 
   /** Retourne la liste des films ajoutés à Ma liste */
@@ -338,7 +350,6 @@ class UtilisateurDAO {
     // Récupérer le film
     let film = await db.collection("Utilisateur").doc(utilisateur.uid)
         .collection("MaListe").doc(idFilm.toString()).get();
-    console.log(film);
     return !!film.exists;
   }
 
