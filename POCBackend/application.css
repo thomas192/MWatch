@@ -69,22 +69,13 @@
   width: 10%;
 }
 
-.page #swipe #flex-haut {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-.page #swipe #flex-bas {
+.page #swipe .swipe-item {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
 .page #swipe #flex-milieu {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
   align-items: center;
 }
 
