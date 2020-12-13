@@ -315,19 +315,35 @@ class UtilisateurDAO {
         .collection("MaListe").doc(film.id.toString()).set({id: film.id, titre: film.titre});
   }
 
-  /** Retourne la liste des films ajoutés à ma liste */
+  /** Retourne la liste des films ajoutés à Ma liste */
   async obtenirMaListe() {
     console.log("UtilisateurDAO->obtenirMaListe()");
     // Récupérer l'utilisateur connecté
     const utilisateur = await firebase.auth().currentUser;
     // Récupérer les films ajoutés à ma liste
-    let snapshotMaListe = await db.collection("Utilisateur").doc(utilisateur.uid)
+    const snapshotMaListe = await db.collection("Utilisateur").doc(utilisateur.uid)
         .collection("MaListe").get();
     let maListe = [];
     snapshotMaListe.forEach(doc => {
       maListe.push(doc.data())
     });
     return maListe;
+  }
+
+  /** Retourne true si le film fait partie de Ma liste, sinon false */
+  async faitPartieDeMaListe(idFilm) {
+    console.log("UtilisateurDAO->obtenirMaListe()");
+    // Récupérer l'utilisateur connecté
+    const utilisateur = await firebase.auth().currentUser;
+    // Récupérer le film
+    let film = await db.collection("Utilisateur").doc(utilisateur.uid)
+        .collection("MaListe").doc(idFilm.toString()).get();
+    console.log(film);
+    if (film.exists) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   async getUtilisateur(idUtilisateur) {
