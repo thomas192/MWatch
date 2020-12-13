@@ -244,8 +244,8 @@ class UtilisateurDAO {
     });
     // Récupérer les objets utilisateur à partir de leur id
     let listeUtilisateur = [];
-    for (let index in listeIdUtilisateur) {
-      let utilisateur = await db.collection("Utilisateur").doc(listeIdUtilisateur[index]).get();
+    for (let i in listeIdUtilisateur) {
+      let utilisateur = await db.collection("Utilisateur").doc(listeIdUtilisateur[i]).get();
       listeUtilisateur.push(utilisateur.data());
     }
     return listeUtilisateur;
@@ -313,6 +313,21 @@ class UtilisateurDAO {
     const utilisateur = await firebase.auth().currentUser;
     await db.collection("Utilisateur").doc(utilisateur.uid)
         .collection("MaListe").doc(film.id.toString()).set({id: film.id, titre: film.titre});
+  }
+
+  /** Retourne la liste des films ajoutés à ma liste */
+  async obtenirMaListe() {
+    console.log("UtilisateurDAO->obtenirMaListe()");
+    // Récupérer l'utilisateur connecté
+    const utilisateur = await firebase.auth().currentUser;
+    // Récupérer les films ajoutés à ma liste
+    let snapshotMaListe = await db.collection("Utilisateur").doc(utilisateur.uid)
+        .collection("MaListe").get();
+    let maListe = [];
+    snapshotMaListe.forEach(doc => {
+      maListe.push(doc.data())
+    });
+    return maListe;
   }
 
   async getUtilisateur(idUtilisateur) {
