@@ -128,8 +128,17 @@ class VueAmis {
     if (resultat !== "true") {
       choixAlerte(resultat);
     } else {
-      // Mettre à jour l'html
-      document.getElementById("demande-ami-de-" + idUtilisateurAccepte).innerHTML = "";
+      // Mettre à jour la vue
+      for (let i in this.listeDemandeAmi) {
+        if (this.listeDemandeAmi[i].id === idUtilisateurAccepte) {
+          let ami = this.listeDemandeAmi[i];
+          this.listeDemandeAmi.splice(i, 1);
+          if (reponse === "acceptee") {
+            this.listeAmi.push(ami);
+          }
+          this.afficher();
+        }
+      }
     }
   }
 }
