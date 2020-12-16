@@ -51,7 +51,7 @@ class UtilisateurDAO {
   async mettreAJourInformationPersonnelle(pseudo, email,
     motDePasseActuel, nouveauMotDePasse) {
     console.log("UtilisateurDAO->mettreAJourPseudoEtEmail()");
-    let retour = "true";
+    let retour = "miseAJourEffectuee";
     // Récupérer l'utilisateur connecté
     const utilisateur = await firebase.auth().currentUser;
     const utilisateurRef = await db.collection("Utilisateur").doc(utilisateur.uid);
@@ -112,7 +112,7 @@ class UtilisateurDAO {
 
   async ajouterAmi(emailUtilisateurAjoute) {
     console.log("UtilisateurDAO->ajouterAmi()");
-    let retour = "true";
+    let retour = "demandeAmiEnvoyee";
     // Récupérer l'utilisateur connecté
     const utilisateur = await firebase.auth().currentUser;
     // Récupérer le snapshot contenant le document de l'utilisateur ajouté

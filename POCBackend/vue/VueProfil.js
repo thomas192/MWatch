@@ -67,23 +67,18 @@ class VueProfil {
     let formulaireGenreHtmlRemplacement = "";
     for (let i in this.listeGenreDonnee) {
       let formulaireGenreItemHtmlRemplacement = formulaireGenreItemHtml;
-      // id
       formulaireGenreItemHtmlRemplacement =
         formulaireGenreItemHtmlRemplacement.replace("{id}",
         this.listeGenreDonnee[i].id)
-      // name
       formulaireGenreItemHtmlRemplacement =
         formulaireGenreItemHtmlRemplacement.replace("{name}",
         this.listeGenreDonnee[i].id)
-      // value
       formulaireGenreItemHtmlRemplacement =
         formulaireGenreItemHtmlRemplacement.replace("{value}",
         this.listeGenreDonnee[i].nom)
-      // for
       formulaireGenreItemHtmlRemplacement =
           formulaireGenreItemHtmlRemplacement.replace("{for}",
           this.listeGenreDonnee[i].id)
-      // label
       formulaireGenreItemHtmlRemplacement =
         formulaireGenreItemHtmlRemplacement.replace("{label}",
         this.listeGenreDonnee[i].nom)
@@ -105,9 +100,7 @@ class VueProfil {
     // Effectuer la mise à jour des informations personnelles
     let resultat = await this.actionMettreAJourInformationPersonnelle(pseudo,
         email, motDePasseActuel, nouveauMotDePasse);
-    if (resultat !== "true") {
-      choixAlerte(resultat);
-    }
+    choixAlerte(resultat);
   }
 
   /** Récupère les genre aimés par l'utilisateur et et les passe

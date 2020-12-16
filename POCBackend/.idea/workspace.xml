@@ -4,8 +4,11 @@
     <list default="true" id="19fd17dd-f088-4c1c-9aca-a9714e96e367" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application.css" beforeDir="false" afterPath="$PROJECT_DIR$/application.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/donnee/UtilisateurDAO.js" beforeDir="false" afterPath="$PROJECT_DIR$/donnee/UtilisateurDAO.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/fonctionDeBase.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/fonctionDeBase.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/VueAmis.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueAmis.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/VueProfil.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueProfil.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +51,7 @@
       <workItem from="1607713782558" duration="7648000" />
       <workItem from="1607850971989" duration="18406000" />
       <workItem from="1607869975340" duration="941000" />
-      <workItem from="1608111318651" duration="4756000" />
+      <workItem from="1608111318651" duration="7287000" />
     </task>
     <servers />
   </component>

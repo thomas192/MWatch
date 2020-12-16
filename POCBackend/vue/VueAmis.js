@@ -116,9 +116,7 @@ class VueAmis {
     let emailUtilisateurAjoute = document.getElementById("email").value;
     // Ajouter ami
     let resultat = await this.actionAjouterAmi(emailUtilisateurAjoute);
-    if (resultat !== "true") {
-      choixAlerte(resultat);
-    }
+    choixAlerte(resultat);
   }
 
   async gererDemandeAmi(evenement, idUtilisateurAccepte, reponse) {

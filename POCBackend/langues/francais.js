@@ -11,3 +11,6 @@ const ERREUR_UTILISATEUR_INCONNU = "L'utilisateur recherché n'existe pas."
 const ERREUR_AJOUT_DE_SOI_EN_AMI = "Vous ne pouvez vous ajouter vous-même en ami."
 const ERREUR_DEMANDE_AMI_DEJA_ENVOYEE = "Demande d'ami déjà envoyée."
 const ERREUR_DEJA_AMI = "Vous êtes déjà ami avec cette personne."
+
+const SUCCES_MISE_A_JOUR = "Mise à jour effectuée."
+const SUCCES_DEMANDE_AMI = "Demande d'ami envoyée."
