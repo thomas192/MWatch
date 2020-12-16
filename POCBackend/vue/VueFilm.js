@@ -47,11 +47,13 @@ class VueFilm {
         document.getElementsByTagName("contenu")[0].innerHTML = this.html;
         // Affichage du bouton supprimer
         if (await this.faitPartieDeMaListe(this.film.id)) {
+            console.log("true");
             document.getElementById("action-supprimer-film").style.display = "block";
             // Bouton supprimé cliqué
             document.getElementById("action-supprimer-film").addEventListener("click",
                 evenement => this.supprimerDeMaListe(evenement));
         } else {
+            console.log("false");
             document.getElementById("action-supprimer-film").style.display = "none";
         }
         // Bouton retour cliqué

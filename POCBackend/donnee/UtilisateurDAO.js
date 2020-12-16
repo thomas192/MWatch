@@ -17,7 +17,7 @@ class UtilisateurDAO {
       // Ajouter l'utilisateur dans firestore
       await db.collection('Utilisateur').doc(utilisateur.uid)
       .set({
-        idUtilisateur: firebase.auth().currentUser.uid,
+        id: firebase.auth().currentUser.uid,
         pseudo: pseudo,
         email: email
       });
@@ -48,13 +48,13 @@ class UtilisateurDAO {
     firebase.auth().signOut();
   }
 
-  async mettreAJourInformationPersonnelle(idUtilisateur, pseudo, email,
+  async mettreAJourInformationPersonnelle(pseudo, email,
     motDePasseActuel, nouveauMotDePasse) {
     console.log("UtilisateurDAO->mettreAJourPseudoEtEmail()");
     let retour = "true";
-
+    // Récupérer l'utilisateur connecté
     const utilisateur = await firebase.auth().currentUser;
-    const utilisateurRef = await db.collection("Utilisateur").doc(idUtilisateur);
+    const utilisateurRef = await db.collection("Utilisateur").doc(utilisateur.uid);
     // Initialiser l'objet de reconnexion
     const credential = await firebase.auth.EmailAuthProvider.credential(
         utilisateur.email,
@@ -94,11 +94,13 @@ class UtilisateurDAO {
     return retour;
   }
 
-  async enregistrerListeGenreAime(idUtilisateur, listeGenreAime) {
+  async enregistrerListeGenreAime(listeGenreAime) {
     console.log("UtilisateurDAO->enregistrerListeGenreAime()");
     let retour = "true";
+    // Récupérer l'utilisateur connecté
+    const utilisateur = await firebase.auth().currentUser;
     // Créer le document
-    await db.collection("GenreAime").doc(idUtilisateur).set({ listeGenreAime: listeGenreAime })
+    await db.collection("GenreAime").doc(utilisateur.uid).set({ listeGenreAime: listeGenreAime })
     // Gestion des erreurs
     .catch(function(objetErreur) {
       console.log("   Code d'erreur: " + objetErreur.code)
@@ -108,7 +110,7 @@ class UtilisateurDAO {
     return retour;
   }
 
-  async ajouterAmi(idUtilisateur, emailUtilisateurAjoute) {
+  async ajouterAmi(emailUtilisateurAjoute) {
     console.log("UtilisateurDAO->ajouterAmi()");
     let retour = "true";
     // Récupérer l'utilisateur connecté
@@ -132,7 +134,7 @@ class UtilisateurDAO {
         return exceptionPersonnalisee("ajout_de_soi_en_ami");
       }
       // Vérifier si l'utilisateur n'a pas déjà envoyé une demande d'ami à l'utilisateur ajouté
-      const demande = await db.collection("Ami").doc(utilisateurAjoute.idUtilisateur)
+      const demande = await db.collection("Ami").doc(utilisateurAjoute.id)
           .collection("DemandeRecue").doc(utilisateur.uid).get();
       if (demande.exists) {
         console.log("   Demande d'ami déjà envoyée à cet utilisateur");
@@ -140,13 +142,13 @@ class UtilisateurDAO {
       }
       // Vérifier si l'utilisateur n'est pas déjà ami avec l'utilisateur ajouté
       const relation = await db.collection("Ami").doc(utilisateur.uid)
-          .collection("Relation").doc(utilisateurAjoute.idUtilisateur).get();
+          .collection("Relation").doc(utilisateurAjoute.id).get();
       if (relation.exists) {
         console.log("   Utilisateur déjà ami avec l'utilisateur ajouté");
         return exceptionPersonnalisee("deja_ami");
       }
       // Enregistrer la demande d'ami
-      await db.collection("Ami").doc(utilisateurAjoute.idUtilisateur).collection("DemandeRecue")
+      await db.collection("Ami").doc(utilisateurAjoute.id).collection("DemandeRecue")
         .doc(utilisateur.uid).set({});
       console.log("   Demande d'ami envoyée");
     })
@@ -222,8 +224,8 @@ class UtilisateurDAO {
     });
     // Récupérer les objets utilisateur à partir de leur id
     let listeUtilisateur = [];
-    for (let index in listeIdUtilisateur) {
-      let utilisateur = await db.collection("Utilisateur").doc(listeIdUtilisateur[index]).get();
+    for (let i in listeIdUtilisateur) {
+      let utilisateur = await db.collection("Utilisateur").doc(listeIdUtilisateur[i]).get();
       listeUtilisateur.push(utilisateur.data());
     }
     return listeUtilisateur;
@@ -251,13 +253,13 @@ class UtilisateurDAO {
     return listeUtilisateur;
   }
 
-  async supprimerCompte(idUtilisateur, motDePasse) {
+  async supprimerCompte(motDePasse) {
     console.log("UtilisateurDAO->supprimerCompte()");
     let retour = "true";
-
+    // Récupérer l'utilisateur connecté
     const utilisateur = await firebase.auth().currentUser;
-    const utilisateurRef = await db.collection("Utilisateur").doc(idUtilisateur);
-    const listeGenreAimeRef = await db.collection("GenreAime").doc(idUtilisateur);
+    const utilisateurRef = await db.collection("Utilisateur").doc(utilisateur.uid);
+    const listeGenreAimeRef = await db.collection("GenreAime").doc(utilisateur.uid);
     // Initialiser l'objet de reconnexion
     const credential = await firebase.auth.EmailAuthProvider.credential(
         utilisateur.email,

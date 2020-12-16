@@ -20,26 +20,25 @@ class Application {
       this.actionConnecter(email, motDePasse));
 
     // Initialiser la fonction actionMettreAJourInformationPersonnelle dans VueProfil
-    this.vueProfil.initialiserActionMettreAJourInformationPersonnelle((idUtilisateur,
+    this.vueProfil.initialiserActionMettreAJourInformationPersonnelle((
       pseudo, email, motDePasseActuel, nouveauMotDePasse) =>
-        this.actionMettreAJourInformationPersonnelle(idUtilisateur, pseudo, email,
+        this.actionMettreAJourInformationPersonnelle( pseudo, email,
           motDePasseActuel, nouveauMotDePasse));
 
     // Initialiser la fonction actionEnregistrerListeGenreAime dans VueProfil
-    this.vueProfil.initialiserActionEnregistrerListeGenreAime((idUtilisateur,
-      listeGenreAime) => this.actionEnregistrerListeGenreAime(idUtilisateur,
-        listeGenreAime));
+    this.vueProfil.initialiserActionEnregistrerListeGenreAime((
+      listeGenreAime) => this.actionEnregistrerListeGenreAime(listeGenreAime));
 
     // Initialiser la fonction actionSupprimerCompte dans VueProfil
-    this.vueProfil.initialiserActionSupprimerCompte((idUtilisateur, motDePasse) =>
-      this.actionSupprimerCompte(idUtilisateur, motDePasse));
+    this.vueProfil.initialiserActionSupprimerCompte((motDePasse) =>
+      this.actionSupprimerCompte(motDePasse));
 
     // Initialiser la fonction actionDeconnecter dans VueProfil
     this.vueProfil.initialiserActionDeconnecter(() => this.actionDeconnecter());
 
     // Initialiser la fonction actionSupprimerCompte dans VueProfil
-    this.vueAmis.initialiserActionAjouterAmi((idUtilisateur, emailUtilisateurAjoute) =>
-      this.actionAjouterAmi(idUtilisateur, emailUtilisateurAjoute));
+    this.vueAmis.initialiserActionAjouterAmi((emailUtilisateurAjoute) =>
+      this.actionAjouterAmi(emailUtilisateurAjoute));
 
     // Initialiser la fonction actionGererDemandeAmi dans VueAmis
     this.vueAmis.initialiserActionGererDemandeAmi((idUtilisateurAccepte, reponse) =>
@@ -168,22 +167,21 @@ class Application {
     this.window.location.hash = "#";
   }
 
-  async actionMettreAJourInformationPersonnelle(idUtilisateur, pseudo, email,
+  async actionMettreAJourInformationPersonnelle(pseudo, email,
     motDePasseActuel, nouveauMotDePasse) {
     console.log("Application->actionMettreAJourInformationPersonnelle()");
-    return await this.utilisateurDAO.mettreAJourInformationPersonnelle(idUtilisateur,
-      pseudo, email, motDePasseActuel, nouveauMotDePasse);
+    return await this.utilisateurDAO.mettreAJourInformationPersonnelle(pseudo,
+        email, motDePasseActuel, nouveauMotDePasse);
   }
 
-  async actionEnregistrerListeGenreAime(idUtilisateur, listeGenreAime) {
+  async actionEnregistrerListeGenreAime(listeGenreAime) {
     console.log("Application->actionEnregistrerListeGenreAime()");
-    return await this.utilisateurDAO.enregistrerListeGenreAime(idUtilisateur,
-      listeGenreAime);
+    return await this.utilisateurDAO.enregistrerListeGenreAime(listeGenreAime);
   }
 
-  async actionSupprimerCompte(idUtilisateur, motDePasse) {
+  async actionSupprimerCompte(motDePasse) {
     console.log("Application->actionSupprimerCompte()");
-    let resultat = await this.utilisateurDAO.supprimerCompte(idUtilisateur, motDePasse);
+    let resultat = await this.utilisateurDAO.supprimerCompte(motDePasse);
     // Redirection
     if (resultat === "true") {
       this.window.location.hash = "#";
@@ -191,9 +189,9 @@ class Application {
     return resultat;
   }
 
-  async actionAjouterAmi(idUtilisateur, emailUtilisateurAjoute) {
+  async actionAjouterAmi(emailUtilisateurAjoute) {
     console.log("Application->actionAjouterAmi()");
-    return await this.utilisateurDAO.ajouterAmi(idUtilisateur, emailUtilisateurAjoute);
+    return await this.utilisateurDAO.ajouterAmi(emailUtilisateurAjoute);
   }
 
   async actionGererDemandeAmi(idUtilisateurAccepte, reponse) {

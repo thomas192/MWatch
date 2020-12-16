@@ -97,16 +97,14 @@ class VueProfil {
   async mettreAJourInformationPersonnelle(evenement) {
     console.log("VueProfil->mettreAJourInformationPersonnelle()");
     evenement.preventDefault();
-    // Récupérer l'id de l'utilisateur connecté
-    let idUtilisateur = firebase.auth().currentUser.uid;
     // Récupérer les valeurs des champs
     let pseudo = document.getElementById("pseudo").value;
     let email = document.getElementById("email").value;
     let motDePasseActuel = document.getElementById("mot-de-passe-actuel").value;
     let nouveauMotDePasse = document.getElementById("nouveau-mot-de-passe").value;
     // Effectuer la mise à jour des informations personnelles
-    let resultat = await this.actionMettreAJourInformationPersonnelle(idUtilisateur,
-      pseudo, email, motDePasseActuel, nouveauMotDePasse);
+    let resultat = await this.actionMettreAJourInformationPersonnelle(pseudo,
+        email, motDePasseActuel, nouveauMotDePasse);
     if (resultat !== "true") {
       choixAlerte(resultat);
     }
@@ -117,8 +115,6 @@ class VueProfil {
   async enregistrerListeGenreAime(evenement) {
     console.log("VueProfil->enregistrerListeGenreAime()");
     evenement.preventDefault();
-    // Récupérer l'id de l'utilisateur
-    let idUtilisateur = firebase.auth().currentUser.uid;
     // Récupérer les champs cochés
     let listeGenreAime = []
     for (let i in this.listeGenreDonnee) {
@@ -128,7 +124,7 @@ class VueProfil {
       }
     }
     // Enregistrer les genres aimés
-    let resultat = await this.actionEnregistrerListeGenreAime(idUtilisateur, listeGenreAime);
+    let resultat = await this.actionEnregistrerListeGenreAime(listeGenreAime);
     if(resultat !== "true") {
       choixAlerte(resultat);
     }
@@ -139,12 +135,10 @@ class VueProfil {
     async supprimerCompte(evenement) {
       console.log("VueProfil->supprimerCompte()");
       evenement.preventDefault();
-      // Récupérer l'id de l'utilisateur
-      let idUtilisateur = firebase.auth().currentUser.uid;
       // Récupérer le mot de passe
       let motDePasseActuel = document.getElementById("mot-de-passe").value;
       // Supprimer l'utilisateur
-      let resultat = await this.actionSupprimerCompte(idUtilisateur, motDePasseActuel);
+      let resultat = await this.actionSupprimerCompte(motDePasseActuel);
       if(resultat !== "true") {
         choixAlerte(resultat);
       }

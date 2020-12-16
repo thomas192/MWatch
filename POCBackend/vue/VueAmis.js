@@ -49,16 +49,16 @@ class VueAmis {
         let listeDemandeAmiHtmlItemRemplacement = demandeAmiHtml;
         listeDemandeAmiHtmlItemRemplacement =
           listeDemandeAmiHtmlItemRemplacement.replace("{div.id}",
-          this.listeDemandeAmi[i].idUtilisateur);
+          this.listeDemandeAmi[i].id);
         listeDemandeAmiHtmlItemRemplacement =
           listeDemandeAmiHtmlItemRemplacement.replace("{a.texte}",
           "Demande d'ami de " + this.listeDemandeAmi[i].pseudo);
         listeDemandeAmiHtmlItemRemplacement =
           listeDemandeAmiHtmlItemRemplacement.replace("{boutonAccepter.id}",
-          this.listeDemandeAmi[i].idUtilisateur);
+          this.listeDemandeAmi[i].id);
         listeDemandeAmiHtmlItemRemplacement =
           listeDemandeAmiHtmlItemRemplacement.replace("{boutonRefuser.id}",
-          this.listeDemandeAmi[i].idUtilisateur);
+          this.listeDemandeAmi[i].id);
         listeDemandeAmiHtmlItemRemplacement =
           listeDemandeAmiHtmlItemRemplacement.replace("{boutonAccepter.texte}",
           "Accepter");
@@ -93,10 +93,10 @@ class VueAmis {
         let listeAmiHtmlItemRemplacement = amiHtml;
         listeAmiHtmlItemRemplacement =
           listeAmiHtmlItemRemplacement.replace("{div.id}",
-          this.listeAmi[i].idUtilisateur);
+          this.listeAmi[i].id);
         listeAmiHtmlItemRemplacement =
           listeAmiHtmlItemRemplacement.replace("{a.href}",
-          this.listeAmi[i].idUtilisateur);
+          this.listeAmi[i].id);
         listeAmiHtmlItemRemplacement =
           listeAmiHtmlItemRemplacement.replace("{a.texte}",
           this.listeAmi[i].pseudo);
@@ -112,12 +112,10 @@ class VueAmis {
   async ajouterAmi(evenement) {
     console.log("VueAmis->actionAjouterAmi()");
     evenement.preventDefault();
-    // Récupérer l'id de l'utilisateur connecté
-    let idUtilisateur = firebase.auth().currentUser.uid;
     // Récupérer les valeurs des champs
     let emailUtilisateurAjoute = document.getElementById("email").value;
     // Ajouter ami
-    let resultat = await this.actionAjouterAmi(idUtilisateur, emailUtilisateurAjoute);
+    let resultat = await this.actionAjouterAmi(emailUtilisateurAjoute);
     if (resultat !== "true") {
       choixAlerte(resultat);
     }

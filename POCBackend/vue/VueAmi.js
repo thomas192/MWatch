@@ -65,7 +65,7 @@ class VueAmi {
   async supprimerAmi(evenement) {
     console.log("VueAmi->supprimerAmi()");
     evenement.preventDefault();
-    let resultat = await this.actionSupprimerAmi(this.ami.idUtilisateur);
+    let resultat = await this.actionSupprimerAmi(this.ami.id);
     if (resultat !== "true") {
       choixAlerte(resultat);
     }
