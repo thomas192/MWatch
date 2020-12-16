@@ -1,49 +1,59 @@
 function choixAlerte(codeErreur) {
   switch(codeErreur) {
     case "auth/wrong-password":
-      alert(ERREUR_MOT_DE_PASSE_INCORRECT);
+      afficherAlerte(ERREUR_MOT_DE_PASSE_INCORRECT, "rouge");
       break;
     case "auth/weak-password":
-      alert(ERREUR_MOT_DE_PASSE_PAS_ASSEZ_SECURISE);
+      afficherAlerte(ERREUR_MOT_DE_PASSE_PAS_ASSEZ_SECURISE, "rouge");
       break;
     case "auth/invalid-email":
-      alert(ERREUR_EMAIL_INVALIDE);
+      afficherAlerte(ERREUR_EMAIL_INVALIDE, "rouge");
       break;
     case "auth/email-already-exists":
-      alert(ERREUR_EMAIL_DEJA_UTILISE);
+      afficherAlerte(ERREUR_EMAIL_DEJA_UTILISE, "rouge");
       break;
     case "auth/email-already-in-use":
-      alert(ERREUR_EMAIL_DEJA_UTILISE);
+      afficherAlerte(ERREUR_EMAIL_DEJA_UTILISE, "rouge");
       break;
     case "auth/too-many-requests":
-      alert(ERREUR_TROP_DE_TENTATIVES);
+      afficherAlerte(ERREUR_TROP_DE_TENTATIVES, "rouge");
       break;
     case "auth/invalid-display-name":
-      alert(ERREUR_PSEUDO_INVALIDE);
+      afficherAlerte(ERREUR_PSEUDO_INVALIDE, "rouge");
       break;
     case "auth/user-not-found":
-      alert(ERREUR_EMAIL_INVALIDE);
+      afficherAlerte(ERREUR_EMAIL_INVALIDE, "rouge");
       break;
     case "auth/requires-recent-login":
-      alert(ERREUR_CONNEXION_RECENTE_REQUISE);
+      afficherAlerte(ERREUR_CONNEXION_RECENTE_REQUISE, "rouge");
       break;
     case "utilisateur_inconnu":
-      alert(ERREUR_UTILISATEUR_INCONNU);
+      afficherAlerte(ERREUR_UTILISATEUR_INCONNU, "rouge");
       break;
     case "ajout_de_soi_en_ami":
-      alert(ERREUR_AJOUT_DE_SOI_EN_AMI);
+      afficherAlerte(ERREUR_AJOUT_DE_SOI_EN_AMI, "rouge");
       break;
     case "demande_ami_deja_envoyee":
-      alert(ERREUR_DEMANDE_AMI_DEJA_ENVOYEE);
+      afficherAlerte(ERREUR_DEMANDE_AMI_DEJA_ENVOYEE, "rouge");
       break;
     case "deja_ami":
-      alert(ERREUR_DEJA_AMI);
+      afficherAlerte(ERREUR_DEJA_AMI, "rouge");
       break;
     default:
       alert(codeErreur);
   }
 }
 
+function afficherAlerte(message, couleur) {
+  if (couleur === "rouge") {
+    document.getElementById("alerte-verte").innerHTML = "";
+    document.getElementById("alerte-rouge").innerHTML = message;
+
+  } else if (couleur === "verte") {
+    document.getElementById("alerte-rouge").innerHTML = "";
+    document.getElementById("alerte-verte").innerHTML = message;
+  }
+}
 
 // Créé un objet erreur personnalisé
 function exceptionPersonnalisee(code) {

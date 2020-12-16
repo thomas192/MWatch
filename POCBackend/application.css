@@ -14,6 +14,14 @@
   padding: 1%;
 }
 
+.page #alerte-verte {
+  color: green;
+}
+
+.page #alerte-rouge {
+  color: red;
+}
+
 .page #formulaires form {
   padding-bottom: 2%;
 }
