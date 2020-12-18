@@ -43,11 +43,12 @@
   <header>
     <div class="menu">
 		<nav>
+		
 			<ul>
 			  <li><a id="menu-item-inscription" href="#inscription" >Inscription</a></li>
 			  <li><a id="menu-item-connexion" href="#">Connexion</a></li>
 			  <li><a id="menu-item-profil" href="#profil">Profil</a></li>
-			  <li><a id="menu-item-swipe" href="#swipe">Swipe</a></li>
+			  <li><a id="menu-item-swipe" href="#swipe"  ><img id="logo" src="decoration\illustration\logo.jpg"> </a></li>
 			  <li><a id="menu-item-amis" href="#amis">Amis</a></li>
 			</ul>
 		</nav>
@@ -106,9 +107,9 @@
     </script>
 
     <script type="plain/text" id="html-vue-profil">
+	<div class="page-deconnexion-et-maliste">
       <h1>Profil</h1>
 	  <hr>
-	  <div class="page-deconnexion-et-maliste">
 		  <div>
 			<button class="action" id="deconnexion" type="button">Déconnexion</button>
 		  </div>
@@ -169,6 +170,7 @@
     <script type="plain/text" id="html-vue-amis">
 	<div class="page">
       <h1>Amis</h1>
+	  <hr>
       <div id="liste-demande-ami">
         <div id="demande-ami-de-{div.id}">
           <a>{a.texte}</a>
@@ -204,6 +206,7 @@
     <script type="plain/text" id="html-vue-ami">
 	<div class="page">
       <h1>{h1.texte}</h1>
+	  <hr>
       <button class="action" id="action-supprimer-ami" type="button">Supprimer des amis</button>
       <h2>Films en commun</h2>
       <div id="liste-film-en-commun">
@@ -236,6 +239,7 @@
       <div id="film">
         <div>
           <h1>{Film.titre} ({Film.annee})</h1>
+		  <hr>
         </div>
         <div>
           <button class="action" id="action-supprimer-film" type="button">Supprimer de ma liste</button>
