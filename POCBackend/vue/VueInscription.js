@@ -25,7 +25,16 @@ class VueInscription {
     if(resultat === "true") {
       console.log("   Utilisateur inscrit et connecté");
     } else{
-      choixAlerte(resultat);
+      this.afficherAlerte(Utilisateur.choixAlerte(resultat));
     }
+  }
+
+  afficherAlerte(alerte) {
+    if (alerte.type === "erreur") {
+      document.getElementById("alerte").style.color = "red";
+    } else if (alerte.type === "succes") {
+      document.getElementById("alerte").style.color = "green";
+    }
+    document.getElementById("alerte").innerHTML = alerte.message;
   }
 }

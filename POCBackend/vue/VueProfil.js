@@ -100,7 +100,7 @@ class VueProfil {
     // Effectuer la mise à jour des informations personnelles
     let resultat = await this.actionMettreAJourInformationPersonnelle(pseudo,
         email, motDePasseActuel, nouveauMotDePasse);
-    choixAlerte(resultat);
+    this.afficherAlerte(Utilisateur.choixAlerte(resultat));
   }
 
   /** Récupère les genre aimés par l'utilisateur et et les passe
@@ -119,7 +119,7 @@ class VueProfil {
     // Enregistrer les genres aimés
     let resultat = await this.actionEnregistrerListeGenreAime(listeGenreAime);
     if(resultat !== "true") {
-      choixAlerte(resultat);
+      alert(resultat);
     }
   }
 
@@ -133,7 +133,7 @@ class VueProfil {
       // Supprimer l'utilisateur
       let resultat = await this.actionSupprimerCompte(motDePasseActuel);
       if(resultat !== "true") {
-        choixAlerte(resultat);
+        alert(resultat);
       }
     }
 
@@ -142,5 +142,14 @@ class VueProfil {
     console.log("VueProfil->deconnecter()");
     evenement.preventDefault();
     this.actionDeconnecter();
+  }
+
+  afficherAlerte(alerte) {
+    if (alerte.type === "erreur") {
+      document.getElementById("alerte").style.color = "red";
+    } else if (alerte.type === "succes") {
+      document.getElementById("alerte").style.color = "green";
+    }
+    document.getElementById("alerte").innerHTML = alerte.message;
   }
 }

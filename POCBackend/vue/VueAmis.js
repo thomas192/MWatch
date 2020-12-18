@@ -116,7 +116,7 @@ class VueAmis {
     let emailUtilisateurAjoute = document.getElementById("email").value;
     // Ajouter ami
     let resultat = await this.actionAjouterAmi(emailUtilisateurAjoute);
-    choixAlerte(resultat);
+    this.afficherAlerte(Utilisateur.choixAlerte(resultat));
   }
 
   async gererDemandeAmi(evenement, idUtilisateurAccepte, reponse) {
@@ -124,7 +124,7 @@ class VueAmis {
     evenement.preventDefault();
     let resultat = await this.actionGererDemandeAmi(idUtilisateurAccepte, reponse);
     if (resultat !== "true") {
-      choixAlerte(resultat);
+      alert(resultat);
     } else {
       // Mettre à jour la vue
       for (let i in this.listeDemandeAmi) {
@@ -138,5 +138,14 @@ class VueAmis {
         }
       }
     }
+  }
+
+  afficherAlerte(alerte) {
+    if (alerte.type === "erreur") {
+      document.getElementById("alerte").style.color = "red";
+    } else if (alerte.type === "succes") {
+      document.getElementById("alerte").style.color = "green";
+    }
+    document.getElementById("alerte").innerHTML = alerte.message;
   }
 }

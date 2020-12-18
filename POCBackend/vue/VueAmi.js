@@ -67,7 +67,7 @@ class VueAmi {
     evenement.preventDefault();
     let resultat = await this.actionSupprimerAmi(this.ami.id);
     if (resultat !== "true") {
-      choixAlerte(resultat);
+      alert(resultat);
     }
   }
 

@@ -83,9 +83,7 @@ class VueSwipe {
         // Gérer swipe
         let resultat = await this.actionGererSwipe(this.filmASwiper, reponse);
         if (resultat !== "true") {
-            choixAlerte(resultat);
-        } else {
-            await this.afficherFilmASwiper();
+            alert(resultat);
         }
     }
 }
