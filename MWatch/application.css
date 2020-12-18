@@ -1,0 +1,84 @@
+/*.menu {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.menu a {
+  padding-right: 1%
+}*/
+
+.page {
+  position: relative;
+  padding: 1%;
+}
+
+/*.page #formulaires form {
+  padding-bottom: 2%;
+}*/
+
+.page formulaire{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.page formulaire div {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 25%;
+  padding-bottom: 1%;
+}
+/*
+.page #preference {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.page #deconnexion {
+  margin-bottom: 3%;
+}
+
+.page #film {
+  display: flex;
+  flex-direction: column;
+  max-width: 60%;
+}
+
+.page #film div {
+  padding-bottom: 1%;
+}
+
+.page #film div img {
+  max-width: 35%;
+}
+
+.page #swipe {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 60%;
+}
+
+.page #swipe button {
+  max-height: 0.03%;
+  width: 10%;
+}
+
+.page #swipe .swipe-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.page #swipe #flex-milieu {
+  align-items: center;
+}
+
+.page #swipe #detailsFilm #titre-film{
+  font-weight: bold;
+}*/

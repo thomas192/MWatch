@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
+
+	:root {
+  --theme-rouge: #fd341f;
+  --theme-blanc-transparent: rgba(255,255,255,0.3);
+  --theme-bleu-pale: rgba(151,219,246,1);
+  --theme-bleu-fonce: rgba(63,155,191,1);
+  --theme-vert: #408450;
+  --theme-blanc: white;
+  --theme-noir: black;
+
+  --theme-bordure-rondeur: 0.7rem;
+  
+}
+
+
+body {
+	margin: 0;
+	background: black;
+	font-family: 'Work Sans', sans-serif;
+	font-weight: 800;
+}
+
+.menu {
+	width: 80%;
+	margin: 0 auto;
+}
+
+header {
+  background: #E5A90A;
+  padding:2%;
+}
+
+header::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.logo {
+  float: left;
+  padding: 10px 0;
+}
+
+nav {
+  float: left;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 70px;
+  padding-top: 23px;
+
+  position: relative;
+}
+
+nav a {
+  color: #444;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+
+nav a:hover {
+  color: #000;
+}
+
+nav a::before {
+  content: '';
+  display: block;
+  height: 5px;
+  background-color: #444;
+
+  position: absolute;
+  top: 0;
+  width: 0%;
+
+  transition: all ease-in-out 250ms;
+}
+
+nav a:hover::before {
+  width: 100%;
+}
+
+menu-item-inscription{
+	
+}

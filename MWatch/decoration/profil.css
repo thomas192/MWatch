@@ -1,0 +1,197 @@
+	:root {
+  --theme-rouge: #fd341f;
+  --theme-blanc-transparent: rgba(255,255,255,0.3);
+  --theme-bleu-pale: rgba(151,219,246,1);
+  --theme-bleu-fonce: rgba(63,155,191,1);
+  --theme-vert: #408450;
+  --theme-blanc: white;
+  --theme-noir: black;
+
+  --theme-bordure-rondeur: 0.7rem;
+  
+}
+.page-deconnexion-et-maliste{
+	position:relative;
+  background-color:var(--theme-noir);
+  padding:5%;
+  min-height: 0vh;
+  box-sizing: border-box;
+
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:top;
+  background-attachment:fixed;
+  
+  color:var(--theme-rouge);
+  font-size:17px;
+	
+}
+
+a.maliste:link, a.maliste:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a.maliste:hover, a.maliste:active {
+  background-color: red;
+}
+
+
+
+.page-genre-aime{
+  position:relative;
+  background-color:var(--theme-noir);
+  padding:5%;
+  min-height: 0vh;
+  box-sizing: border-box;
+
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:top;
+  background-attachment:fixed;
+  
+  color:var(--theme-rouge);
+  font-size:17px;
+	
+}
+
+
+
+#genre {
+   margin:200 auto;
+   width:400px;
+text-align:left;
+}
+/* contour */
+div.push{
+	position: relative;
+	margin:5px auto;
+	padding: 6px 8px;
+	width: 172px;
+	height: 60px;
+	border-radius: 25px;
+	background-image: linear-gradient(bottom, rgba(255,255,255,.17) 0%, rgba(15,16,16,.17) 100%);
+	background-clip: padding-box;
+}
+
+
+/* Bouton */
+label.genre-label{
+	position: absolute;
+	z-index: 50;
+	display: block;
+	margin: 2px 0 0;
+	padding: 14px 18px;
+	width: 120px;
+	height: 28px;
+	border-radius: 14px;
+	background-color: #E5A90A;
+	background-image: linear-gradient(bottom, rgba(0,0,0,.24) -2.65%, rgba(255,255,255,.24) 97.35%);
+	background-clip: padding-box;
+	box-shadow: 0 2px 6px 2px rgba(15,16,16,.49),inset 0 3px rgba(255,255,255,0.75);
+	color: #fd341f;
+	text-align: left;
+	text-indent: 50px;
+	font-size: 20px;
+	line-height:28px;
+	cursor: pointer;
+	user-select: none;
+}
+div.push label.genre-label:hover{
+	background-color: #bbc4cf;
+}
+
+div.push label.genre-label:active{
+	background-image: linear-gradient(bottom, rgba(0,0,0,.34) -2.65%, rgba(255,255,255,.14) 97.35%);
+	transform: scale(0.95);
+}
+
+div.push label.genre-label:active ~ div.push:after {/* no work */
+	transform: scale(0.95);}
+
+
+/* reflet du bouton */
+label.genre-label:after{
+	position: absolute;
+	top: 2px;
+	left: 0px;
+	width: 170px;
+	height: 28px;
+	border-radius: 14px 14px 0px 0px / 14px 14px 0px 0px;
+	background-color:  rgba(255,255,255,.21) ;
+	background-clip: padding-box;
+	content: "";
+}
+label.genre-label:hover:after{background-color:  rgba(255,255,255,.32) ;}
+
+/* checkbox */
+input[type="checkbox"].push-btn{
+	position: absolute;
+	left: 0px;
+	z-index: 20;
+	display: inline-block;
+	float: left;
+	margin: -2px 20px 0 15px;
+	width: 33px;
+	height: 33px;
+	border-radius: 4px;
+	background-color: rgba(69, 75, 88, 1.000);
+	background-image: linear-gradient(bottom, rgba(235,235,235,.27) 0%, rgba(17,17,18,.27) 100%);
+	background-clip: padding-box;
+	box-shadow: 0 0 6px rgba(245,245,245,.2), inset 0 0 8px rgba(15,16,16,.75);
+	appearance: none;
+}
+
+/* case coché */
+input[type="checkbox"].push-btn:checked:after{
+	position: absolute;
+	top: -2px;
+	left: 4px;
+	display: block;
+	color: white;
+	content: "✓";
+	text-shadow: 0px 1px 2px black;
+	font-weight: 100;
+	font-family: "Charcoal CY";
+}
+
+
+
+.page-information-personnelle{
+  position:relative;
+  background-color:var(--theme-noir);
+  padding:5%;
+  min-height: 0vh;
+  box-sizing: border-box;
+
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:top;
+  background-attachment:fixed;
+  
+  color:var(--theme-rouge);
+	
+}
+
+
+.page-supprimer-compte {
+  position:relative;
+  background-color:var(--theme-noir);
+  padding:5%;
+  min-height: 0vh;
+  box-sizing: border-box;
+
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:top;
+  background-attachment:fixed;
+  
+  color:var(--theme-rouge);
+}
+
+
+
