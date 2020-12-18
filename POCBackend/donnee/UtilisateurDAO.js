@@ -2,6 +2,21 @@ class UtilisateurDAO {
   constructor() {
   }
 
+  async ecouterEtatUtilisateur(actionUtilisateurConnecte, actionUtilisateurDeconnecte) {
+    // Ecouteur qui met à jour l'interface utilisateur automatiquement à chaque
+    // fois que l'utilisateur se connecte ou se déconnecte
+    firebase.auth().onAuthStateChanged(function(utilisateur) {
+      console.log("Event onAuthStateChanged");
+      if(utilisateur != null) {
+        console.log("   Utilisateur connecté");
+        actionUtilisateurConnecte();
+      } else {
+        console.log("   Utilisateur non connecté");
+        actionUtilisateurDeconnecte();
+      }
+    });
+  }
+
   async inscrire(pseudo, email, motDePasse) {
     console.log("UtilisateurDAO->inscrire()");
     let retour = "true";
@@ -116,6 +131,7 @@ class UtilisateurDAO {
     // Récupérer l'utilisateur connecté
     const utilisateur = await firebase.auth().currentUser;
     // Récupérer le snapshot contenant le document de l'utilisateur ajouté
+    let instanceUtilisateurDAO = this;
     await db.collection("Utilisateur").where("email", "==", emailUtilisateurAjoute).get()
     .then(async function(snapshotUtilisateurAjoute) {
       // Récupérer le document de l'utilisateur ajouté
@@ -126,26 +142,26 @@ class UtilisateurDAO {
       // Vérifier si l'utilisateur ajouté existe
       if (utilisateurAjoute == null) {
         console.log("   Utilisateur ajouté inconnu");
-        return exceptionPersonnalisee("utilisateur_inconnu");
+        return instanceUtilisateurDAO.exceptionAmi("utilisateur_inconnu");
       }
       // Vérifier si l'utilisateur ne s'ajoute pas lui-même en ami
       if (utilisateur.email === emailUtilisateurAjoute) {
         console.log("   L'utilisateur s'ajoute lui-même en ami");
-        return exceptionPersonnalisee("ajout_de_soi_en_ami");
+        return instanceUtilisateurDAO.exceptionAmi("ajout_de_soi_en_ami");
       }
       // Vérifier si l'utilisateur n'a pas déjà envoyé une demande d'ami à l'utilisateur ajouté
       const demande = await db.collection("Ami").doc(utilisateurAjoute.id)
           .collection("DemandeRecue").doc(utilisateur.uid).get();
       if (demande.exists) {
         console.log("   Demande d'ami déjà envoyée à cet utilisateur");
-        return exceptionPersonnalisee("demande_ami_deja_envoyee");
+        return instanceUtilisateurDAO.exceptionAmi("demande_ami_deja_envoyee");
       }
       // Vérifier si l'utilisateur n'est pas déjà ami avec l'utilisateur ajouté
       const relation = await db.collection("Ami").doc(utilisateur.uid)
           .collection("Relation").doc(utilisateurAjoute.id).get();
       if (relation.exists) {
         console.log("   Utilisateur déjà ami avec l'utilisateur ajouté");
-        return exceptionPersonnalisee("deja_ami");
+        return instanceUtilisateurDAO.exceptionAmi("deja_ami");
       }
       // Enregistrer la demande d'ami
       await db.collection("Ami").doc(utilisateurAjoute.id).collection("DemandeRecue")
@@ -450,6 +466,14 @@ class UtilisateurDAO {
       {id: "thriller", nom: "Thriller"}, {id: "romance", nom: "Romance"},
       {id: "action", nom: "Action"}, {id: "crime", nom: "Crime"},
       {id: "aventure", nom: "Aventure"}, {id: "mystere", nom: "Mystère"}];
+  }
+
+  // Créé un objet erreur personnalisé
+  exceptionAmi(code) {
+    console.log("   exceptionAmi()");
+    const objetErreur = new Error("Erreur personnalisée");
+    objetErreur.code = code;
+    throw objetErreur;
   }
 
 }

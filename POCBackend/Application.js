@@ -66,33 +66,26 @@ class Application {
     this.vueSwipe.initialiserActionAjouterAMaListe((film) => this.actionAjouterAMaListe(film));
 
     this.initialiserApplication();
+
+    // Initialiser l'ecouteur d'état de l'utilisateur
+    this.utilisateurDAO.ecouterEtatUtilisateur(() => this.actionUtilisateurConnecte(),
+        () => this.actionUtilisateurDeconnecte());
+  }
+
+  actionUtilisateurConnecte() {
+    console.log("Application->actionUtilisateurConnecte");
+    this.vueConnexion.presenterConnexion();
+  }
+
+  actionUtilisateurDeconnecte() {
+    console.log("Application->actionUtilisateurDeconnecte");
+    this.vueConnexion.presenterDeconnexion();
   }
 
   initialiserApplication() {
       console.log("Application->initialiserNavigation()");
 
       this.window.addEventListener("hashchange", () => this.naviguer());
-
-      // Ecouteur qui met à jour l'interface utilisateur automatiquement à chaque
-      // fois que l'utilisateur se connecte ou se déconnecte
-      firebase.auth().onAuthStateChanged(function(user) {
-        console.log("Event onAuthStateChanged");
-        if(user != null) {
-          console.log("   Utilisateur connecté");
-          document.getElementById("menu-item-inscription").style.display = "none";
-          document.getElementById("menu-item-connexion").style.display = "none";
-          document.getElementById("menu-item-profil").style.display = "block";
-          document.getElementById("menu-item-amis").style.display = "block";
-          document.getElementById("menu-item-swipe").style.display = "block";
-        } else {
-          console.log("   Utilisateur non connecté");
-          document.getElementById("menu-item-inscription").style.display = "block";
-          document.getElementById("menu-item-connexion").style.display = "block";
-          document.getElementById("menu-item-profil").style.display = "none";
-          document.getElementById("menu-item-amis").style.display = "none";
-          document.getElementById("menu-item-swipe").style.display = "none";
-        }
-      });
   }
 
   async naviguer() {
