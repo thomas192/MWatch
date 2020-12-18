@@ -27,9 +27,9 @@ body {
 }
 
 .logo{
-	width:150% ;
-	height:auto;
-	align : center;
+  height: 100%;
+  width: auto;
+  padding: 7px 14px;
 }
 
 header {

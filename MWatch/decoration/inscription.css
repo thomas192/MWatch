@@ -62,10 +62,12 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus  {
 }
 
 /* Avatar image */
-img.avatar {
-  width: 15%;
-  border-radius: 50%;
-  
+img.app-logo {
+  width: 40%;
+  display: block;
+  margin-top: 20%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
