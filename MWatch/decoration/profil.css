@@ -30,6 +30,7 @@
 a.maliste:link, a.maliste:visited {
   background-color: #f44336;
   color: white;
+  margin-top: 50px;
   padding: 14px 25px;
   text-align: center;
   text-decoration: none;
@@ -63,12 +64,13 @@ a.maliste:hover, a.maliste:active {
 
 #genre {
    margin:200 auto;
-   width:400px;
+   
 text-align:left;
 }
 /* contour */
 div.push{
 	position: relative;
+	 display: inline-block;
 	margin:5px auto;
 	padding: 6px 8px;
 	width: 172px;
@@ -84,7 +86,7 @@ label.genre-label{
 	position: absolute;
 	z-index: 50;
 	display: block;
-	margin: 2px 0 0;
+	margin: 15px 0 0;
 	padding: 14px 18px;
 	width: 120px;
 	height: 28px;
@@ -120,8 +122,8 @@ label.genre-label:after{
 	top: 2px;
 	left: 0px;
 	width: 170px;
-	height: 28px;
-	border-radius: 14px 14px 0px 0px / 14px 14px 0px 0px;
+	height: 40px;
+	border-radius: 14px 14px 14px 14px / 14px 14px 14px 14px;
 	background-color:  rgba(255,255,255,.21) ;
 	background-clip: padding-box;
 	content: "";
