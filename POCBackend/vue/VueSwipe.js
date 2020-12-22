@@ -28,8 +28,6 @@ class VueSwipe {
     async afficher() {
         console.log("VueSwipe->afficher()");
         document.getElementsByTagName("contenu")[0].innerHTML = this.html;
-        // Afficher le film à swiper
-        await this.afficherFilmASwiper();
         // Ajout d'un écouteur pour chaque bouton de la vue
         let listeBouton = document.getElementsByTagName("button");
         for (let i=0; i<listeBouton.length; i++) {
@@ -37,27 +35,24 @@ class VueSwipe {
             listeBouton[i].addEventListener("click",
                 evenement => this.gererSwipe(evenement, valeurBouton));
         }
-    }
-
-    /** Affiche un film à swiper */
-    async afficherFilmASwiper() {
-        console.log("VueSwipe->afficherFilmASwiper()");
-        document.getElementById("detailsFilm").style.display = "none";
-        // Récupérer le film à swiper
-        this.filmASwiper = await this.actionObtenirFilmASwiper();
-        // Affichage de l'affiche
-        document.getElementById("affiche").src = this.filmASwiper.affiche;
-        // Affichage des détails du film
-        let detailsFilmHtml = document.getElementById("detailsFilm").innerHTML;
-        detailsFilmHtml = detailsFilmHtml.replace("{Film.titre}", this.filmASwiper.titre);
-        detailsFilmHtml = detailsFilmHtml.replace("{Film.annee}", this.filmASwiper.annee);
-        detailsFilmHtml = detailsFilmHtml.replace("{Film.description}", this.filmASwiper.description);
-        document.getElementById("detailsFilm").innerHTML = detailsFilmHtml;
-        // Réinitialiser la checkbox utilisée pour ajouter un film à Ma liste
-        document.getElementById("ajouter-a-ma-liste").checked = false;
         // Affiche cliquée
         document.getElementById("affiche").addEventListener("click",
             evenement => this.afficherDetailsFilm(evenement));
+    }
+
+    /** Affiche un film à swiper */
+    async afficherFilmASwiper(filmASwiper) {
+        console.log("VueSwipe->afficherFilmASwiper()");
+        document.getElementById("detailsFilm").style.display = "none";
+        // Récupérer le film à swiper
+        this.filmASwiper = filmASwiper;
+        // Affichage de l'affiche
+        document.getElementById("affiche").src = this.filmASwiper.affiche;
+        // Affichage des détails du film
+        document.getElementById("titre-film").innerHTML = this.filmASwiper.titre + " (" + this.filmASwiper.annee + ")";
+        document.getElementById("description-film").innerHTML = this.filmASwiper.description;
+        // Réinitialiser la checkbox utilisée pour ajouter un film à Ma liste
+        document.getElementById("ajouter-a-ma-liste").checked = false;
     }
 
     afficherDetailsFilm(evenement) {
@@ -84,6 +79,8 @@ class VueSwipe {
         let resultat = await this.actionGererSwipe(this.filmASwiper, reponse);
         if (resultat !== "true") {
             alert(resultat);
+        } else {
+            this.actionObtenirFilmASwiper();
         }
     }
 }

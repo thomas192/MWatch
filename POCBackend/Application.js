@@ -11,6 +11,8 @@ class Application {
     this.vueFilm = vueFilm;
     this.vueMaListe = vueMaListe;
 
+    this.utilisateurDAO.initialiserActionRecevoirFilm(filmASwiper => this.actionRecevoirFilm(filmASwiper));
+
     // Initialiser la fonction actionInscrire dans VueInscription
     this.vueInscription.initialiserActionInscrire((pseudo, email, motDePasse) =>
       this.actionInscrire(pseudo, email, motDePasse));
@@ -66,7 +68,6 @@ class Application {
     this.vueSwipe.initialiserActionAjouterAMaListe((film) => this.actionAjouterAMaListe(film));
 
     this.initialiserApplication();
-
     // Initialiser l'ecouteur d'état de l'utilisateur
     this.utilisateurDAO.ecouterEtatUtilisateur(() => this.actionUtilisateurConnecte(),
         () => this.actionUtilisateurDeconnecte());
@@ -128,6 +129,7 @@ class Application {
 
     } else if (hash.match(/^#swipe/)) {
       this.vueSwipe.afficher();
+      await this.utilisateurDAO.proposerFilmASwiper();
     }
   }
 
@@ -217,11 +219,6 @@ class Application {
     return await this.utilisateurDAO.supprimerDeMaListe(idFilm);
   }
 
-  async actionObtenirFilmASwiper() {
-    console.log("Application->actionObtenirFilmASwiper");
-    return await this.utilisateurDAO.obtenirFilmASwiper();
-  }
-
   async actionGererSwipe(film, reponse) {
     console.log("Application->actionGererSwipe()");
     return await this.utilisateurDAO.gererSwipe(film, reponse);
@@ -231,6 +228,17 @@ class Application {
     console.log("Application->actionAjouterAMaListe()");
     return await this.utilisateurDAO.ajouterAMaListe(film);
   }
+
+  async actionRecevoirFilm(filmASwiper) {
+    console.log("Application->actionRecevoirFilm()");
+    await this.vueSwipe.afficherFilmASwiper(filmASwiper);
+  }
+
+  async actionObtenirFilmASwiper() {
+    console.log("Application->actionObtenirFilmASwiper");
+    return await this.utilisateurDAO.proposerFilmASwiper();
+  }
+
 }
 
 new Application(window, new UtilisateurDAO(), new VueInscription(), new VueConnexion(), new VueProfil(), new VueAmis(), new VueAmi(), new VueSwipe(), new VueFilm(), new VueMaListe());

@@ -1,5 +1,10 @@
 class UtilisateurDAO {
   constructor() {
+    this.actionRecevoirFilm = null;
+  }
+
+  initialiserActionRecevoirFilm(actionRecevoirFilm){
+    this.actionRecevoirFilm = actionRecevoirFilm;
   }
 
   async ecouterEtatUtilisateur(actionUtilisateurConnecte, actionUtilisateurDeconnecte) {
@@ -401,48 +406,70 @@ class UtilisateurDAO {
     return listeFilmEnCommun;
   }
 
-  /** Retourne un film à swiper pour l'utilisateur (simulé) */
-  async obtenirFilmASwiper() {
-    // Récupérer l'utilisateur connecté
-    const utilisateur = await firebase.auth().currentUser;
-    // Liste de films disponibles simulée
-    let listeFilm = [{
-      titre: "Enola Holmes",
-      id: 497582,
-      annee: 2020,
-      description: "Quand Enola Holmes, la jeune sœur de Sherlock, découvre que sa mère a disparu, elle s'improvise super-détective. Ne tardant pas à faire ses preuves, elle se montre même plus maligne que son illustre grand frère en mettant au jour le dangereux complot qui entoure un mystérieux jeune lord.",
-      affiche: "https://image.tmdb.org/t/p/w342/2tfTE30QGr71g8XLUQefRdbbV4N.jpg"
-    },
-      {
-        titre: "Mort Subite 2",
-        id: 741067,
-        annee: 2020,
-        description: "Jesse Freeman est un ancien officier des forces spéciales et expert en explosifs qui travaille maintenant comme agent de sécurité dans une arène de basket-ball à la pointe de la technologie. Des problèmes éclatent lorsqu'un groupe de terroristes kidnappe le propriétaire de l'équipe et la fille de Jesse lors de la soirée d'ouverture.",
-        affiche: "https://image.tmdb.org/t/p/w342/9lHBNpAkiFoqKNygC22217hSrqW.jpg"
-      },
-      {
-        titre: "Les chroniques de Noël 2",
-        id: 654028,
-        annee: 2020,
-        description: "Désormais ado et cynique, Kate Pierce fait une nouvelle fois équipe avec le père Noël quand un mystérieux fauteur de troubles menace de supprimer Noël... pour toujours.",
-        affiche: "https://image.tmdb.org/t/p/w342/AawUeviXf2hRi9d4K2IxgJUfUO9.jpg"
-      },
-      {
-        titre: "Sacrées sorcières",
-        id: 531219,
-        annee: 2020,
-        description: "Un jeune garçon et sa grand-mère, exilés en Angleterre, doivent lutter contre d'horribles sorcières. Contrairement aux idées reçues, les sorcières ne portent ni balai, ni verrue, ni chapeau pointu. Les démasquer représente donc une vraie difficulté pour le petit garçon, qui va devoir rivaliser d'ingéniosité pour échapper à la perfidie de ces vilaines créatures.",
-        affiche: "https://image.tmdb.org/t/p/w342/9wI1x4H86A1Cj2tuRdolZ0F7BPb.jpg"
-      }];
+  async proposerFilmASwiper() {
+    console.log("UtilisateurDAO->proposerFilmASwiper()");
+    // Récupérer l'id de l'utilisateur connecté
+    const idUtilisateur = await firebase.auth().currentUser.uid;
+    // Récupérer la liste des genres aimés
+    const genreAimeRef = await db.collection("GenreAime").doc(idUtilisateur).get();
+    const listeGenreAime = genreAimeRef.data().listeGenreAime;
+    // Determiner le nombre de genres à utiliser pour la requête (5 maximum)
+    let nombreGenreRequete = 1 + (Math.floor(Math.random() * Math.floor(listeGenreAime.length - 1)) % 4);
+    // Choix au hasard des genres à utiliser pour la requête
+    let listeGenreRequete = [];
+    for (let nb = 0; nb < nombreGenreRequete; nb++) {
+      // Choisir un genre à utiliser au hasard dans la liste des genres aimés
+      listeGenreRequete.push(listeGenreAime[Math.floor(Math.random() * Math.floor(listeGenreAime.length))]);
+    }
+    let genres = "";
+    for (let genre of listeGenreRequete) {
+      genres += genre + ",";
+    }
+    this.choisirFilmASwiper(genres, idUtilisateur, 1);
+  }
 
+  choisirFilmASwiper(genres, idUtilisateur, numeroPage) {
+    console.log("UtilisateurDAO->choisirFilmASwiper()");
+    // Effectuer la requête
+    let url = "https://api.themoviedb.org/3/discover/movie?api_key=108344e6b716107e3d41077a5ce57da2&language=fr-FR&include_adult=false&with_genres="+genres+"&page="+numeroPage;
+    let request = new XMLHttpRequest();
+    request.open("GET", url);
+    request.responseType = "json";
+    request.send();
+
+    let utilisateurDAO = this;
     let filmASwiper;
-    while (true) {
-      filmASwiper = listeFilm[Math.floor(Math.random() * listeFilm.length)];
-      // Vérifier si le film à swiper n'a pas déjà été swipé
-      const film = await db.collection("Utilisateur").doc(utilisateur.uid)
-          .collection("FilmSwipe").doc(filmASwiper.id.toString()).get();
-      if (!film.exists) {
-        return filmASwiper;
+    // Recevoir la réponse de la requête
+    request.onload = async function() {
+      let reponse = request.response;
+      // Si aucun film ne correspond aux genres sélectionnés
+      if (reponse["results"].length === 0) {
+        await utilisateurDAO.proposerFilmASwiper(idUtilisateur);
+      } else {
+        // Parcourir la liste des films tant qu'on n'a pas trouvé un film non swipé par l'utilisateur
+        for (let film of reponse["results"]) {
+          const filmPotentiel = await db.collection("Utilisateur").doc(idUtilisateur)
+              .collection("FilmSwipe").doc(film["id"].toString()).get();
+          if (!filmPotentiel.exists) {
+            filmASwiper = {
+              titre: film["title"],
+              id: film["id"],
+              annee: film["release_date"].substring(0, 4),
+              description: film["overview"],
+              affiche: "https://image.tmdb.org/t/p/w342/" + film["poster_path"]
+            }
+            break;
+          }
+        }
+        // Si un film non swipé a été trouvé
+        if (filmASwiper) {
+          utilisateurDAO.actionRecevoirFilm(filmASwiper);
+        // Si tous les films ont déjà été swipés
+        } else {
+          // Parcourir les films de la page suivante
+          numeroPage++;
+          utilisateurDAO.choisirFilmASwiper(genres, idUtilisateur, numeroPage);
+        }
       }
     }
   }
@@ -467,7 +494,7 @@ class UtilisateurDAO {
       {id: "18", nom: "Drame"}, {id: "10751", nom: "Familial"}, {id: "14", nom: "Fantastique"},
       {id: "36", nom: "Histoire"}, {id: "27", nom: "Horreur"}, {id: "10402", nom: "Musique"},
       {id: "9648", nom: "Mystère"}, {id: "10749", nom: "Romance"}, {id: "878", nom: "Science-Fiction"},
-      {id: "10770", nom: "Téléfilm"}, {id: "53", nom: "Thriller"}, {id: "10752", nom: "guerre"},
+      {id: "10770", nom: "Téléfilm"}, {id: "53", nom: "Thriller"}, {id: "10752", nom: "Guerre"},
       {id: "37", nom: "Western"}];
   }
 

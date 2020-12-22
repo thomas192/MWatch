@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="19fd17dd-f088-4c1c-9aca-a9714e96e367" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application.js" beforeDir="false" afterPath="$PROJECT_DIR$/Application.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/donnee/UtilisateurDAO.js" beforeDir="false" afterPath="$PROJECT_DIR$/donnee/UtilisateurDAO.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/VueSwipe.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueSwipe.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +36,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -51,7 +55,7 @@
       <workItem from="1608111318651" duration="7498000" />
       <workItem from="1608131014723" duration="9038000" />
       <workItem from="1608314863582" duration="8830000" />
-      <workItem from="1608630782730" duration="1813000" />
+      <workItem from="1608630782730" duration="21518000" />
     </task>
     <servers />
   </component>
