@@ -21,6 +21,10 @@ class VuePrincipale{
         this.film = filmPropose; // On enregiste le film en local de maniere a pouvoir agir dessus une fois le choix de l'utilisateur fait
     }
 
+    detaillerFilm(film){
+        //A coder quand on demande le detail d'un film
+    }
+
     actionSwipeFilm(evenement){ // Executer quand un swipe est detecte
         var directionSwipe = evenement.detail.data[0].currentDirection; // On recupere l'orientation du swipe
         const margeErreur = 20; // "Marge" d'erreur pour savoir si le swipe est dans la bonne direction. EX : 340° = Swipe droite quand meme ; CHANGER SI BESOIN
