@@ -30,7 +30,6 @@ class Application{
 
 
     actionRecevoirFilm(filmPropose){
-        console.log("ActionRecevoirFilm : " , filmPropose);
         this.vuePrincipale.rafraichirFilm(filmPropose);
     }
 

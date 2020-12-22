@@ -76,6 +76,7 @@ class FilmDAO{
 
     getDetailsFilm(idFilm){
         let film = new Film;
+        console.log("FilmDAO.js : getDetailsFilm() : requete envoyee");
         let url = "https://api.themoviedb.org/3/movie/"+idFilm+"?api_key=108344e6b716107e3d41077a5ce57da2";
         let dao = this;
         var request = new XMLHttpRequest(); 
@@ -85,15 +86,16 @@ class FilmDAO{
         request.onload = function() // Fonction executer au moment de la reception de la réponse API
         {
             let reponse = request.response; // On enregistre la réponse dans une variable locale
-            if(reponse[id] != idFilm)
+            if(reponse["id"] != idFilm)
             {
                 console.log("DEBUG : Erreur lors de l'envoi de la requête API")
             } else
             {
-                this.film.titre = reponse["title"];
-                this.film.id = idFilm;
-                this.film.description = reponse["overview"];
-                this.film.backgroundpath = reponse["poster_path"];
+                film.titre = reponse["title"];
+                film.id = idFilm;
+                film.description = reponse["overview"];
+                film.backgroundpath = reponse["poster_path"];
+                console.log("FilmDAO.js : getDetailsFilm() : Renvoie du film d'ID n°" + film.id + " titre : " + film.titre);
                 dao.actionDetaillerFilm(film); 
             }
         }
