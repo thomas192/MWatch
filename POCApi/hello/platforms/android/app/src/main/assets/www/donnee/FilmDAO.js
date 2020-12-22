@@ -74,6 +74,31 @@ class FilmDAO{
         } 
     }
 
+    getDetailsFilm(idFilm){
+        let film = new Film;
+        let url = "https://api.themoviedb.org/3/movie/"+idFilm+"?api_key=108344e6b716107e3d41077a5ce57da2";
+        let dao = this;
+        var request = new XMLHttpRequest(); 
+        request.open('GET', url); // Ouverture de la requête API
+        request.responseType = 'json';
+        request.send();
+        request.onload = function() // Fonction executer au moment de la reception de la réponse API
+        {
+            let reponse = request.response; // On enregistre la réponse dans une variable locale
+            if(reponse[id] != idFilm)
+            {
+                console.log("DEBUG : Erreur lors de l'envoi de la requête API")
+            } else
+            {
+                this.film.titre = reponse["title"];
+                this.film.id = idFilm;
+                this.film.description = reponse["overview"];
+                this.film.backgroundpath = reponse["poster_path"];
+                dao.actionDetaillerFilm(film); 
+            }
+        }
+    }
+
     getListeFilm(){ // Renvoie la liste des genres et les ids correspondant, possible d'avoir le même resultat via requete API mais mieux vaut limiter les appels
         var dict = {};
         dict["Action"] = 28;
@@ -119,6 +144,10 @@ class FilmDAO{
     // INITIALISATION DE FONCTION //
     initialiserActionRecevoirFilm(actionRecevoirFilm){
         this.actionRecevoirFilm = actionRecevoirFilm;
+    }
+
+    initialiserActionDetaillerFilm(actionDetaillerFilm){
+        this.actionDetaillerFilm = actionDetaillerFilm;
     }
     ////////////////////////////////
 }

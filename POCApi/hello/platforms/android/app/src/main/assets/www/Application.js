@@ -11,6 +11,7 @@ class Application{
 
         // Initialisation de fonction de filmDAO necessaire //
         this.filmDAO.initialiserActionRecevoirFilm(filmPropose => this.actionRecevoirFilm(filmPropose));
+        this.filmDAO.initialiserActionDetaillerFilm(film => this.actionDetaillerFilm(film));
         //////////////////////////////////////////////////////
 
         this.vuePrincipale = vuePrincipale;
@@ -31,6 +32,10 @@ class Application{
     actionRecevoirFilm(filmPropose){
         console.log("ActionRecevoirFilm : " , filmPropose);
         this.vuePrincipale.rafraichirFilm(filmPropose);
+    }
+
+    actionDetaillerFilm(film){
+        this.vuePrincipale.detaillerFilm(film);
     }
     
     // Fonctions liees a FilmDAO dans le constructeur //
