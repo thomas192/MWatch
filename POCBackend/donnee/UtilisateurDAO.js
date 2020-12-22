@@ -459,13 +459,16 @@ class UtilisateurDAO {
     };
   }
 
-  /** Simule la liste des genres qui existent */
+  /** Renvoie la liste des genres de film */
   listerGenre() {
     console.log("UtilisateurDAO->listerGenre()");
-    return [{id: "drame", nom: "Drame"}, {id: "comedie", nom: "Comédie"},
-      {id: "thriller", nom: "Thriller"}, {id: "romance", nom: "Romance"},
-      {id: "action", nom: "Action"}, {id: "crime", nom: "Crime"},
-      {id: "aventure", nom: "Aventure"}, {id: "mystere", nom: "Mystère"}];
+    return [{id: "28", nom: "Action"}, {id: "12", nom: "Aventure"}, {id: "16", nom: "Animation"},
+      {id: "35", nom: "Comédie"}, {id: "80", nom: "Crime"}, {id: "99", nom: "Documentaire"},
+      {id: "18", nom: "Drame"}, {id: "10751", nom: "Familial"}, {id: "14", nom: "Fantastique"},
+      {id: "36", nom: "Histoire"}, {id: "27", nom: "Horreur"}, {id: "10402", nom: "Musique"},
+      {id: "9648", nom: "Mystère"}, {id: "10749", nom: "Romance"}, {id: "878", nom: "Science-Fiction"},
+      {id: "10770", nom: "Téléfilm"}, {id: "53", nom: "Thriller"}, {id: "10752", nom: "guerre"},
+      {id: "37", nom: "Western"}];
   }
 
   // Créé un objet erreur personnalisé
