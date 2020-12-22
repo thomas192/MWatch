@@ -11,11 +11,6 @@ class VueFilm {
         this.actionSupprimerDeMaListe = null;
     }
 
-    /** Initialise le film */
-    initialiserFilm(film) {
-        this.film = film;
-    }
-
     /** Initialise la vue appelante */
     initialiserVueAppelante(vueAppelante) {
         this.vueAppelante = vueAppelante;

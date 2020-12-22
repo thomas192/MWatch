@@ -11,8 +11,10 @@ class Application {
     this.vueFilm = vueFilm;
     this.vueMaListe = vueMaListe;
 
+    // Initialiser la fonction actionRecevoirFilm dans UtilisateurDAO
     this.utilisateurDAO.initialiserActionRecevoirFilm(filmASwiper => this.actionRecevoirFilm(filmASwiper));
 
+    // Initialiser la fonction actionObtenirFilm dans UtilisateurDAO
     this.utilisateurDAO.initialiserActionObtenirFilm(film => this.actionObtenirFilm(film));
 
     // Initialiser la fonction actionInscrire dans VueInscription

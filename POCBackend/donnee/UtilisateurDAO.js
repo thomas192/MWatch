@@ -1,12 +1,16 @@
 class UtilisateurDAO {
   constructor() {
+    // Fonctions prêtées par le controleur
     this.actionRecevoirFilm = null;
+    this.actionObtenirFilm = null;
   }
 
+  /** Initialise la fonction actionRecevoirFilm */
   initialiserActionRecevoirFilm(actionRecevoirFilm){
     this.actionRecevoirFilm = actionRecevoirFilm;
   }
 
+  /** Initialise la fonction actionObtenirFilm */
   initialiserActionObtenirFilm(actionObtenirFilm) {
     this.actionObtenirFilm = actionObtenirFilm;
   }
