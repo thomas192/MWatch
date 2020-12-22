@@ -187,16 +187,16 @@
     <script type="plain/text" id="html-vue-film">
       <div id="film">
         <div>
-          <h1>{Film.titre} ({Film.annee})</h1>
+          <h1 id="titre"></h1>
         </div>
         <div>
           <button class="action" id="action-supprimer-film" type="button">Supprimer de ma liste</button>
         </div>
         <div>
-          <img src="{Film.affiche}"></img>
+          <img id="affiche" src=""></img>
         </div>
         <div>
-          <a>{Film.description}</a>
+          <a id="description"></a>
         </div>
       </div>
       <button class="action" id="action-retour-vue-film" type="button">Retour</button>

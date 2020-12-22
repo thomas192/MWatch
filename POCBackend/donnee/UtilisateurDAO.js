@@ -7,6 +7,10 @@ class UtilisateurDAO {
     this.actionRecevoirFilm = actionRecevoirFilm;
   }
 
+  initialiserActionObtenirFilm(actionObtenirFilm) {
+    this.actionObtenirFilm = actionObtenirFilm;
+  }
+
   async ecouterEtatUtilisateur(actionUtilisateurConnecte, actionUtilisateurDeconnecte) {
     // Ecouteur qui met à jour l'interface utilisateur automatiquement à chaque
     // fois que l'utilisateur se connecte ou se déconnecte
@@ -412,15 +416,26 @@ class UtilisateurDAO {
     const idUtilisateur = await firebase.auth().currentUser.uid;
     // Récupérer la liste des genres aimés
     const genreAimeRef = await db.collection("GenreAime").doc(idUtilisateur).get();
-    const listeGenreAime = genreAimeRef.data().listeGenreAime;
-    // Determiner le nombre de genres à utiliser pour la requête (5 maximum)
-    let nombreGenreRequete = 1 + (Math.floor(Math.random() * Math.floor(listeGenreAime.length - 1)) % 4);
-    // Choix au hasard des genres à utiliser pour la requête
+
+    let listeGenreAime = [];
     let listeGenreRequete = [];
-    for (let nb = 0; nb < nombreGenreRequete; nb++) {
-      // Choisir un genre à utiliser au hasard dans la liste des genres aimés
-      listeGenreRequete.push(listeGenreAime[Math.floor(Math.random() * Math.floor(listeGenreAime.length))]);
+    // Si l'utilisateur n'a pas de genres aimés
+    if (!genreAimeRef.exists) {
+      // Choisir un genre au hasard dans la liste des genres existants
+      let listeGenreExistant = this.listerGenre();
+      listeGenreRequete.push(listeGenreExistant[Math.floor(Math.random() * Math.floor(listeGenreExistant.length))].id);
+      // Si l'utilisateur a bien défini ses genres aimés
+    } else {
+      listeGenreAime = genreAimeRef.data().listeGenreAime;
+      // Determiner le nombre de genres à utiliser pour la requête (5 maximum)
+      let nombreGenreRequete = 1 + (Math.floor(Math.random() * Math.floor(listeGenreAime.length - 1)) % 4);
+      // Choix au hasard des genres à utiliser pour la requête
+      for (let nb = 0; nb < nombreGenreRequete; nb++) {
+        // Choisir un genre à utiliser au hasard dans la liste des genres aimés
+        listeGenreRequete.push(listeGenreAime[Math.floor(Math.random() * Math.floor(listeGenreAime.length))]);
+      }
     }
+
     let genres = "";
     for (let genre of listeGenreRequete) {
       genres += genre + ",";
@@ -474,16 +489,25 @@ class UtilisateurDAO {
     }
   }
 
-  /** Retourne un film (simulé) */
   obtenirFilm(idFilm) {
     console.log("UtilisateurDAO->obtenirFilm()");
-    return {
-      titre: "Sacrées sorcières",
-      id: 531219,
-      annee: 2020,
-      description: "Un jeune garçon et sa grand-mère, exilés en Angleterre, doivent lutter contre d'horribles sorcières. Contrairement aux idées reçues, les sorcières ne portent ni balai, ni verrue, ni chapeau pointu. Les démasquer représente donc une vraie difficulté pour le petit garçon, qui va devoir rivaliser d'ingéniosité pour échapper à la perfidie de ces vilaines créatures.",
-      affiche: "https://image.tmdb.org/t/p/w342/9wI1x4H86A1Cj2tuRdolZ0F7BPb.jpg"
-    };
+    let url = "https://api.themoviedb.org/3/movie/"+idFilm+"?api_key=108344e6b716107e3d41077a5ce57da2";
+    let utilisateurDAO = this;
+    let request = new XMLHttpRequest();
+    request.open('GET', url);
+    request.responseType = 'json';
+    request.send();
+    request.onload = function() {
+      let f = request.response;
+      let film = {
+        titre: f["title"],
+        id: f["id"],
+        annee: f["release_date"].substring(0, 4),
+        description: f["overview"],
+        affiche: "https://image.tmdb.org/t/p/w342/" + f["poster_path"]
+      }
+      utilisateurDAO.actionObtenirFilm(film);
+    }
   }
 
   /** Renvoie la liste des genres de film */

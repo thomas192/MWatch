@@ -46,9 +46,8 @@ class VueSwipe {
         document.getElementById("detailsFilm").style.display = "none";
         // Récupérer le film à swiper
         this.filmASwiper = filmASwiper;
-        // Affichage de l'affiche
+        // Affichage du film
         document.getElementById("affiche").src = this.filmASwiper.affiche;
-        // Affichage des détails du film
         document.getElementById("titre-film").innerHTML = this.filmASwiper.titre + " (" + this.filmASwiper.annee + ")";
         document.getElementById("description-film").innerHTML = this.filmASwiper.description;
         // Réinitialiser la checkbox utilisée pour ajouter un film à Ma liste

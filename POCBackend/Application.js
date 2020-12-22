@@ -13,6 +13,8 @@ class Application {
 
     this.utilisateurDAO.initialiserActionRecevoirFilm(filmASwiper => this.actionRecevoirFilm(filmASwiper));
 
+    this.utilisateurDAO.initialiserActionObtenirFilm(film => this.actionObtenirFilm(film));
+
     // Initialiser la fonction actionInscrire dans VueInscription
     this.vueInscription.initialiserActionInscrire((pseudo, email, motDePasse) =>
       this.actionInscrire(pseudo, email, motDePasse));
@@ -124,8 +126,8 @@ class Application {
     } else if (hash.match(/^#film\/(.*)/)) {
       let navigation = hash.match(/^#film\/(.*)/);
       let idFilm = navigation[1];
-      this.vueFilm.initialiserFilm(await this.utilisateurDAO.obtenirFilm(idFilm));
       this.vueFilm.afficher();
+      this.utilisateurDAO.obtenirFilm(idFilm);
 
     } else if (hash.match(/^#swipe/)) {
       this.vueSwipe.afficher();
@@ -239,6 +241,10 @@ class Application {
     return await this.utilisateurDAO.proposerFilmASwiper();
   }
 
+  async actionObtenirFilm(film) {
+    console.log("Application->actionObtenirFilm()");
+    await this.vueFilm.afficherFilm(film);
+  }
 }
 
 new Application(window, new UtilisateurDAO(), new VueInscription(), new VueConnexion(), new VueProfil(), new VueAmis(), new VueAmi(), new VueSwipe(), new VueFilm(), new VueMaListe());
