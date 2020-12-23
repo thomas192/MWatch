@@ -495,7 +495,7 @@ class UtilisateurDAO {
 
   obtenirFilm(idFilm) {
     console.log("UtilisateurDAO->obtenirFilm()");
-    let url = "https://api.themoviedb.org/3/movie/"+idFilm+"?api_key=108344e6b716107e3d41077a5ce57da2";
+    let url = "https://api.themoviedb.org/3/movie/"+idFilm+"?api_key=108344e6b716107e3d41077a5ce57da2&language=fr-FR";
     let utilisateurDAO = this;
     let request = new XMLHttpRequest();
     request.open('GET', url);
