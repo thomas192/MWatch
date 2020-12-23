@@ -35,6 +35,12 @@ class VueSwipe {
             listeBouton[i].addEventListener("click",
                 evenement => this.gererSwipe(evenement, valeurBouton));
         }
+
+        // Bind de l'image avec la fonction swipe
+        var region = new ZingTouch.Region(document.getElementById('swipe'));
+        var target = document.getElementById('flex-milieu');
+        region.bind(target, 'swipe', evenement => this.actionSwiperFilm(evenement));
+
         // Affiche cliquée
         document.getElementById("affiche").addEventListener("click",
             evenement => this.afficherDetailsFilm(evenement));
@@ -81,5 +87,29 @@ class VueSwipe {
         } else {
             this.actionObtenirFilmASwiper();
         }
+    }
+
+    actionSwiperFilm(evenement){ // Executer quand un swipe est detecte
+        var directionSwipe = evenement.detail.data[0].currentDirection; // On recupere l'orientation du swipe
+        const margeErreur = 20; // "Marge" d'erreur pour savoir si le swipe est dans la bonne direction. EX : 340° = Swipe droite quand meme ; CHANGER SI BESOIN
+
+        if(directionSwipe < 0+margeErreur || directionSwipe > 360-margeErreur){
+            console.log("Swipe vers la droite");
+            this.gererSwipe(evenement, "nonVuNonAime");
+            //APPELER FONCTION POUR SWIPE VERS LA DROITE
+        } else if(directionSwipe < 90+margeErreur && directionSwipe > 90-margeErreur){
+            console.log("Swipe vers le haut");
+            this.gererSwipe(evenement, "vuAime");
+            //APPELER FONCTION POUR SWIPE VERS LE HAUT
+        } else if(directionSwipe < 180+margeErreur && directionSwipe > 180-margeErreur){
+            console.log("Swipe vers la gauche");
+            this.gererSwipe(evenement, "nonVuNonAime")
+            //APPELER FONCTION POUR SWIPE VERS LA GAUCHE
+        } else if(directionSwipe < 270+margeErreur && directionSwipe > 270-margeErreur){
+            console.log("Swipe vers le bas");
+            this.gererSwipe(evenement, "vuNonAime");
+            //APPELER FONCTION POUR SWIPE VERS LE BAS
+        }
+        
     }
 }
