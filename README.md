@@ -70,3 +70,6 @@ Accéléromètre : l’utilisateur peut swiper en agitant son téléphone.
 
 https://github.com/cegepmatane/projet-mobile-2020-mwatch/tree/efe9c8879f39f2d409a30b450c4b1ddb4128f200/POCGesture
 
+### LIVRAISON_DAO
+
+https://github.com/cegepmatane/projet-mobile-2020-mwatch/blob/2448c22be9a1efe0bc79aa0f5eaf1cd82e95fab1/POCBackend/donnee/UtilisateurDAO.js
