@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="19fd17dd-f088-4c1c-9aca-a9714e96e367" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MWatch/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MWatch/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../POCBackendCordova/hello/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../POCBackendCordova/hello/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../POCBackendCordova/hello/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" />
@@ -2766,6 +2766,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -2782,9 +2783,12 @@
       <workItem from="1607850971989" duration="18406000" />
       <workItem from="1607869975340" duration="941000" />
       <workItem from="1608111318651" duration="7498000" />
-      <workItem from="1608131014723" duration="8719000" />
-      <workItem from="1608746946982" duration="4180000" />
-      <workItem from="1608754333131" duration="2087000" />
+      <workItem from="1608131014723" duration="9038000" />
+      <workItem from="1608314863582" duration="8830000" />
+      <workItem from="1608630782730" duration="27466000" />
+      <workItem from="1608735159867" duration="206000" />
+      <workItem from="1608738235214" duration="31000" />
+      <workItem from="1608759030438" duration="71000" />
     </task>
     <servers />
   </component>

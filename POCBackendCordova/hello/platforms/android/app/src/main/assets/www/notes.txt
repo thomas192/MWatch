@@ -1,5 +1,0 @@
-A FAIRE:
-
-  - Changer les <button> en <a>
-
-  - Rendre les pseudos uniques
