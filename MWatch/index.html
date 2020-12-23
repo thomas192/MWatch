@@ -5,21 +5,23 @@
   <link rel="stylesheet" href="application.css">
   <style></style>
   <title>MWatch</title>
-  
-   
- 
+
+
+
  	<link rel="stylesheet" href="decoration/application.css">
 	<link rel="stylesheet" href="decoration/entete.css">
 	<link rel="stylesheet" href="decoration/inscription.css">
 	<link rel="stylesheet" href="decoration/profil.css">
 
-  
+
 
   <!-- Firebase -->
   <script defer src="firebase/firebase-app.js"></script>
   <script defer src="firebase/firebase-auth.js"></script>
   <script defer src="firebase/firebase-firestore.js"></script>
   <script defer src="donnee/init-firebase.js"></script>
+
+  <script src="zingtouch/zingtouch-1.0.6/dist/zingtouch.min.js"></script>
 
   <script src="langues/francais.js"></script>
   <script src="lib/fonctionDeBase.js"></script>
@@ -43,7 +45,7 @@
   <header>
     <div class="menu">
 		<nav>
-		
+
 			<ul>
 			  <li><a id="menu-item-inscription" href="#inscription" >Inscription</a></li>
 			  <li><a id="menu-item-connexion" href="#">Connexion</a></li>
@@ -62,20 +64,20 @@
 		  <h1>Inscription</h1>
 		  <hr>
 		  <form class = "formulaire" id="formulaire">
-			
+
 				 <div id="alerte"></div>
 				 <div class="container">
 						<label for="pseudo">Pseudo</label>
 						<input type="text" id="pseudo" required/>
-					  
-					  
+
+
 						<label for="email">Adresse email</label>
 						<input type="email" id="email" required/>
-					  
-					 
+
+
 						<label for="mot-de-passe">Mot de passe</label>
 						<input type="password" id="mot-de-passe" required/>
-					 
+
 					 <div class="clearfix">
 						<input class="action" type="submit" id="action-inscrire" value="S'inscrire"/>
 					 </div>
@@ -240,17 +242,17 @@
 	<div class="page">
       <div id="film">
         <div>
-          <h1>{Film.titre} ({Film.annee})</h1>
+          <h1 id="titre"></h1>
 		  <hr>
         </div>
         <div>
           <button class="action" id="action-supprimer-film" type="button">Supprimer de ma liste</button>
         </div>
         <div>
-          <img src="{Film.affiche}"></img>
+            <img id="affiche" src=""></img>
         </div>
         <div>
-          <a>{Film.description}</a>
+            <a id="description"></a>
         </div>
       </div>
       <button class="action" id="action-retour-vue-film" type="button">Retour</button>
@@ -260,10 +262,7 @@
     <script type="plain/text" id="html-vue-swipe">
 	<div class="page">
       <div id=swipe>
-        <div class="swipe-item">
-          <button class="action" id="action-vu-aime" value="vuAime" type="button">Vu et aimé</button>
-        </div>
-        <div class="swipe-item">
+           <div class="swipe-item">
           <div>
             <input type="checkbox" id="ajouter-a-ma-liste" name="ajouter-a-ma-liste">
             <label for="ajouter-a-ma-liste">Ajouter à ma liste</label>
@@ -271,18 +270,12 @@
         </div>
 
         <div class="swipe-item" id="flex-milieu">
-          <button class="action" id="action-non-vu-non-aime" value="nonVuNonAime" type="button">Non vu et non aimé</button>
           <img id="affiche" src="{img.src}"></img>
-          <button class="action" id="action-non-vu-aime" value="nonVuAime" type="button">Non vu et aimé</button>
         </div>
 
         <div id="detailsFilm">
-          <a id="titre-film">{Film.titre} ({Film.annee})</a>
-          <a>{Film.description}</a>
-        </div>
-
-        <div class="swipe-item">
-          <button class="action" id="action-vu-non-aime" value="vuNonAime" type="button">Vu et non aimé</button>
+          <a id="titre-film"></a>
+          <a id="description-film"></a>
         </div>
       </div>
 	  </div>

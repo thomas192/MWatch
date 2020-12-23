@@ -11,11 +11,6 @@ class VueFilm {
         this.actionSupprimerDeMaListe = null;
     }
 
-    /** Initialise le film */
-    initialiserFilm(film) {
-        this.film = film;
-    }
-
     /** Initialise la vue appelante */
     initialiserVueAppelante(vueAppelante) {
         this.vueAppelante = vueAppelante;
@@ -38,27 +33,29 @@ class VueFilm {
 
     /** Gère l'affichage de la vue */
     async afficher() {
-        console.log("VueFilm->afficher()");
-        // Affichage du film
-        this.html = this.html.replace("{Film.titre}", this.film.titre);
-        this.html = this.html.replace("{Film.annee}", this.film.annee);
-        this.html = this.html.replace("{Film.affiche}", this.film.affiche);
-        this.html = this.html.replace("{Film.description}", this.film.description);
         document.getElementsByTagName("contenu")[0].innerHTML = this.html;
+        document.getElementById("action-supprimer-film").style.display = "none";
+        // Bouton retour cliqué
+        document.getElementById("action-retour-vue-film").addEventListener("click",
+            evenement => this.retourVueFilm(evenement));
+    }
+
+    async afficherFilm(film) {
+        console.log("VueFilm->afficherFilm()");
+        this.film = film;
+        // Affichage du film
+        document.getElementById("affiche").src = this.film.affiche;
+        document.getElementById("titre").innerHTML = this.film.titre + " (" + this.film.annee + ")";
+        document.getElementById("description").innerHTML = this.film.description;
         // Affichage du bouton supprimer
         if (await this.faitPartieDeMaListe(this.film.id)) {
-            console.log("true");
             document.getElementById("action-supprimer-film").style.display = "block";
             // Bouton supprimé cliqué
             document.getElementById("action-supprimer-film").addEventListener("click",
                 evenement => this.supprimerDeMaListe(evenement));
         } else {
-            console.log("false");
             document.getElementById("action-supprimer-film").style.display = "none";
         }
-        // Bouton retour cliqué
-        document.getElementById("action-retour-vue-film").addEventListener("click",
-            evenement => this.retourVueFilm(evenement));
     }
 
     async supprimerDeMaListe(evenement) {

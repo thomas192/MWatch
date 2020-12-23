@@ -2,10 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="19fd17dd-f088-4c1c-9aca-a9714e96e367" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/html/vue-inscription.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application.js" beforeDir="false" afterPath="$PROJECT_DIR$/Application.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/donnee/UtilisateurDAO.js" beforeDir="false" afterPath="$PROJECT_DIR$/donnee/UtilisateurDAO.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modele/Utilisateur.js" beforeDir="false" afterPath="$PROJECT_DIR$/modele/Utilisateur.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/VueAmi.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueAmi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/VueAmis.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueAmis.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/VueConnexion.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueConnexion.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/VueFilm.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueFilm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/VueInscription.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueInscription.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/VueProfil.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueProfil.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/VueSwipe.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/VueSwipe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../POCBackend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../POCBackend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../POCBackendCordova/hello/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../POCBackendCordova/hello/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +62,7 @@
       <workItem from="1607869975340" duration="941000" />
       <workItem from="1608111318651" duration="7498000" />
       <workItem from="1608131014723" duration="8719000" />
+      <workItem from="1608746946982" duration="4180000" />
     </task>
     <servers />
   </component>

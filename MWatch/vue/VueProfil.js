@@ -41,19 +41,19 @@ class VueProfil {
 
     // Ecouteur du bouton de déconnexion
     document.getElementById("deconnexion").addEventListener("click",
-    evenement => this.deconnecter(evenement));
+        evenement => this.deconnecter(evenement));
 
     // Ecouteur du formulaire informations personnelles
     document.getElementById("formulaire-information-personnelle").addEventListener("submit",
-    evenement => this.mettreAJourInformationPersonnelle(evenement));
+        evenement => this.mettreAJourInformationPersonnelle(evenement));
 
     // Ecouteur du formulaire genres aimés
     document.getElementById("formulaire-genre-aime").addEventListener("submit",
-    evenement => this.enregistrerListeGenreAime(evenement));
+        evenement => this.enregistrerListeGenreAime(evenement));
 
     // Ecouteur du formulaire supprimer compte
     document.getElementById("formulaire-supprimer-compte").addEventListener("submit",
-    evenement => this.supprimerCompte(evenement));
+        evenement => this.supprimerCompte(evenement));
 
     // Affichage dynamique du pseudo
     document.getElementById("pseudo").value = firebase.auth().currentUser.displayName;
@@ -68,27 +68,27 @@ class VueProfil {
     for (let i in this.listeGenreDonnee) {
       let formulaireGenreItemHtmlRemplacement = formulaireGenreItemHtml;
       formulaireGenreItemHtmlRemplacement =
-        formulaireGenreItemHtmlRemplacement.replace("{id}",
-        this.listeGenreDonnee[i].id)
+          formulaireGenreItemHtmlRemplacement.replace("{id}",
+              this.listeGenreDonnee[i].id)
       formulaireGenreItemHtmlRemplacement =
-        formulaireGenreItemHtmlRemplacement.replace("{name}",
-        this.listeGenreDonnee[i].id)
+          formulaireGenreItemHtmlRemplacement.replace("{name}",
+              this.listeGenreDonnee[i].id)
       formulaireGenreItemHtmlRemplacement =
-        formulaireGenreItemHtmlRemplacement.replace("{value}",
-        this.listeGenreDonnee[i].nom)
+          formulaireGenreItemHtmlRemplacement.replace("{value}",
+              this.listeGenreDonnee[i].nom)
       formulaireGenreItemHtmlRemplacement =
           formulaireGenreItemHtmlRemplacement.replace("{for}",
-          this.listeGenreDonnee[i].id)
+              this.listeGenreDonnee[i].id)
       formulaireGenreItemHtmlRemplacement =
-        formulaireGenreItemHtmlRemplacement.replace("{label}",
-        this.listeGenreDonnee[i].nom)
-     formulaireGenreHtmlRemplacement += formulaireGenreItemHtmlRemplacement;
+          formulaireGenreItemHtmlRemplacement.replace("{label}",
+              this.listeGenreDonnee[i].nom)
+      formulaireGenreHtmlRemplacement += formulaireGenreItemHtmlRemplacement;
     }
     formulaireGenre.innerHTML = formulaireGenreHtmlRemplacement;
   }
 
   /** Récupère les informations personnelles renseignées par l'utilisateur et
-    * et les passe au controleur */
+   * et les passe au controleur */
   async mettreAJourInformationPersonnelle(evenement) {
     console.log("VueProfil->mettreAJourInformationPersonnelle()");
     evenement.preventDefault();
@@ -100,11 +100,11 @@ class VueProfil {
     // Effectuer la mise à jour des informations personnelles
     let resultat = await this.actionMettreAJourInformationPersonnelle(pseudo,
         email, motDePasseActuel, nouveauMotDePasse);
-    choixAlerte(resultat);
+    this.afficherAlerte(Utilisateur.choixAlerte(resultat));
   }
 
   /** Récupère les genre aimés par l'utilisateur et et les passe
-    * au controleur */
+   * au controleur */
   async enregistrerListeGenreAime(evenement) {
     console.log("VueProfil->enregistrerListeGenreAime()");
     evenement.preventDefault();
@@ -113,34 +113,43 @@ class VueProfil {
     for (let i in this.listeGenreDonnee) {
       let checkbox = document.getElementById(this.listeGenreDonnee[i].id);
       if (checkbox.checked) {
-            listeGenreAime.push(this.listeGenreDonnee[i].id);
+        listeGenreAime.push(this.listeGenreDonnee[i].id);
       }
     }
     // Enregistrer les genres aimés
     let resultat = await this.actionEnregistrerListeGenreAime(listeGenreAime);
     if(resultat !== "true") {
-      choixAlerte(resultat);
+      alert(resultat);
     }
   }
 
   /** Récupère le mot de passe renseigné par l'utilisateur et appelle le
-    * controleur */
-    async supprimerCompte(evenement) {
-      console.log("VueProfil->supprimerCompte()");
-      evenement.preventDefault();
-      // Récupérer le mot de passe
-      let motDePasseActuel = document.getElementById("mot-de-passe").value;
-      // Supprimer l'utilisateur
-      let resultat = await this.actionSupprimerCompte(motDePasseActuel);
-      if(resultat !== "true") {
-        choixAlerte(resultat);
-      }
+   * controleur */
+  async supprimerCompte(evenement) {
+    console.log("VueProfil->supprimerCompte()");
+    evenement.preventDefault();
+    // Récupérer le mot de passe
+    let motDePasseActuel = document.getElementById("mot-de-passe").value;
+    // Supprimer l'utilisateur
+    let resultat = await this.actionSupprimerCompte(motDePasseActuel);
+    if(resultat !== "true") {
+      alert(resultat);
     }
+  }
 
   /** Appelle le controleur qui déconnecte l'utilisateur */
   deconnecter(evenement) {
     console.log("VueProfil->deconnecter()");
     evenement.preventDefault();
     this.actionDeconnecter();
+  }
+
+  afficherAlerte(alerte) {
+    if (alerte.type === "erreur") {
+      document.getElementById("alerte").style.color = "red";
+    } else if (alerte.type === "succes") {
+      document.getElementById("alerte").style.color = "green";
+    }
+    document.getElementById("alerte").innerHTML = alerte.message;
   }
 }

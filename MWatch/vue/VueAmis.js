@@ -35,7 +35,7 @@ class VueAmis {
 
     // Ecouteur du formulaire de demande d'ami
     document.getElementById("formulaire-ajouter-ami").addEventListener("submit",
-    evenement => this.ajouterAmi(evenement));
+        evenement => this.ajouterAmi(evenement));
 
     // Affichage des demandes d'ami
     if (this.listeDemandeAmi.length > 0) {
@@ -48,24 +48,24 @@ class VueAmis {
       for (let i in this.listeDemandeAmi) {
         let listeDemandeAmiHtmlItemRemplacement = demandeAmiHtml;
         listeDemandeAmiHtmlItemRemplacement =
-          listeDemandeAmiHtmlItemRemplacement.replace("{div.id}",
-          this.listeDemandeAmi[i].id);
+            listeDemandeAmiHtmlItemRemplacement.replace("{div.id}",
+                this.listeDemandeAmi[i].id);
         listeDemandeAmiHtmlItemRemplacement =
-          listeDemandeAmiHtmlItemRemplacement.replace("{a.texte}",
-          "Demande d'ami de " + this.listeDemandeAmi[i].pseudo);
+            listeDemandeAmiHtmlItemRemplacement.replace("{a.texte}",
+                "Demande d'ami de " + this.listeDemandeAmi[i].pseudo);
         listeDemandeAmiHtmlItemRemplacement =
-          listeDemandeAmiHtmlItemRemplacement.replace("{boutonAccepter.id}",
-          this.listeDemandeAmi[i].id);
+            listeDemandeAmiHtmlItemRemplacement.replace("{boutonAccepter.id}",
+                this.listeDemandeAmi[i].id);
         listeDemandeAmiHtmlItemRemplacement =
-          listeDemandeAmiHtmlItemRemplacement.replace("{boutonRefuser.id}",
-          this.listeDemandeAmi[i].id);
+            listeDemandeAmiHtmlItemRemplacement.replace("{boutonRefuser.id}",
+                this.listeDemandeAmi[i].id);
         listeDemandeAmiHtmlItemRemplacement =
-          listeDemandeAmiHtmlItemRemplacement.replace("{boutonAccepter.texte}",
-          "Accepter");
+            listeDemandeAmiHtmlItemRemplacement.replace("{boutonAccepter.texte}",
+                "Accepter");
         listeDemandeAmiHtmlItemRemplacement =
-          listeDemandeAmiHtmlItemRemplacement.replace("{boutonRefuser.texte}",
-          "Refuser");
-       listeDemandeAmiHtmlRemplacement += listeDemandeAmiHtmlItemRemplacement;
+            listeDemandeAmiHtmlItemRemplacement.replace("{boutonRefuser.texte}",
+                "Refuser");
+        listeDemandeAmiHtmlRemplacement += listeDemandeAmiHtmlItemRemplacement;
       }
       listeDemandeAmiHtml.innerHTML = listeDemandeAmiHtmlRemplacement;
 
@@ -75,7 +75,7 @@ class VueAmis {
         let idBouton = listeBouton[i].id;
         let valeurBouton = listeBouton[i].value;
         listeBouton[i].addEventListener("click",
-          evenement => this.gererDemandeAmi(evenement, idBouton, valeurBouton));
+            evenement => this.gererDemandeAmi(evenement, idBouton, valeurBouton));
       }
     } else {
       document.getElementById("liste-demande-ami").style.display = "none";
@@ -92,15 +92,15 @@ class VueAmis {
       for (let i in this.listeAmi) {
         let listeAmiHtmlItemRemplacement = amiHtml;
         listeAmiHtmlItemRemplacement =
-          listeAmiHtmlItemRemplacement.replace("{div.id}",
-          this.listeAmi[i].id);
+            listeAmiHtmlItemRemplacement.replace("{div.id}",
+                this.listeAmi[i].id);
         listeAmiHtmlItemRemplacement =
-          listeAmiHtmlItemRemplacement.replace("{a.href}",
-          this.listeAmi[i].id);
+            listeAmiHtmlItemRemplacement.replace("{a.href}",
+                this.listeAmi[i].id);
         listeAmiHtmlItemRemplacement =
-          listeAmiHtmlItemRemplacement.replace("{a.texte}",
-          this.listeAmi[i].pseudo);
-       listeAmiHtmlRemplacement += listeAmiHtmlItemRemplacement;
+            listeAmiHtmlItemRemplacement.replace("{a.texte}",
+                this.listeAmi[i].pseudo);
+        listeAmiHtmlRemplacement += listeAmiHtmlItemRemplacement;
       }
       listeAmiHtml.innerHTML = listeAmiHtmlRemplacement;
 
@@ -116,7 +116,7 @@ class VueAmis {
     let emailUtilisateurAjoute = document.getElementById("email").value;
     // Ajouter ami
     let resultat = await this.actionAjouterAmi(emailUtilisateurAjoute);
-    choixAlerte(resultat);
+    this.afficherAlerte(Utilisateur.choixAlerte(resultat));
   }
 
   async gererDemandeAmi(evenement, idUtilisateurAccepte, reponse) {
@@ -124,7 +124,7 @@ class VueAmis {
     evenement.preventDefault();
     let resultat = await this.actionGererDemandeAmi(idUtilisateurAccepte, reponse);
     if (resultat !== "true") {
-      choixAlerte(resultat);
+      alert(resultat);
     } else {
       // Mettre à jour la vue
       for (let i in this.listeDemandeAmi) {
@@ -138,5 +138,14 @@ class VueAmis {
         }
       }
     }
+  }
+
+  afficherAlerte(alerte) {
+    if (alerte.type === "erreur") {
+      document.getElementById("alerte").style.color = "red";
+    } else if (alerte.type === "succes") {
+      document.getElementById("alerte").style.color = "green";
+    }
+    document.getElementById("alerte").innerHTML = alerte.message;
   }
 }

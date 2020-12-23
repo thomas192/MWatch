@@ -1,5 +1,33 @@
 class UtilisateurDAO {
   constructor() {
+    // Fonctions prêtées par le controleur
+    this.actionRecevoirFilm = null;
+    this.actionObtenirFilm = null;
+  }
+
+  /** Initialise la fonction actionRecevoirFilm */
+  initialiserActionRecevoirFilm(actionRecevoirFilm){
+    this.actionRecevoirFilm = actionRecevoirFilm;
+  }
+
+  /** Initialise la fonction actionObtenirFilm */
+  initialiserActionObtenirFilm(actionObtenirFilm) {
+    this.actionObtenirFilm = actionObtenirFilm;
+  }
+
+  async ecouterEtatUtilisateur(actionUtilisateurConnecte, actionUtilisateurDeconnecte) {
+    // Ecouteur qui met à jour l'interface utilisateur automatiquement à chaque
+    // fois que l'utilisateur se connecte ou se déconnecte
+    firebase.auth().onAuthStateChanged(function(utilisateur) {
+      console.log("Event onAuthStateChanged");
+      if(utilisateur != null) {
+        console.log("   Utilisateur connecté");
+        actionUtilisateurConnecte();
+      } else {
+        console.log("   Utilisateur non connecté");
+        actionUtilisateurDeconnecte();
+      }
+    });
   }
 
   async inscrire(pseudo, email, motDePasse) {
@@ -7,27 +35,27 @@ class UtilisateurDAO {
     let retour = "true";
     // Créer l'utilisateur
     await firebase.auth().createUserWithEmailAndPassword(email, motDePasse)
-    .then(async function() {
-      console.log("   Utilisateur créé");
-      // Récupérer l'utilisateur connecté
-      let utilisateur = await firebase.auth().currentUser;
-      // Ajouter le pseudo
-      await utilisateur.updateProfile({ displayName: pseudo });
-      console.log("   Pseudo ajouté");
-      // Ajouter l'utilisateur dans firestore
-      await db.collection('Utilisateur').doc(utilisateur.uid)
-      .set({
-        id: firebase.auth().currentUser.uid,
-        pseudo: pseudo,
-        email: email
-      });
-      console.log("   Utilisateur ajouté dans Firestore");
-    })
-    // Gestion des erreurs
-    .catch(function(objetErreur) {
-      console.log("   Code d'erreur: " + objetErreur.code);
-      retour = objetErreur.code;
-    });
+        .then(async function() {
+          console.log("   Utilisateur créé");
+          // Récupérer l'utilisateur connecté
+          let utilisateur = await firebase.auth().currentUser;
+          // Ajouter le pseudo
+          await utilisateur.updateProfile({ displayName: pseudo });
+          console.log("   Pseudo ajouté");
+          // Ajouter l'utilisateur dans firestore
+          await db.collection('Utilisateur').doc(utilisateur.uid)
+              .set({
+                id: firebase.auth().currentUser.uid,
+                pseudo: pseudo,
+                email: email
+              });
+          console.log("   Utilisateur ajouté dans Firestore");
+        })
+        // Gestion des erreurs
+        .catch(function(objetErreur) {
+          console.log("   Code d'erreur: " + objetErreur.code);
+          retour = objetErreur.code;
+        });
     return retour;
   }
 
@@ -36,11 +64,11 @@ class UtilisateurDAO {
     let retour = "true";
     // Requête
     await firebase.auth().signInWithEmailAndPassword(email, motDePasse)
-    // Gestion des erreurs
-    .catch(function(objetErreur) {
-      console.log("   Code d'erreur: " + objetErreur.code);
-      retour = objetErreur.code;
-    });
+        // Gestion des erreurs
+        .catch(function(objetErreur) {
+          console.log("   Code d'erreur: " + objetErreur.code);
+          retour = objetErreur.code;
+        });
     return retour;
   }
 
@@ -49,7 +77,7 @@ class UtilisateurDAO {
   }
 
   async mettreAJourInformationPersonnelle(pseudo, email,
-    motDePasseActuel, nouveauMotDePasse) {
+                                          motDePasseActuel, nouveauMotDePasse) {
     console.log("UtilisateurDAO->mettreAJourPseudoEtEmail()");
     let retour = "miseAJourEffectuee";
     // Récupérer l'utilisateur connecté
@@ -62,35 +90,35 @@ class UtilisateurDAO {
     );
     // Réauthentifier l'utilisateur
     await utilisateur.reauthenticateWithCredential(credential)
-    .then(async function() {
-      if (pseudo !== utilisateur.displayName) {
-        // Mettre à jour le pseudo dans FirebaseAuth
-        await utilisateur.updateProfile({ displayName: pseudo });
-        console.log("   Pseudo mis à jour FirebaseAuth");
-        // Mettre à jour le pseudo dans Firestore
-        utilisateurRef.update({ pseudo: utilisateur.displayName });
-        console.log("   Pseudo mis à jour dans Firestore");
-      }
-      if (email !== utilisateur.email) {
-        // Mettre à jour l'email dans FirebaseAuth
-        await utilisateur.updateEmail(email);
-        console.log("   Email mis à jour dans FirebaseAuth");
-        // Mettre à jour l'email dans Firestore
-        utilisateurRef.update({ email: utilisateur.email });
-        console.log("   Email mis à jour dans Firestore");
-      }
-      if (nouveauMotDePasse !== "") {
-        // Mettre à jour le mot de passe
-        await utilisateur.updatePassword(nouveauMotDePasse);
-        console.log("   Mot de passe mis à jour");
-      }
-    })
-    // Gestion des erreurs
-    .catch(function(objetErreur) {
-      console.log(objetErreur);
-      console.log("   Code d'erreur: " + objetErreur.code);
-      retour = objetErreur.code;
-    });
+        .then(async function() {
+          if (pseudo !== utilisateur.displayName) {
+            // Mettre à jour le pseudo dans FirebaseAuth
+            await utilisateur.updateProfile({ displayName: pseudo });
+            console.log("   Pseudo mis à jour FirebaseAuth");
+            // Mettre à jour le pseudo dans Firestore
+            utilisateurRef.update({ pseudo: utilisateur.displayName });
+            console.log("   Pseudo mis à jour dans Firestore");
+          }
+          if (email !== utilisateur.email) {
+            // Mettre à jour l'email dans FirebaseAuth
+            await utilisateur.updateEmail(email);
+            console.log("   Email mis à jour dans FirebaseAuth");
+            // Mettre à jour l'email dans Firestore
+            utilisateurRef.update({ email: utilisateur.email });
+            console.log("   Email mis à jour dans Firestore");
+          }
+          if (nouveauMotDePasse !== "") {
+            // Mettre à jour le mot de passe
+            await utilisateur.updatePassword(nouveauMotDePasse);
+            console.log("   Mot de passe mis à jour");
+          }
+        })
+        // Gestion des erreurs
+        .catch(function(objetErreur) {
+          console.log(objetErreur);
+          console.log("   Code d'erreur: " + objetErreur.code);
+          retour = objetErreur.code;
+        });
     return retour;
   }
 
@@ -101,11 +129,11 @@ class UtilisateurDAO {
     const utilisateur = await firebase.auth().currentUser;
     // Créer le document
     await db.collection("GenreAime").doc(utilisateur.uid).set({ listeGenreAime: listeGenreAime })
-    // Gestion des erreurs
-    .catch(function(objetErreur) {
-      console.log("   Code d'erreur: " + objetErreur.code)
-      retour = objetErreur.code
-    });
+        // Gestion des erreurs
+        .catch(function(objetErreur) {
+          console.log("   Code d'erreur: " + objetErreur.code)
+          retour = objetErreur.code
+        });
     console.log("   Genres aimés enregistrés");
     return retour;
   }
@@ -116,47 +144,48 @@ class UtilisateurDAO {
     // Récupérer l'utilisateur connecté
     const utilisateur = await firebase.auth().currentUser;
     // Récupérer le snapshot contenant le document de l'utilisateur ajouté
+    let instanceUtilisateurDAO = this;
     await db.collection("Utilisateur").where("email", "==", emailUtilisateurAjoute).get()
-    .then(async function(snapshotUtilisateurAjoute) {
-      // Récupérer le document de l'utilisateur ajouté
-      let utilisateurAjoute;
-      snapshotUtilisateurAjoute.forEach(doc => {
-        utilisateurAjoute = doc.data();
-      })
-      // Vérifier si l'utilisateur ajouté existe
-      if (utilisateurAjoute == null) {
-        console.log("   Utilisateur ajouté inconnu");
-        return exceptionPersonnalisee("utilisateur_inconnu");
-      }
-      // Vérifier si l'utilisateur ne s'ajoute pas lui-même en ami
-      if (utilisateur.email === emailUtilisateurAjoute) {
-        console.log("   L'utilisateur s'ajoute lui-même en ami");
-        return exceptionPersonnalisee("ajout_de_soi_en_ami");
-      }
-      // Vérifier si l'utilisateur n'a pas déjà envoyé une demande d'ami à l'utilisateur ajouté
-      const demande = await db.collection("Ami").doc(utilisateurAjoute.id)
-          .collection("DemandeRecue").doc(utilisateur.uid).get();
-      if (demande.exists) {
-        console.log("   Demande d'ami déjà envoyée à cet utilisateur");
-        return exceptionPersonnalisee("demande_ami_deja_envoyee");
-      }
-      // Vérifier si l'utilisateur n'est pas déjà ami avec l'utilisateur ajouté
-      const relation = await db.collection("Ami").doc(utilisateur.uid)
-          .collection("Relation").doc(utilisateurAjoute.id).get();
-      if (relation.exists) {
-        console.log("   Utilisateur déjà ami avec l'utilisateur ajouté");
-        return exceptionPersonnalisee("deja_ami");
-      }
-      // Enregistrer la demande d'ami
-      await db.collection("Ami").doc(utilisateurAjoute.id).collection("DemandeRecue")
-        .doc(utilisateur.uid).set({});
-      console.log("   Demande d'ami envoyée");
-    })
-    // Gestion des erreurs
-    .catch(function(objetErreur) {
-      console.log("   Code d'erreur: " + objetErreur.code)
-      retour = objetErreur.code
-    });
+        .then(async function(snapshotUtilisateurAjoute) {
+          // Récupérer le document de l'utilisateur ajouté
+          let utilisateurAjoute;
+          snapshotUtilisateurAjoute.forEach(doc => {
+            utilisateurAjoute = doc.data();
+          })
+          // Vérifier si l'utilisateur ajouté existe
+          if (utilisateurAjoute == null) {
+            console.log("   Utilisateur ajouté inconnu");
+            return instanceUtilisateurDAO.exceptionAmi("utilisateur_inconnu");
+          }
+          // Vérifier si l'utilisateur ne s'ajoute pas lui-même en ami
+          if (utilisateur.email === emailUtilisateurAjoute) {
+            console.log("   L'utilisateur s'ajoute lui-même en ami");
+            return instanceUtilisateurDAO.exceptionAmi("ajout_de_soi_en_ami");
+          }
+          // Vérifier si l'utilisateur n'a pas déjà envoyé une demande d'ami à l'utilisateur ajouté
+          const demande = await db.collection("Ami").doc(utilisateurAjoute.id)
+              .collection("DemandeRecue").doc(utilisateur.uid).get();
+          if (demande.exists) {
+            console.log("   Demande d'ami déjà envoyée à cet utilisateur");
+            return instanceUtilisateurDAO.exceptionAmi("demande_ami_deja_envoyee");
+          }
+          // Vérifier si l'utilisateur n'est pas déjà ami avec l'utilisateur ajouté
+          const relation = await db.collection("Ami").doc(utilisateur.uid)
+              .collection("Relation").doc(utilisateurAjoute.id).get();
+          if (relation.exists) {
+            console.log("   Utilisateur déjà ami avec l'utilisateur ajouté");
+            return instanceUtilisateurDAO.exceptionAmi("deja_ami");
+          }
+          // Enregistrer la demande d'ami
+          await db.collection("Ami").doc(utilisateurAjoute.id).collection("DemandeRecue")
+              .doc(utilisateur.uid).set({});
+          console.log("   Demande d'ami envoyée");
+        })
+        // Gestion des erreurs
+        .catch(function(objetErreur) {
+          console.log("   Code d'erreur: " + objetErreur.code)
+          retour = objetErreur.code
+        });
 
     return retour;
   }
@@ -168,23 +197,23 @@ class UtilisateurDAO {
     const utilisateur = await firebase.auth().currentUser;
     // Supprimer la demande d'ami
     await db.collection("Ami").doc(utilisateur.uid).collection("DemandeRecue")
-      .doc(idUtilisateurAccepte).delete()
-    .then(async function() {
-      console.log("   Demande d'ami supprimée")
-      if (reponse === "acceptee") {
-        // Ajouter la relation d'amitié
-        await db.collection("Ami").doc(utilisateur.uid).collection("Relation")
-          .doc(idUtilisateurAccepte).set({})
-        await db.collection("Ami").doc(idUtilisateurAccepte).collection("Relation")
-          .doc(utilisateur.uid).set({});
-        console.log("   Relation d'amitié enregistrée")
-      }
-    })
-    // Gestion des erreurs
-    .catch(function(objetErreur) {
-      console.log("   Code d'erreur: " + objetErreur.code)
-      retour = objetErreur.code
-    });
+        .doc(idUtilisateurAccepte).delete()
+        .then(async function() {
+          console.log("   Demande d'ami supprimée")
+          if (reponse === "acceptee") {
+            // Ajouter la relation d'amitié
+            await db.collection("Ami").doc(utilisateur.uid).collection("Relation")
+                .doc(idUtilisateurAccepte).set({})
+            await db.collection("Ami").doc(idUtilisateurAccepte).collection("Relation")
+                .doc(utilisateur.uid).set({});
+            console.log("   Relation d'amitié enregistrée")
+          }
+        })
+        // Gestion des erreurs
+        .catch(function(objetErreur) {
+          console.log("   Code d'erreur: " + objetErreur.code)
+          retour = objetErreur.code
+        });
     return retour;
   }
 
@@ -195,16 +224,16 @@ class UtilisateurDAO {
     const utilisateur = await firebase.auth().currentUser;
     // Supprimer la relation d'amitié
     await db.collection("Ami").doc(utilisateur.uid).collection("Relation")
-      .doc(idAmi).delete()
-    .then(async function() {
-      await db.collection("Ami").doc(idAmi).collection("Relation")
-        .doc(utilisateur.uid).delete()
-    })
-    // Gestion des erreurs
-    .catch(function(objetErreur) {
-      console.log("   Code d'erreur: " + objetErreur.code)
-      retour = objetErreur.code
-    });
+        .doc(idAmi).delete()
+        .then(async function() {
+          await db.collection("Ami").doc(idAmi).collection("Relation")
+              .doc(utilisateur.uid).delete()
+        })
+        // Gestion des erreurs
+        .catch(function(objetErreur) {
+          console.log("   Code d'erreur: " + objetErreur.code)
+          retour = objetErreur.code
+        });
     console.log("   Ami supprimé");
     return retour;
   }
@@ -267,30 +296,30 @@ class UtilisateurDAO {
     );
     // Réauthentifier l'utilisateur
     await utilisateur.reauthenticateWithCredential(credential)
-    .then(async function() {
-      // Supprimer la liste des genres aimés par l'utilisateur
-      await listeGenreAimeRef.delete();
-      // Supprimer l'utilisateur de Firestore
-      await utilisateurRef.delete();
-      // Récupérer la liste des amis
-      var snapshotRelation = await db.collection("Ami").doc(utilisateur.uid)
-        .collection("Relation").get();
-      // Supprimer les relations d'amitié
-      snapshotRelation.forEach(async doc => {
-        await db.collection("Ami").doc(doc.id)
-          .collection("Relation").doc(utilisateur.uid).delete();
-        await db.collection("Ami").doc(utilisateur.uid)
-          .collection("Relation").doc(doc.id).delete();
-      });
-      // Supprimer l'utilisateur de FirebaseAuth
-      await utilisateur.delete();
-      console.log("   Utilisateur supprimé de FirebaseAuth");
-    })
-    // Gestion des erreurs
-    .catch(function(objetErreur) {
-      console.log("   Code d'erreur: " + objetErreur.code);
-      retour = objetErreur.code;
-    });
+        .then(async function() {
+          // Supprimer la liste des genres aimés par l'utilisateur
+          await listeGenreAimeRef.delete();
+          // Supprimer l'utilisateur de Firestore
+          await utilisateurRef.delete();
+          // Récupérer la liste des amis
+          var snapshotRelation = await db.collection("Ami").doc(utilisateur.uid)
+              .collection("Relation").get();
+          // Supprimer les relations d'amitié
+          snapshotRelation.forEach(async doc => {
+            await db.collection("Ami").doc(doc.id)
+                .collection("Relation").doc(utilisateur.uid).delete();
+            await db.collection("Ami").doc(utilisateur.uid)
+                .collection("Relation").doc(doc.id).delete();
+          });
+          // Supprimer l'utilisateur de FirebaseAuth
+          await utilisateur.delete();
+          console.log("   Utilisateur supprimé de FirebaseAuth");
+        })
+        // Gestion des erreurs
+        .catch(function(objetErreur) {
+          console.log("   Code d'erreur: " + objetErreur.code);
+          retour = objetErreur.code;
+        });
     return retour;
   }
 
@@ -302,11 +331,11 @@ class UtilisateurDAO {
     // Enregistrer le swipe
     await db.collection("Utilisateur").doc(utilisateur.uid).collection("FilmSwipe")
         .doc(film.id.toString()).set({id: film.id, titre: film.titre, etat: reponse})
-    // Gestion des erreurs
-    .catch(function(objetErreur) {
-      console.log("   Code d'erreur: " + objetErreur.code)
-      retour = objetErreur.code
-    });
+        // Gestion des erreurs
+        .catch(function(objetErreur) {
+          console.log("   Code d'erreur: " + objetErreur.code)
+          retour = objetErreur.code
+        });
     console.log("   Swipe enregistré");
     return retour;
   }
@@ -385,71 +414,124 @@ class UtilisateurDAO {
     return listeFilmEnCommun;
   }
 
-  /** Retourne un film à swiper pour l'utilisateur (simulé) */
-  async obtenirFilmASwiper() {
-    // Récupérer l'utilisateur connecté
-    const utilisateur = await firebase.auth().currentUser;
-    // Liste de films disponibles simulée
-    let listeFilm = [{
-      titre: "Enola Holmes",
-      id: 497582,
-      annee: 2020,
-      description: "Quand Enola Holmes, la jeune sœur de Sherlock, découvre que sa mère a disparu, elle s'improvise super-détective. Ne tardant pas à faire ses preuves, elle se montre même plus maligne que son illustre grand frère en mettant au jour le dangereux complot qui entoure un mystérieux jeune lord.",
-      affiche: "https://image.tmdb.org/t/p/w342/2tfTE30QGr71g8XLUQefRdbbV4N.jpg"
-    },
-      {
-        titre: "Mort Subite 2",
-        id: 741067,
-        annee: 2020,
-        description: "Jesse Freeman est un ancien officier des forces spéciales et expert en explosifs qui travaille maintenant comme agent de sécurité dans une arène de basket-ball à la pointe de la technologie. Des problèmes éclatent lorsqu'un groupe de terroristes kidnappe le propriétaire de l'équipe et la fille de Jesse lors de la soirée d'ouverture.",
-        affiche: "https://image.tmdb.org/t/p/w342/9lHBNpAkiFoqKNygC22217hSrqW.jpg"
-      },
-      {
-        titre: "Les chroniques de Noël 2",
-        id: 654028,
-        annee: 2020,
-        description: "Désormais ado et cynique, Kate Pierce fait une nouvelle fois équipe avec le père Noël quand un mystérieux fauteur de troubles menace de supprimer Noël... pour toujours.",
-        affiche: "https://image.tmdb.org/t/p/w342/AawUeviXf2hRi9d4K2IxgJUfUO9.jpg"
-      },
-      {
-        titre: "Sacrées sorcières",
-        id: 531219,
-        annee: 2020,
-        description: "Un jeune garçon et sa grand-mère, exilés en Angleterre, doivent lutter contre d'horribles sorcières. Contrairement aux idées reçues, les sorcières ne portent ni balai, ni verrue, ni chapeau pointu. Les démasquer représente donc une vraie difficulté pour le petit garçon, qui va devoir rivaliser d'ingéniosité pour échapper à la perfidie de ces vilaines créatures.",
-        affiche: "https://image.tmdb.org/t/p/w342/9wI1x4H86A1Cj2tuRdolZ0F7BPb.jpg"
-      }];
+  async proposerFilmASwiper() {
+    console.log("UtilisateurDAO->proposerFilmASwiper()");
+    // Récupérer l'id de l'utilisateur connecté
+    const idUtilisateur = await firebase.auth().currentUser.uid;
+    // Récupérer la liste des genres aimés
+    const genreAimeRef = await db.collection("GenreAime").doc(idUtilisateur).get();
 
+    let listeGenreAime = [];
+    let listeGenreRequete = [];
+    // Si l'utilisateur n'a pas de genres aimés
+    if (!genreAimeRef.exists) {
+      // Choisir un genre au hasard dans la liste des genres existants
+      let listeGenreExistant = this.listerGenre();
+      listeGenreRequete.push(listeGenreExistant[Math.floor(Math.random() * Math.floor(listeGenreExistant.length))].id);
+      // Si l'utilisateur a bien défini ses genres aimés
+    } else {
+      listeGenreAime = genreAimeRef.data().listeGenreAime;
+      // Determiner le nombre de genres à utiliser pour la requête (5 maximum)
+      let nombreGenreRequete = 1 + (Math.floor(Math.random() * Math.floor(listeGenreAime.length - 1)) % 4);
+      // Choix au hasard des genres à utiliser pour la requête
+      for (let nb = 0; nb < nombreGenreRequete; nb++) {
+        // Choisir un genre à utiliser au hasard dans la liste des genres aimés
+        listeGenreRequete.push(listeGenreAime[Math.floor(Math.random() * Math.floor(listeGenreAime.length))]);
+      }
+    }
+
+    let genres = "";
+    for (let genre of listeGenreRequete) {
+      genres += genre + ",";
+    }
+    this.choisirFilmASwiper(genres, idUtilisateur, 1);
+  }
+
+  choisirFilmASwiper(genres, idUtilisateur, numeroPage) {
+    console.log("UtilisateurDAO->choisirFilmASwiper()");
+    // Effectuer la requête
+    let url = "https://api.themoviedb.org/3/discover/movie?api_key=108344e6b716107e3d41077a5ce57da2&language=fr-FR&include_adult=false&with_genres="+genres+"&page="+numeroPage;
+    let request = new XMLHttpRequest();
+    request.open("GET", url);
+    request.responseType = "json";
+    request.send();
+
+    let utilisateurDAO = this;
     let filmASwiper;
-    while (true) {
-      filmASwiper = listeFilm[Math.floor(Math.random() * listeFilm.length)];
-      // Vérifier si le film à swiper n'a pas déjà été swipé
-      const film = await db.collection("Utilisateur").doc(utilisateur.uid)
-          .collection("FilmSwipe").doc(filmASwiper.id.toString()).get();
-      if (!film.exists) {
-        return filmASwiper;
+    // Recevoir la réponse de la requête
+    request.onload = async function() {
+      let reponse = request.response;
+      // Si aucun film ne correspond aux genres sélectionnés
+      if (reponse["results"].length === 0) {
+        await utilisateurDAO.proposerFilmASwiper(idUtilisateur);
+      } else {
+        // Parcourir la liste des films tant qu'on n'a pas trouvé un film non swipé par l'utilisateur
+        for (let film of reponse["results"]) {
+          const filmPotentiel = await db.collection("Utilisateur").doc(idUtilisateur)
+              .collection("FilmSwipe").doc(film["id"].toString()).get();
+          if (!filmPotentiel.exists) {
+            filmASwiper = {
+              titre: film["title"],
+              id: film["id"],
+              annee: film["release_date"].substring(0, 4),
+              description: film["overview"],
+              affiche: "https://image.tmdb.org/t/p/w342/" + film["poster_path"]
+            }
+            break;
+          }
+        }
+        // Si un film non swipé a été trouvé
+        if (filmASwiper) {
+          utilisateurDAO.actionRecevoirFilm(filmASwiper);
+          // Si tous les films ont déjà été swipés
+        } else {
+          // Parcourir les films de la page suivante
+          numeroPage++;
+          utilisateurDAO.choisirFilmASwiper(genres, idUtilisateur, numeroPage);
+        }
       }
     }
   }
 
-  /** Retourne un film (simulé) */
   obtenirFilm(idFilm) {
     console.log("UtilisateurDAO->obtenirFilm()");
-    return {
-      titre: "Sacrées sorcières",
-      id: 531219,
-      annee: 2020,
-      description: "Un jeune garçon et sa grand-mère, exilés en Angleterre, doivent lutter contre d'horribles sorcières. Contrairement aux idées reçues, les sorcières ne portent ni balai, ni verrue, ni chapeau pointu. Les démasquer représente donc une vraie difficulté pour le petit garçon, qui va devoir rivaliser d'ingéniosité pour échapper à la perfidie de ces vilaines créatures.",
-      affiche: "https://image.tmdb.org/t/p/w342/9wI1x4H86A1Cj2tuRdolZ0F7BPb.jpg"
-    };
+    let url = "https://api.themoviedb.org/3/movie/"+idFilm+"?api_key=108344e6b716107e3d41077a5ce57da2&language=fr-FR";
+    let utilisateurDAO = this;
+    let request = new XMLHttpRequest();
+    request.open('GET', url);
+    request.responseType = 'json';
+    request.send();
+    request.onload = function() {
+      let f = request.response;
+      let film = {
+        titre: f["title"],
+        id: f["id"],
+        annee: f["release_date"].substring(0, 4),
+        description: f["overview"],
+        affiche: "https://image.tmdb.org/t/p/w342/" + f["poster_path"]
+      }
+      utilisateurDAO.actionObtenirFilm(film);
+    }
   }
 
-  /** Simule la liste des genres qui existent */
+  /** Renvoie la liste des genres de film */
   listerGenre() {
     console.log("UtilisateurDAO->listerGenre()");
-    return [{id: "drame", nom: "Drame"}, {id: "comedie", nom: "Comédie"},
-      {id: "thriller", nom: "Thriller"}, {id: "romance", nom: "Romance"},
-      {id: "action", nom: "Action"}, {id: "crime", nom: "Crime"},
-      {id: "aventure", nom: "Aventure"}, {id: "mystere", nom: "Mystère"}];
+    return [{id: "28", nom: "Action"}, {id: "12", nom: "Aventure"}, {id: "16", nom: "Animation"},
+      {id: "35", nom: "Comédie"}, {id: "80", nom: "Crime"}, {id: "99", nom: "Documentaire"},
+      {id: "18", nom: "Drame"}, {id: "10751", nom: "Familial"}, {id: "14", nom: "Fantastique"},
+      {id: "36", nom: "Histoire"}, {id: "27", nom: "Horreur"}, {id: "10402", nom: "Musique"},
+      {id: "9648", nom: "Mystère"}, {id: "10749", nom: "Romance"}, {id: "878", nom: "Science-Fiction"},
+      {id: "10770", nom: "Téléfilm"}, {id: "53", nom: "Thriller"}, {id: "10752", nom: "Guerre"},
+      {id: "37", nom: "Western"}];
+  }
+
+  // Créé un objet erreur personnalisé
+  exceptionAmi(code) {
+    console.log("   exceptionAmi()");
+    const objetErreur = new Error("Erreur personnalisée");
+    objetErreur.code = code;
+    throw objetErreur;
   }
 
 }

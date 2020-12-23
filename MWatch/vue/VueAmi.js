@@ -35,7 +35,7 @@ class VueAmi {
 
     // Ecouteur du bouton supprimer ami
     document.getElementById("action-supprimer-ami").addEventListener("click",
-    evenement => this.supprimerAmi(evenement));
+        evenement => this.supprimerAmi(evenement));
 
     // Affichage de la liste des films en commun
     if (this.listeFilmEnCommun.length > 0) {
@@ -67,7 +67,7 @@ class VueAmi {
     evenement.preventDefault();
     let resultat = await this.actionSupprimerAmi(this.ami.id);
     if (resultat !== "true") {
-      choixAlerte(resultat);
+      alert(resultat);
     }
   }
 

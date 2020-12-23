@@ -11,38 +11,44 @@ class Application {
     this.vueFilm = vueFilm;
     this.vueMaListe = vueMaListe;
 
+    // Initialiser la fonction actionRecevoirFilm dans UtilisateurDAO
+    this.utilisateurDAO.initialiserActionRecevoirFilm(filmASwiper => this.actionRecevoirFilm(filmASwiper));
+
+    // Initialiser la fonction actionObtenirFilm dans UtilisateurDAO
+    this.utilisateurDAO.initialiserActionObtenirFilm(film => this.actionObtenirFilm(film));
+
     // Initialiser la fonction actionInscrire dans VueInscription
     this.vueInscription.initialiserActionInscrire((pseudo, email, motDePasse) =>
-      this.actionInscrire(pseudo, email, motDePasse));
+        this.actionInscrire(pseudo, email, motDePasse));
 
     // Initialiser la fonction actionConnecter dans VueConnexion
     this.vueConnexion.initialiserActionConnecter((email, motDePasse) =>
-      this.actionConnecter(email, motDePasse));
+        this.actionConnecter(email, motDePasse));
 
     // Initialiser la fonction actionMettreAJourInformationPersonnelle dans VueProfil
     this.vueProfil.initialiserActionMettreAJourInformationPersonnelle((
-      pseudo, email, motDePasseActuel, nouveauMotDePasse) =>
+        pseudo, email, motDePasseActuel, nouveauMotDePasse) =>
         this.actionMettreAJourInformationPersonnelle( pseudo, email,
-          motDePasseActuel, nouveauMotDePasse));
+            motDePasseActuel, nouveauMotDePasse));
 
     // Initialiser la fonction actionEnregistrerListeGenreAime dans VueProfil
     this.vueProfil.initialiserActionEnregistrerListeGenreAime((
-      listeGenreAime) => this.actionEnregistrerListeGenreAime(listeGenreAime));
+        listeGenreAime) => this.actionEnregistrerListeGenreAime(listeGenreAime));
 
     // Initialiser la fonction actionSupprimerCompte dans VueProfil
     this.vueProfil.initialiserActionSupprimerCompte((motDePasse) =>
-      this.actionSupprimerCompte(motDePasse));
+        this.actionSupprimerCompte(motDePasse));
 
     // Initialiser la fonction actionDeconnecter dans VueProfil
     this.vueProfil.initialiserActionDeconnecter(() => this.actionDeconnecter());
 
     // Initialiser la fonction actionSupprimerCompte dans VueProfil
     this.vueAmis.initialiserActionAjouterAmi((emailUtilisateurAjoute) =>
-      this.actionAjouterAmi(emailUtilisateurAjoute));
+        this.actionAjouterAmi(emailUtilisateurAjoute));
 
     // Initialiser la fonction actionGererDemandeAmi dans VueAmis
     this.vueAmis.initialiserActionGererDemandeAmi((idUtilisateurAccepte, reponse) =>
-      this.actionGererDemandeAmi(idUtilisateurAccepte, reponse));
+        this.actionGererDemandeAmi(idUtilisateurAccepte, reponse));
 
     // Initialiser la fonction actionSupprimerAmi dans VueAmi
     this.vueAmi.initialiserActionSupprimerAmi((idAmi) => this.actionSupprimerAmi(idAmi));
@@ -66,33 +72,25 @@ class Application {
     this.vueSwipe.initialiserActionAjouterAMaListe((film) => this.actionAjouterAMaListe(film));
 
     this.initialiserApplication();
+    // Initialiser l'ecouteur d'état de l'utilisateur
+    this.utilisateurDAO.ecouterEtatUtilisateur(() => this.actionUtilisateurConnecte(),
+        () => this.actionUtilisateurDeconnecte());
+  }
+
+  actionUtilisateurConnecte() {
+    console.log("Application->actionUtilisateurConnecte");
+    this.vueConnexion.presenterConnexion();
+  }
+
+  actionUtilisateurDeconnecte() {
+    console.log("Application->actionUtilisateurDeconnecte");
+    this.vueConnexion.presenterDeconnexion();
   }
 
   initialiserApplication() {
-      console.log("Application->initialiserNavigation()");
+    console.log("Application->initialiserNavigation()");
 
-      this.window.addEventListener("hashchange", () => this.naviguer());
-
-      // Ecouteur qui met à jour l'interface utilisateur automatiquement à chaque
-      // fois que l'utilisateur se connecte ou se déconnecte
-      firebase.auth().onAuthStateChanged(function(user) {
-        console.log("Event onAuthStateChanged");
-        if(user != null) {
-          console.log("   Utilisateur connecté");
-          document.getElementById("menu-item-inscription").style.display = "none";
-          document.getElementById("menu-item-connexion").style.display = "none";
-          document.getElementById("menu-item-profil").style.display = "block";
-          document.getElementById("menu-item-amis").style.display = "block";
-          document.getElementById("menu-item-swipe").style.display = "block";
-        } else {
-          console.log("   Utilisateur non connecté");
-          document.getElementById("menu-item-inscription").style.display = "block";
-          document.getElementById("menu-item-connexion").style.display = "block";
-          document.getElementById("menu-item-profil").style.display = "none";
-          document.getElementById("menu-item-amis").style.display = "none";
-          document.getElementById("menu-item-swipe").style.display = "none";
-        }
-      });
+    this.window.addEventListener("hashchange", () => this.naviguer());
   }
 
   async naviguer() {
@@ -130,11 +128,12 @@ class Application {
     } else if (hash.match(/^#film\/(.*)/)) {
       let navigation = hash.match(/^#film\/(.*)/);
       let idFilm = navigation[1];
-      this.vueFilm.initialiserFilm(await this.utilisateurDAO.obtenirFilm(idFilm));
       this.vueFilm.afficher();
+      this.utilisateurDAO.obtenirFilm(idFilm);
 
     } else if (hash.match(/^#swipe/)) {
       this.vueSwipe.afficher();
+      await this.utilisateurDAO.proposerFilmASwiper();
     }
   }
 
@@ -168,7 +167,7 @@ class Application {
   }
 
   async actionMettreAJourInformationPersonnelle(pseudo, email,
-    motDePasseActuel, nouveauMotDePasse) {
+                                                motDePasseActuel, nouveauMotDePasse) {
     console.log("Application->actionMettreAJourInformationPersonnelle()");
     return await this.utilisateurDAO.mettreAJourInformationPersonnelle(pseudo,
         email, motDePasseActuel, nouveauMotDePasse);
@@ -224,11 +223,6 @@ class Application {
     return await this.utilisateurDAO.supprimerDeMaListe(idFilm);
   }
 
-  async actionObtenirFilmASwiper() {
-    console.log("Application->actionObtenirFilmASwiper");
-    return await this.utilisateurDAO.obtenirFilmASwiper();
-  }
-
   async actionGererSwipe(film, reponse) {
     console.log("Application->actionGererSwipe()");
     return await this.utilisateurDAO.gererSwipe(film, reponse);
@@ -237,6 +231,21 @@ class Application {
   async actionAjouterAMaListe(film) {
     console.log("Application->actionAjouterAMaListe()");
     return await this.utilisateurDAO.ajouterAMaListe(film);
+  }
+
+  async actionRecevoirFilm(filmASwiper) {
+    console.log("Application->actionRecevoirFilm()");
+    await this.vueSwipe.afficherFilmASwiper(filmASwiper);
+  }
+
+  async actionObtenirFilmASwiper() {
+    console.log("Application->actionObtenirFilmASwiper");
+    return await this.utilisateurDAO.proposerFilmASwiper();
+  }
+
+  async actionObtenirFilm(film) {
+    console.log("Application->actionObtenirFilm()");
+    await this.vueFilm.afficherFilm(film);
   }
 }
 
