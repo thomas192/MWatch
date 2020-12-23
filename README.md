@@ -63,3 +63,10 @@ Librairie JavaScript: Vue.js
 ### Capteur
 
 Accéléromètre : l’utilisateur peut swiper en agitant son téléphone.
+
+## Livraisons
+
+### LIVRAISON_GESTURE
+
+https://github.com/cegepmatane/projet-mobile-2020-mwatch/tree/efe9c8879f39f2d409a30b450c4b1ddb4128f200/POCGesture
+
