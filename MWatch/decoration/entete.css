@@ -21,9 +21,20 @@ body {
 	font-weight: 800;
 }
 
+.topnav-droit {
+  float: right;
+  margin-left:100px;
+}
+
+.topnav-gauche {
+  float: left;
+  
+}
+
 .menu {
 	width: 80%;
 	margin: 0 auto;
+	overflow: hidden;
 }
 
 .logo{

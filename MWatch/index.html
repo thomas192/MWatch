@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="decoration/entete.css">
 	<link rel="stylesheet" href="decoration/inscription.css">
 	<link rel="stylesheet" href="decoration/profil.css">
+	<link rel="stylesheet" href="decoration/swipe.css">
 
 
 
@@ -49,9 +50,13 @@
 			<ul>
 			  <li><a id="menu-item-inscription" href="#inscription" >Inscription</a></li>
 			  <li><a id="menu-item-connexion" href="#">Connexion</a></li>
-			  <li><a id="menu-item-profil" href="#profil">Profil</a></li>
-			  <li><a id="menu-item-swipe" href="#swipe"  ><img id="logo" src="decoration\illustration\logo.jpg"> </a></li>
-			  <li><a id="menu-item-amis" href="#amis">Amis</a></li>
+			  <div class="topnav-gauche">
+				<li><a id="menu-item-profil" href="#profil"><img id="logo" src="decoration\illustration\profil-logo.png"></a></li>
+			</div>
+				<li><a id="menu-item-swipe" href="#swipe"  ><img id="logo" src="decoration\illustration\logo.jpg"> </a></li>
+			  <div class="topnav-droit">
+				<li><a id="menu-item-amis" href="#amis"><img id="logo" src="decoration\illustration\ami-logo.png"></a></li>
+			  </div>
 			</ul>
 		</nav>
     </div>
@@ -262,16 +267,21 @@
     <script type="plain/text" id="html-vue-swipe">
 	<div class="page">
       <div id=swipe>
-           <div class="swipe-item">
-          <div>
-            <input type="checkbox" id="ajouter-a-ma-liste" name="ajouter-a-ma-liste">
-            <label for="ajouter-a-ma-liste">Ajouter à ma liste</label>
-          </div>
-        </div>
+       
 
         <div class="swipe-item" id="flex-milieu">
-          <img id="affiche" src="{img.src}"></img>
+          <img class="affiche" id="affiche"src="{img.src}"></img>
         </div>
+		<div id=swipe>
+			 <div class="swipe-item">
+			  <div>
+				<label class="swipe-item-label" for="ajouter-a-ma-liste">
+				<input type="checkbox" class="ajouter-a-ma-liste" id="ajouter-a-ma-liste" name="ajouter-a-ma-liste">
+				Ajouter à ma liste</label>
+			  </div>
+			</div>
+		</div>
+		
 
         <div id="detailsFilm">
           <a id="titre-film"></a>
