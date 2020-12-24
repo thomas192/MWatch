@@ -1,9 +1,0 @@
-A FAIRE:
-
-  - Scripts de vue à mettre dans des fichiers
-
-  - Listener onAuthStateChanged à déplacer dans le DAO
-
-  - Changer les <button> en <a>
-
-  - Rendre les pseudos uniques

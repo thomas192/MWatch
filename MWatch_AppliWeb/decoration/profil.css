@@ -8,7 +8,7 @@
   --theme-noir: black;
 
   --theme-bordure-rondeur: 0.7rem;
-  
+
 }
 .page-deconnexion-et-maliste{
 	position:relative;
@@ -21,10 +21,10 @@
   background-size:cover;
   background-position:top;
   background-attachment:fixed;
-  
+
   color:var(--theme-rouge);
   font-size:17px;
-	
+
 }
 
 a.maliste:link, a.maliste:visited {
@@ -54,17 +54,17 @@ a.maliste:hover, a.maliste:active {
   background-size:cover;
   background-position:top;
   background-attachment:fixed;
-  
+
   color:var(--theme-rouge);
   font-size:17px;
-	
+
 }
 
 
 
 #genre {
    margin:200 auto;
-   
+
 text-align:left;
 }
 /* contour */
@@ -88,8 +88,8 @@ label.genre-label{
 	display: block;
 	margin: 15px 0 0;
 	padding: 14px 18px;
-	width: 120px;
-	height: 28px;
+	width: 170px;
+	height: 45px;
 	border-radius: 14px;
 	background-color: #E5A90A;
 	background-image: linear-gradient(bottom, rgba(0,0,0,.24) -2.65%, rgba(255,255,255,.24) 97.35%);
@@ -174,9 +174,9 @@ input[type="checkbox"].push-btn:checked:after{
   background-size:cover;
   background-position:top;
   background-attachment:fixed;
-  
+
   color:var(--theme-rouge);
-	
+
 }
 
 
@@ -191,9 +191,6 @@ input[type="checkbox"].push-btn:checked:after{
   background-size:cover;
   background-position:top;
   background-attachment:fixed;
-  
+
   color:var(--theme-rouge);
 }
-
-
-

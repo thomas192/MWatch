@@ -8,7 +8,7 @@
   --theme-noir: black;
 
   --theme-bordure-rondeur: 0.7rem;
-  
+
 }
 
 
@@ -32,11 +32,10 @@
   font-family:'Verdana ', sans-serif;
   text-align:center;
   font-size:250%;
-  
+
   font-weight:normal;
   line-height:1.8rem;
   color:white;
-  text-shadow: 4px 4px var(--theme-rouge);
 
 }
 
@@ -44,11 +43,11 @@
   font-family:'', sans-serif;
   text-align:left;
   font-size:175%;
-  
+
   font-weight:normal;
   line-height:1.8rem;
   color:white;
- 
+
 
 }
 
@@ -63,7 +62,7 @@
   color: white;
   padding: 14px 20px;
   margin-top: 50px;
- 
+
   border: none;
   cursor: pointer;
   width: 100%;
@@ -81,7 +80,7 @@ input.action-inscrire : hover {
   padding: 10px 90px;
   background-color: #f44336;
   margin-left:310px;
-    
+
 }
 
 @media screen and (max-width: 300px) {
@@ -99,7 +98,7 @@ input.action-inscrire : hover {
   padding: 10px 90px;
   background-color: #f44336;
   margin-left: 605px;
-    
+
 }
 
 @media screen and (max-width: 300px) {
@@ -111,10 +110,3 @@ input.action-inscrire : hover {
      width: 100%;
   }
 }*/
-
-
-
-
-
-
-

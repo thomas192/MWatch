@@ -46,18 +46,28 @@
   <header>
     <div class="menu">
 		<nav>
-
 			<ul>
-			  <li><a id="menu-item-inscription" href="#inscription" >Inscription</a></li>
-			  <li><a id="menu-item-connexion" href="#">Connexion</a></li>
-			  <div class="topnav-gauche">
-				<li><a id="menu-item-profil" href="#profil"><img id="logo" src="decoration\illustration\profil-logo.png"></a></li>
-			</div>
-				<li><a id="menu-item-swipe" href="#swipe"  ><img id="logo" src="decoration\illustration\logo.jpg"> </a></li>
-			  <div class="topnav-droit">
-				<li><a id="menu-item-amis" href="#amis"><img id="logo" src="decoration\illustration\ami-logo.png"></a></li>
-			  </div>
-			</ul>
+        <div id="menu-deconnecte">
+          <div>
+    			  <li><a id="menu-item-inscription" href="#inscription" >Inscription</a></li>
+          </div>
+          <div>
+    	      <li><a id="menu-item-connexion" href="#">Connexion</a></li>
+          </div>
+        </div>
+        
+        <div id="menu-connecte">
+    			<div>
+    				<li><a id="menu-item-profil" href="#profil"><img id="logo" src="decoration\illustration\profil-logo.png"></a></li>
+    			</div>
+          <div>
+            <li><a id="menu-item-swipe" href="#swipe"  ><img id="logo" src="decoration\illustration\logo.jpg"> </a></li>
+          </div>
+          <div>
+    				<li><a id="menu-item-amis" href="#amis"><img id="logo" src="decoration\illustration\ami-logo.png"></a></li>
+    			</div>
+        </div>
+  		</ul>
 		</nav>
     </div>
   </header>
@@ -267,7 +277,7 @@
     <script type="plain/text" id="html-vue-swipe">
 	<div class="page">
       <div id=swipe>
-       
+
 
         <div class="swipe-item" id="flex-milieu">
           <img class="affiche" id="affiche"src="{img.src}"></img>
@@ -281,7 +291,7 @@
 			  </div>
 			</div>
 		</div>
-		
+
 
         <div id="detailsFilm">
           <a id="titre-film"></a>

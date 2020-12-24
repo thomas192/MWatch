@@ -10,7 +10,7 @@
   --theme-noir: black;
 
   --theme-bordure-rondeur: 0.7rem;
-  
+
 }
 
 
@@ -21,20 +21,23 @@ body {
 	font-weight: 800;
 }
 
-.topnav-droit {
-  float: right;
-  margin-left:100px;
+#menu-connecte {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
 }
 
-.topnav-gauche {
-  float: left;
-  
+#menu-deconnecte {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
 }
 
-.menu {
-	width: 80%;
-	margin: 0 auto;
-	overflow: hidden;
+#menu-deconnecte div {
+	padding-left: 10%;
+	padding-right: 10%;
 }
 
 .logo{
@@ -45,7 +48,9 @@ body {
 
 header {
   background: #E5A90A;
-  padding:2%;
+  padding-left: 2%;
+	padding-right: 2%;
+	padding-bottom: 1%;
 }
 
 header::after {
@@ -59,10 +64,6 @@ header::after {
   padding: 20px 0;
 }
 
-nav {
-  float: left;
-}
-
 nav ul {
   margin: 0;
   padding: 0;
@@ -71,8 +72,7 @@ nav ul {
 
 nav li {
   display: inline-block;
-  margin-left: 70px;
-  padding-top: 23px;
+  padding-top: 15px;
 
   position: relative;
 }
@@ -104,5 +104,3 @@ nav a::before {
 nav a:hover::before {
   width: 100%;
 }
-
-
