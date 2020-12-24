@@ -1,78 +1,78 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="application.css">
-  <style></style>
-  <title>MWatch</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="application.css">
+    <style></style>
+    <title>MWatch</title>
 
 
 
- 	<link rel="stylesheet" href="decoration/application.css">
-	<link rel="stylesheet" href="decoration/entete.css">
-	<link rel="stylesheet" href="decoration/inscription.css">
-	<link rel="stylesheet" href="decoration/profil.css">
-	<link rel="stylesheet" href="decoration/swipe.css">
+    <link rel="stylesheet" href="decoration/application.css">
+    <link rel="stylesheet" href="decoration/entete.css">
+    <link rel="stylesheet" href="decoration/inscription.css">
+    <link rel="stylesheet" href="decoration/profil.css">
+    <link rel="stylesheet" href="decoration/swipe.css">
 
 
 
-  <!-- Firebase -->
-  <script defer src="firebase/firebase-app.js"></script>
-  <script defer src="firebase/firebase-auth.js"></script>
-  <script defer src="firebase/firebase-firestore.js"></script>
-  <script defer src="donnee/init-firebase.js"></script>
+    <!-- Firebase -->
+    <script defer src="firebase/firebase-app.js"></script>
+    <script defer src="firebase/firebase-auth.js"></script>
+    <script defer src="firebase/firebase-firestore.js"></script>
+    <script defer src="donnee/init-firebase.js"></script>
 
-  <script src="zingtouch/zingtouch-1.0.6/dist/zingtouch.min.js"></script>
+    <script src="zingtouch/zingtouch-1.0.6/dist/zingtouch.min.js"></script>
 
-  <script src="langues/francais.js"></script>
-  <script src="lib/fonctionDeBase.js"></script>
-  <script src="donnee/UtilisateurDAO.js"></script>
-  <script src="modele/Utilisateur.js"></script>
-  <script src="vue/VueInscription.js"></script>
-  <script src="vue/VueConnexion.js"></script>
-  <script src="vue/VueProfil.js"></script>
-  <script src="vue/VueAmis.js"></script>
-  <script src="vue/VueAmi.js"></script>
-  <script src="vue/VueSwipe.js"></script>
-  <script src="vue/VueFilm.js"></script>
-  <script src="vue/VueMaListe.js"></script>
+    <script src="langues/francais.js"></script>
+    <script src="lib/fonctionDeBase.js"></script>
+    <script src="donnee/UtilisateurDAO.js"></script>
+    <script src="modele/Utilisateur.js"></script>
+    <script src="vue/VueInscription.js"></script>
+    <script src="vue/VueConnexion.js"></script>
+    <script src="vue/VueProfil.js"></script>
+    <script src="vue/VueAmis.js"></script>
+    <script src="vue/VueAmi.js"></script>
+    <script src="vue/VueSwipe.js"></script>
+    <script src="vue/VueFilm.js"></script>
+    <script src="vue/VueMaListe.js"></script>
 
-  <script defer src="Application.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script defer src="Application.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
 
 </head>
 
 <body>
-  <header>
+<header>
     <div class="menu">
-		<nav>
-			<ul>
-        <div id="menu-deconnecte">
-          <div>
-    			  <li><a id="menu-item-inscription" href="#inscription" >Inscription</a></li>
-          </div>
-          <div>
-    	      <li><a id="menu-item-connexion" href="#">Connexion</a></li>
-          </div>
-        </div>
+        <nav>
+            <ul>
+                <div id="menu-deconnecte">
+                    <div>
+                        <li><a id="menu-item-inscription" href="#inscription" >Inscription</a></li>
+                    </div>
+                    <div>
+                        <li><a id="menu-item-connexion" href="#">Connexion</a></li>
+                    </div>
+                </div>
 
-        <div id="menu-connecte">
-    			<div>
-    				<li><a id="menu-item-profil" href="#profil"><img id="logo" src="decoration\illustration\profil-logo.png"></a></li>
-    			</div>
-          <div>
-            <li><a id="menu-item-swipe" href="#swipe"  ><img id="logo" src="decoration\illustration\logo.jpg"> </a></li>
-          </div>
-          <div>
-    				<li><a id="menu-item-amis" href="#amis"><img id="logo" src="decoration\illustration\ami-logo.png"></a></li>
-    			</div>
-        </div>
-  		</ul>
-		</nav>
+                <div id="menu-connecte">
+                    <div>
+                        <li><a id="menu-item-profil" href="#profil"><img id="logo" src="decoration\illustration\profil-logo.png"></a></li>
+                    </div>
+                    <div>
+                        <li><a id="menu-item-swipe" href="#swipe"  ><img id="logo" src="decoration\illustration\logo.jpg"> </a></li>
+                    </div>
+                    <div>
+                        <li><a id="menu-item-amis" href="#amis"><img id="logo" src="decoration\illustration\ami-logo.png"></a></li>
+                    </div>
+                </div>
+            </ul>
+        </nav>
     </div>
-  </header>
+</header>
 
-  <contenu class="pages">
+<contenu class="pages">
 
     <script type="plain/text" id="html-vue-inscription">
 		<div class="page">
@@ -301,7 +301,7 @@
 	  </div>
     </script>
 
-  </contenu>
+</contenu>
 
 </body>
 </html>

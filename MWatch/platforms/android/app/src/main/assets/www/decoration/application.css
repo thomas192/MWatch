@@ -1,0 +1,112 @@
+	:root {
+  --theme-rouge: #fd341f;
+  --theme-blanc-transparent: rgba(255,255,255,0.3);
+  --theme-bleu-pale: rgba(151,219,246,1);
+  --theme-bleu-fonce: rgba(63,155,191,1);
+  --theme-vert: #408450;
+  --theme-blanc: white;
+  --theme-noir: black;
+
+  --theme-bordure-rondeur: 0.7rem;
+
+}
+
+
+
+.page {
+  position:relative;
+  background-color:var(--theme-noir);
+  padding:5%;
+  min-height: 90vh;
+  box-sizing: border-box;
+
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+  background-size: absolute;
+  color:var(--theme-rouge);
+}
+
+ h1{
+  font-family:'Verdana ', sans-serif;
+  text-align:center;
+  font-size:250%;
+
+  font-weight:normal;
+  line-height:1.8rem;
+  color:white;
+
+}
+
+ h2{
+  font-family:'', sans-serif;
+  text-align:left;
+  font-size:175%;
+
+  font-weight:normal;
+  line-height:1.8rem;
+  color:white;
+
+
+}
+
+
+ hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+.action {
+  background-color: #E5A90A;
+  color: white;
+  padding: 14px 20px;
+  margin-top: 50px;
+
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+  border-radius: var(--theme-bordure-rondeur);
+  font-size: 17px;
+}
+
+input.action-inscrire : hover {
+  opacity: 10;
+}
+
+.action-inscrire {
+  width: auto;
+  padding: 10px 90px;
+  background-color: #f44336;
+  margin-left:310px;
+
+}
+
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .action-inscrire {
+     width: 100%;
+  }
+}
+
+/*.connectionbtn{
+  width: auto;
+  padding: 10px 90px;
+  background-color: #f44336;
+  margin-left: 605px;
+
+}
+
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .connectionbtn {
+     width: 100%;
+  }
+}*/

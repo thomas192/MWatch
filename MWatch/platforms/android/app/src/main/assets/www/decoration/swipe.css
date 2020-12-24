@@ -1,0 +1,86 @@
+img.affiche {
+  position : relative; z-index: 1;
+	width : 100%; height : 200%;
+	object-fit : cover;
+	object-position: center center;
+}
+
+/* Bouton */
+label.swipe-item-label{
+	position: absolute;
+	z-index: 50;
+	display: block;
+	margin: 15px 0 0;
+	padding: 14px 18px;
+	width: 300px;
+	height: 52px;
+	border-radius: 14px;
+	background-color: #E5A90A;
+	background-image: linear-gradient(bottom, rgba(0,0,0,.24) -2.65%, rgba(255,255,255,.24) 97.35%);
+	background-clip: padding-box;
+	box-shadow: 0 2px 6px 2px rgba(15,16,16,.49),inset 0 3px rgba(255,255,255,0.75);
+	color: #000000;
+	text-align: left;
+	text-indent: 50px;
+	font-size: 20px;
+	line-height:28px;
+	cursor: pointer;
+	user-select: none;
+}
+div.swipe-item label.swipe-item-label:hover{
+	background-color: #bbc4cf;
+}
+
+div.swipe-item label.swipe-item-label:active{
+	background-image: linear-gradient(bottom, rgba(0,0,0,.34) -2.65%, rgba(255,255,255,.14) 97.35%);
+	transform: scale(0.95);
+}
+
+div.swipe-item label.swipe-item-label:active ~ div.swipe-item:after {/* no work */
+	transform: scale(0.95);}
+
+
+/* reflet du bouton */
+label.swipe-item-label:after{
+	position: absolute;
+	top: 2px;
+	left: 0px;
+	width: 300px;
+	height: 50px;
+	border-radius: 14px 14px 14px 14px / 14px 14px 14px 14px;
+	background-color:  rgba(255,255,255,.21) ;
+	background-clip: padding-box;
+	content: "";
+}
+label.swipe-item-label:hover:after{background-color:  rgba(255,255,255,.32) ;}
+
+/* checkbox */
+input[type="checkbox"].ajouter-a-ma-liste{
+	position: absolute;
+	left: 0px;
+	z-index: 20;
+	display: inline-block;
+	float: left;
+	margin: -2px 20px 0 15px;
+  width: 30px;
+  height: 30px;
+	border-radius: 4px;
+	background-color: rgba(69, 75, 88, 1.000);
+	background-image: linear-gradient(bottom, rgba(235,235,235,.27) 0%, rgba(17,17,18,.27) 100%);
+	background-clip: padding-box;
+	box-shadow: 0 0 6px rgba(245,245,245,.2), inset 0 0 8px rgba(15,16,16,.75);
+	appearance: none;
+}
+
+/* case coché */
+input[type="checkbox"].ajouter-a-ma-liste:checked:after{
+	position: absolute;
+	top: -2px;
+	left: 4px;
+	display: block;
+	color: white;
+	content: "✓";
+	text-shadow: 0px 1px 2px black;
+	font-weight: 100;
+	font-family: "Charcoal CY";
+}
