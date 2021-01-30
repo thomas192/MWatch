@@ -2,22 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
 
-
-body {
-	margin: 0;
-	background: black;
-	font-family: 'Work Sans', sans-serif;
-	font-weight: 800;
-}
-
-#menu-connecte {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	width: 100%;
-}
-
-#menu-deconnecte {
+.menu {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -29,40 +14,19 @@ body {
 	padding-right: 10%;
 }
 
-.logo{
-  height: 100%;
-  width: auto;
-  padding: 7px 14px;
-}
-
 header {
   background: #E5A90A;
-  padding-left: 2%;
-	padding-right: 2%;
-	padding-bottom: 1%;
-}
-
-header::after {
-  content: '';
-  display: table;
-  clear: both;
-}
-
-.logo {
-  float: left;
-  padding: 20px 0;
+  padding: 0 2% 1%;
 }
 
 nav ul {
   margin: 0;
   padding: 0;
-  list-style: none;
 }
 
 nav li {
   display: inline-block;
   padding-top: 15px;
-
   position: relative;
 }
 
@@ -73,21 +37,19 @@ nav a {
   font-size: 15px;
 }
 
-nav a:hover {
-  color: #000;
+nav a::before {
+    display: block;
+    position: absolute;
+    content: '';
+    height: 5px;
+    background-color: #444;
+    top: 0;
+    width: 0;
+    transition: all ease-in-out 250ms;
 }
 
-nav a::before {
-  content: '';
-  display: block;
-  height: 5px;
-  background-color: #444;
-
-  position: absolute;
-  top: 0;
-  width: 0%;
-
-  transition: all ease-in-out 250ms;
+nav a:hover {
+  color: #000;
 }
 
 nav a:hover::before {

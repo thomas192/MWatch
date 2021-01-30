@@ -1,5 +1,12 @@
 @import "themes.css";
 
+body {
+  margin: 0;
+  background: black;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 800;
+}
+
 .page {
   background-color:var(--theme-noir);
   padding:5%;
