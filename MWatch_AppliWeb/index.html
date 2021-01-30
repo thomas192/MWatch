@@ -46,7 +46,7 @@
 
   <header>
     <div>
-		<nav>
+        <nav>
 			<ul>
                 <div class="menu" id="menu-deconnecte">
                   <div>
@@ -127,64 +127,59 @@
     </script>
 
     <script type="plain/text" id="html-vue-profil">
-	<div class="page-deconnexion-et-maliste">
-      <h1>Profil</h1>
-	  <hr>
-		  <div>
-			<button class="action" id="deconnexion" type="button">Déconnexion</button>
-		  </div>
-		<div>
-			<a class="maliste"  href="#maliste">Ma liste</a>
-		</div>
-		</div>
-      <div id="formulaires">
-			<div class="page-genre-aime">
-			  <h2>Genres aimés</h2>
-			  <form class = "formulaire" id="formulaire-genre-aime">
-				<div id="genre">
-					<div class="push">
-						<label class="genre-label" for="{for}">
-						<input class="push-btn" type="checkbox" id="{id}" name="{name}" value="{value}" checked="checked">
-						{label}</label>
-					</div>
-				</div>
-				<input class="action" type="submit" id="action-formulaire-genre-aime" value="Enregistrer"/>
-			  </form>
-			 </div>
-			<div class="page-information-personnelle">
-			  <h2>Informations personnelles</h2>
-			  <form class = "formulaire" id="formulaire-information-personnelle">
-				<div id="alerte"></div>
-				<div>
-				  <label for="pseudo">Pseudo</label>
-				  <input type="text" id="pseudo" required/>
-				</div>
-				<div>
-				  <label for="email">Adresse email</label>
-				  <input type="email" id="email" required/>
-				</div>
-				<div>
-				  <label for="mot-de-passe-actuel">Mot de passe actuel</label>
-				  <input type="password" id="mot-de-passe-actuel" required/>
-				</div>
-				<div>
-				  <label for="nouveau-mot-de-passe">Nouveau mot de passe</label>
-				  <input type="password" id="nouveau-mot-de-passe"/>
-				</div>
-				<input class="action" type="submit" id="action-formulaire-information-personnelle" value="Mettre à jour"/>
-			  </form>
-			</div>
-		  <div class="page-supprimer-compte">
-			  <h2>Supprimer votre compte</h2>
-			  <form class="formulaire" id="formulaire-supprimer-compte">
-				<div>
-				  <label for="mot-de-passe">Mot de passe</label>
-				  <input type="password" id="mot-de-passe" required/>
-				</div>
-				<input class="action" type="submit" id="action-formulaire-supprimer-compte" value="Supprimer"/>
-			  </form>
-		  </div>
+    <div class="page">
+        <h1>Profil</h1>
+        <hr>
+        <div>
+            <button class="action" id="deconnexion" type="button">Déconnexion</button>
         </div>
+        <div>
+            <a class="maliste"  href="#maliste">Ma liste</a>
+        </div>
+
+        <h2>Genres aimés</h2>
+        <form class = "formulaire" id="formulaire-genre-aime">
+            <div id="genre">
+                <div class="push">
+                    <label class="genre-label" for="{for}">
+                        <input class="push-btn" type="checkbox" id="{id}" name="{name}" value="{value}" checked="checked">
+                        {label}
+                    </label>
+                </div>
+            </div>
+            <input class="action" type="submit" id="action-formulaire-genre-aime" value="Enregistrer"/>
+        </form>
+
+        <h2>Informations personnelles</h2>
+        <form class = "formulaire" id="formulaire-information-personnelle">
+            <div id="alerte"></div>
+            <div>
+                <label for="pseudo">Pseudo</label>
+                <input type="text" id="pseudo" required/>
+            </div>
+            <div>
+                <label for="email">Adresse email</label>
+                <input type="email" id="email" required/>
+            </div>
+            <div>
+                <label for="mot-de-passe-actuel">Mot de passe actuel</label>
+                <input type="password" id="mot-de-passe-actuel" required/>
+            </div>
+            <div>
+                <label for="nouveau-mot-de-passe">Nouveau mot de passe</label>
+                <input type="password" id="nouveau-mot-de-passe"/>
+            </div>
+            <input class="action" type="submit" id="action-formulaire-information-personnelle" value="Mettre à jour"/>
+        </form>
+
+        <h2>Supprimer votre compte</h2>
+        <form class="formulaire" id="formulaire-supprimer-compte">
+            <div>
+                <label for="mot-de-passe">Mot de passe</label>
+                <input type="password" id="mot-de-passe" required/>
+            </div>
+            <input class="action" type="submit" id="action-formulaire-supprimer-compte" value="Supprimer"/>
+        </form>
     </script>
 
     <script type="plain/text" id="html-vue-amis">
