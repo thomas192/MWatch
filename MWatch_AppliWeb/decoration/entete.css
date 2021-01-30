@@ -26,11 +26,12 @@ nav ul {
 
 nav li {
   display: inline-block;
-  padding-top: 15px;
+  padding-top: 13%;
   position: relative;
 }
 
 nav a {
+  margin-top: 5%;
   color: #444;
   text-decoration: none;
   text-transform: uppercase;
@@ -41,7 +42,7 @@ nav a::before {
     display: block;
     position: absolute;
     content: '';
-    height: 5px;
+    height: 10%;
     background-color: #444;
     top: 0;
     width: 0;
@@ -49,7 +50,7 @@ nav a::before {
 }
 
 nav a:hover {
-  color: #000;
+  color: black;
 }
 
 nav a:hover::before {
