@@ -11,7 +11,7 @@
 .page {
   background-color:var(--theme-noir);
   padding:5%;
-  min-height: 90vh;
+  min-height: fit-content;
   color:var(--theme-rouge);
 }
 
@@ -19,7 +19,6 @@ h1 {
   font-family:'Verdana ', sans-serif;
   text-align:center;
   font-size:250%;
-
   font-weight:normal;
   line-height:1.8rem;
   color:white;
@@ -29,7 +28,6 @@ h2 {
   font-family:'', sans-serif;
   text-align:left;
   font-size:175%;
-
   font-weight:normal;
   line-height:1.8rem;
   color:white;
@@ -38,8 +36,8 @@ h2 {
 .action {
   background-color: #E5A90A;
   color: white;
-  padding: 14px 20px;
-  margin-top: 50px;
+  padding: 1%;
+  margin-top: 4%;
   border: none;
   cursor: pointer;
   width: 100%;
