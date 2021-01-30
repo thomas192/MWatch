@@ -1,0 +1,9 @@
+:root {
+    --theme-rouge: #fd341f;
+    --theme-blanc-transparent: rgba(255,255,255,0.3);
+    --theme-bleu-pale: rgba(151,219,246,1);
+    --theme-bleu-fonce: rgba(63,155,191,1);
+    --theme-vert: #408450;
+    --theme-blanc: white;
+    --theme-noir: black;
+}
