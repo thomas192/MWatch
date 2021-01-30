@@ -1,66 +1,22 @@
 @import "themes.css";
 
-.page-deconnexion-et-maliste{
-	position:relative;
-  background-color:var(--theme-noir);
-  padding:5%;
-  min-height: 0vh;
-  box-sizing: border-box;
-
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:top;
-  background-attachment:fixed;
-
-  color:var(--theme-rouge);
-  font-size:17px;
-
-}
-
 a.maliste:link, a.maliste:visited {
-  background-color: #f44336;
-  color: white;
-  margin-top: 50px;
-  padding: 14px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
+	background-color: #f44336;
+	color: white;
+	margin-top: 50px;
+	padding: 14px 25px;
+	text-decoration: none;
+	display: inline-block;
 }
 
 a.maliste:hover, a.maliste:active {
-  background-color: red;
+	background-color: red;
 }
 
-
-
-.page-genre-aime{
-  position:relative;
-  background-color:var(--theme-noir);
-  padding:5%;
-  min-height: 0vh;
-  box-sizing: border-box;
-
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:top;
-  background-attachment:fixed;
-
-  color:var(--theme-rouge);
-  font-size:17px;
-
-}
-
-
-
-#genre {
-   margin:200 auto;
-
-text-align:left;
-}
-/* contour */
-div.push{
+/* Aspect bouton */
+.push {
 	position: relative;
-	 display: inline-block;
+ 	display: inline-block;
 	margin:5px auto;
 	padding: 6px 8px;
 	width: 172px;
@@ -70,9 +26,8 @@ div.push{
 	background-clip: padding-box;
 }
 
-
-/* Bouton */
-label.genre-label{
+/* Intérieur bouton */
+.genre-label {
 	position: absolute;
 	z-index: 50;
 	display: block;
@@ -93,21 +48,18 @@ label.genre-label{
 	cursor: pointer;
 	user-select: none;
 }
-div.push label.genre-label:hover{
+
+.genre-label:hover {
 	background-color: #bbc4cf;
 }
 
-div.push label.genre-label:active{
+.genre-label:active {
 	background-image: linear-gradient(bottom, rgba(0,0,0,.34) -2.65%, rgba(255,255,255,.14) 97.35%);
 	transform: scale(0.95);
 }
 
-div.push label.genre-label:active ~ div.push:after {/* no work */
-	transform: scale(0.95);}
-
-
-/* reflet du bouton */
-label.genre-label:after{
+/* Reflet bouton */
+.genre-label:after {
 	position: absolute;
 	top: 2px;
 	left: 0px;
@@ -118,12 +70,11 @@ label.genre-label:after{
 	background-clip: padding-box;
 	content: "";
 }
-label.genre-label:hover:after{background-color:  rgba(255,255,255,.32) ;}
 
-/* checkbox */
-input[type="checkbox"].push-btn{
+/* Checkbox */
+input[type="checkbox"].push-btn {
 	position: absolute;
-	left: 0px;
+	left: 0;
 	z-index: 20;
 	display: inline-block;
 	float: left;
@@ -138,8 +89,8 @@ input[type="checkbox"].push-btn{
 	appearance: none;
 }
 
-/* case coché */
-input[type="checkbox"].push-btn:checked:after{
+/* Checkbox cochée */
+input[type="checkbox"].push-btn:checked:after {
 	position: absolute;
 	top: -2px;
 	left: 4px;
@@ -148,39 +99,5 @@ input[type="checkbox"].push-btn:checked:after{
 	content: "✓";
 	text-shadow: 0px 1px 2px black;
 	font-weight: 100;
-	font-family: "Charcoal CY";
-}
-
-
-
-.page-information-personnelle{
-  position:relative;
-  background-color:var(--theme-noir);
-  padding:5%;
-  min-height: 0vh;
-  box-sizing: border-box;
-
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:top;
-  background-attachment:fixed;
-
-  color:var(--theme-rouge);
-
-}
-
-
-.page-supprimer-compte {
-  position:relative;
-  background-color:var(--theme-noir);
-  padding:5%;
-  min-height: 0vh;
-  box-sizing: border-box;
-
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:top;
-  background-attachment:fixed;
-
-  color:var(--theme-rouge);
+	font-family: "Charcoal CY", sans-serif;
 }
