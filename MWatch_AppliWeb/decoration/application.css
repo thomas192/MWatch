@@ -5,32 +5,30 @@ body {
   background: black;
   font-family: 'Work Sans', sans-serif;
   font-weight: 800;
-  font-size: 1.1vw;
+  font-size: var(--theme-taille-police-body);
 }
 
 .page {
-  background-color:var(--theme-noir);
-  padding:5%;
+  background-color: var(--theme-noir);
+  padding: 5%;
   min-height: fit-content;
-  color:var(--theme-rouge);
+  color: var(--theme-rouge);
 }
 
 h1 {
-  font-family:'Verdana ', sans-serif;
-  text-align:center;
-  font-size:4vw;
-  font-weight:normal;
-  line-height:1.8rem;
-  color:white;
+  font-family: 'Verdana ', sans-serif;
+  text-align: center;
+  font-size: var(--theme-taille-police-h1);
+  font-weight: normal;
+  color: white;
 }
 
 h2 {
-  font-family:'', sans-serif;
-  text-align:left;
-  font-size:2vw;
-  font-weight:normal;
-  line-height:1.8rem;
-  color:white;
+  font-family: '', sans-serif;
+  text-align: left;
+  font-size: var(--theme-taille-police-h2);
+  font-weight: normal;
+  color: white;
 }
 
 .action {
@@ -43,5 +41,5 @@ h2 {
   width: 100%;
   opacity: 0.9;
   border-radius: 0.7rem;
-  font-size: 1.2vw;
+  font-size: var(--theme-taille-police-action);
 }

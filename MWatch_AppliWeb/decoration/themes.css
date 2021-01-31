@@ -6,4 +6,10 @@
     --theme-vert: #408450;
     --theme-blanc: white;
     --theme-noir: black;
+
+    --theme-taille-police-h1: 13vw;
+    --theme-taille-police-h2: 8vw;
+    --theme-taille-police-body: 6vw;
+    --theme-taille-police-action: 6vw;
+
 }

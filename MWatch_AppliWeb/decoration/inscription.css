@@ -5,12 +5,12 @@
 /* Champs de saisie */
 input[type=text], input[type=password], input[type=email] {
   width: 100%;
-  height: 3vw;
   padding: 1%;
   margin: 1% 0;
   border: none;
   background: #f1f1f1;
   border-radius: 0.7rem;
+  font-size: var(--theme-taille-police-body);
 }
 
 /* Focus champ de saisie */
