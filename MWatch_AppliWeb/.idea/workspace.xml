@@ -200,6 +200,7 @@
       <change beforePath="$PROJECT_DIR$/../MWatch/platforms/android/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../MWatch/platforms/android/project.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MWatch/platforms/android/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../MWatch/platforms/android/settings.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MWatch/platforms/android/wrapper.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../MWatch/platforms/android/wrapper.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -265,7 +266,7 @@
       <workItem from="1608754333131" duration="2087000" />
       <workItem from="1612028008796" duration="350000" />
       <workItem from="1612028361900" duration="20143000" />
-      <workItem from="1612097072925" duration="8905000" />
+      <workItem from="1612097072925" duration="9433000" />
     </task>
     <servers />
   </component>

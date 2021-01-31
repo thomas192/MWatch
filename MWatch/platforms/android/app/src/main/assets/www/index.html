@@ -43,11 +43,12 @@
 </head>
 
 <body>
+
 <header>
-    <div class="menu">
+    <div>
         <nav>
             <ul>
-                <div id="menu-deconnecte">
+                <div class="menu" id="menu-deconnecte">
                     <div>
                         <li><a id="menu-item-inscription" href="#inscription" >Inscription</a></li>
                     </div>
@@ -56,7 +57,7 @@
                     </div>
                 </div>
 
-                <div id="menu-connecte">
+                <div class="menu" id="menu-connecte">
                     <div>
                         <li><a id="menu-item-profil" href="#profil"><img id="logo" src="decoration\illustration\profil-logo.png"></a></li>
                     </div>
@@ -72,32 +73,29 @@
     </div>
 </header>
 
-<contenu class="pages">
+<contenu>
 
     <script type="plain/text" id="html-vue-inscription">
 		<div class="page">
 		  <h1>Inscription</h1>
 		  <hr>
 		  <form class = "formulaire" id="formulaire">
-
-				 <div id="alerte"></div>
-				 <div class="container">
-						<label for="pseudo">Pseudo</label>
-						<input type="text" id="pseudo" required/>
-
-
-						<label for="email">Adresse email</label>
-						<input type="email" id="email" required/>
+             <div id="alerte"></div>
+             <div class="container">
+                <label for="pseudo">Pseudo</label>
+                <input type="text" id="pseudo" required/>
 
 
-						<label for="mot-de-passe">Mot de passe</label>
-						<input type="password" id="mot-de-passe" required/>
+                <label for="email">Adresse email</label>
+                <input type="email" id="email" required/>
 
-					 <div class="clearfix">
-						<input class="action" type="submit" id="action-inscrire" value="S'inscrire"/>
-					 </div>
-					 <img class="app-logo" src="decoration\illustration\logo_large_jaune.png">
-				</div>
+
+                <label for="mot-de-passe">Mot de passe</label>
+                <input type="password" id="mot-de-passe" required/>
+
+                <input class="action" type="submit" id="action-inscrire" value="S'inscrire"/>
+                 <img class="app-logo" src="decoration\illustration\logo_large_jaune.png">
+            </div>
 		  </form>
 		</div>
     </script>
@@ -107,9 +105,6 @@
 		  <h1>Connexion</h1>
 		  <hr>
 		  <form class = "formulaire" id="formulaire">
-			 <div class="imgcontainer">
-				<img src="decoration\illustration\avatar.png" alt="Avatar" class="avatar">
-			  </div>
 			  <div id="alerte"></div>
 			  <div>
 				<label for="email">Adresse email</label>
@@ -126,64 +121,59 @@
     </script>
 
     <script type="plain/text" id="html-vue-profil">
-	<div class="page-deconnexion-et-maliste">
-      <h1>Profil</h1>
-	  <hr>
-		  <div>
-			<button class="action" id="deconnexion" type="button">Déconnexion</button>
-		  </div>
-		<div>
-			<a class="maliste"  href="#maliste">Ma liste</a>
-		</div>
-		</div>
-      <div id="formulaires">
-			<div class="page-genre-aime">
-			  <h2>Genres aimés</h2>
-			  <form class = "formulaire" id="formulaire-genre-aime">
-				<div id="genre">
-					<div class="push">
-						<label class="genre-label" for="{for}">
-						<input class="push-btn" type="checkbox" id="{id}" name="{name}" value="{value}" checked="checked">
-						{label}</label>
-					</div>
-				</div>
-				<input class="action" type="submit" id="action-formulaire-genre-aime" value="Enregistrer"/>
-			  </form>
-			 </div>
-			<div class="page-information-personnelle">
-			  <h2>Informations personnelles</h2>
-			  <form class = "formulaire" id="formulaire-information-personnelle">
-				<div id="alerte"></div>
-				<div>
-				  <label for="pseudo">Pseudo</label>
-				  <input type="text" id="pseudo" required/>
-				</div>
-				<div>
-				  <label for="email">Adresse email</label>
-				  <input type="email" id="email" required/>
-				</div>
-				<div>
-				  <label for="mot-de-passe-actuel">Mot de passe actuel</label>
-				  <input type="password" id="mot-de-passe-actuel" required/>
-				</div>
-				<div>
-				  <label for="nouveau-mot-de-passe">Nouveau mot de passe</label>
-				  <input type="password" id="nouveau-mot-de-passe"/>
-				</div>
-				<input class="action" type="submit" id="action-formulaire-information-personnelle" value="Mettre à jour"/>
-			  </form>
-			</div>
-		  <div class="page-supprimer-compte">
-			  <h2>Supprimer votre compte</h2>
-			  <form class="formulaire" id="formulaire-supprimer-compte">
-				<div>
-				  <label for="mot-de-passe">Mot de passe</label>
-				  <input type="password" id="mot-de-passe" required/>
-				</div>
-				<input class="action" type="submit" id="action-formulaire-supprimer-compte" value="Supprimer"/>
-			  </form>
-		  </div>
+    <div class="page">
+        <h1>Profil</h1>
+        <hr>
+        <div>
+            <button class="action" id="deconnexion" type="button">Déconnexion</button>
         </div>
+        <div>
+            <a class="maliste"  href="#maliste">Ma Liste</a>
+        </div>
+
+        <h2>Genres aimés</h2>
+        <form class = "formulaire" id="formulaire-genre-aime">
+            <div id="genre">
+                <div class="push">
+                    <label class="genre-label" for="{for}">
+                        <input class="push-btn" type="checkbox" id="{id}" name="{name}" value="{value}" checked="checked">
+                        {label}
+                    </label>
+                </div>
+            </div>
+            <input class="action" type="submit" id="action-formulaire-genre-aime" value="Enregistrer"/>
+        </form>
+
+        <h2>Informations personnelles</h2>
+        <form class = "formulaire" id="formulaire-information-personnelle">
+            <div id="alerte"></div>
+            <div>
+                <label for="pseudo">Pseudo</label>
+                <input type="text" id="pseudo" required/>
+            </div>
+            <div>
+                <label for="email">Adresse email</label>
+                <input type="email" id="email" required/>
+            </div>
+            <div>
+                <label for="mot-de-passe-actuel">Mot de passe actuel</label>
+                <input type="password" id="mot-de-passe-actuel" required/>
+            </div>
+            <div>
+                <label for="nouveau-mot-de-passe">Nouveau mot de passe</label>
+                <input type="password" id="nouveau-mot-de-passe"/>
+            </div>
+            <input class="action" type="submit" id="action-formulaire-information-personnelle" value="Mettre à jour"/>
+        </form>
+
+        <h2>Supprimer votre compte</h2>
+        <form class="formulaire" id="formulaire-supprimer-compte">
+            <div>
+                <label for="mot-de-passe">Mot de passe</label>
+                <input type="password" id="mot-de-passe" required/>
+            </div>
+            <input class="action" type="submit" id="action-formulaire-supprimer-compte" value="Supprimer"/>
+        </form>
     </script>
 
     <script type="plain/text" id="html-vue-amis">
@@ -264,7 +254,7 @@
           <button class="action" id="action-supprimer-film" type="button">Supprimer de ma liste</button>
         </div>
         <div>
-            <img id="affiche" src=""></img>
+            <img class="affiche" id="affiche" src=""></img>
         </div>
         <div>
             <a id="description"></a>
@@ -284,10 +274,10 @@
         </div>
 		<div id=swipe>
 			 <div class="swipe-item">
-			  <div>
-				<label class="swipe-item-label" for="ajouter-a-ma-liste">
-				<input type="checkbox" class="ajouter-a-ma-liste" id="ajouter-a-ma-liste" name="ajouter-a-ma-liste">
-				Ajouter à ma liste</label>
+			  <div class="push">
+				<label class="genre-label" for="ajouter-a-ma-liste">
+				<input type="checkbox" class="push-btn" id="ajouter-a-ma-liste" name="ajouter-a-ma-liste">
+				Ma Liste</label>
 			  </div>
 			</div>
 		</div>
