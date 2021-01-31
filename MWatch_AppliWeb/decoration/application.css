@@ -5,6 +5,7 @@ body {
   background: black;
   font-family: 'Work Sans', sans-serif;
   font-weight: 800;
+  font-size: 1.1vw;
 }
 
 .page {
@@ -17,7 +18,7 @@ body {
 h1 {
   font-family:'Verdana ', sans-serif;
   text-align:center;
-  font-size:250%;
+  font-size:4vw;
   font-weight:normal;
   line-height:1.8rem;
   color:white;
@@ -26,7 +27,7 @@ h1 {
 h2 {
   font-family:'', sans-serif;
   text-align:left;
-  font-size:175%;
+  font-size:2vw;
   font-weight:normal;
   line-height:1.8rem;
   color:white;
@@ -42,5 +43,5 @@ h2 {
   width: 100%;
   opacity: 0.9;
   border-radius: 0.7rem;
-  font-size: 17px;
+  font-size: 1.2vw;
 }
