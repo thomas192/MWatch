@@ -3,8 +3,8 @@
 a.maliste:link, a.maliste:visited {
 	background-color: #f44336;
 	color: white;
-	margin-top: 50px;
-	padding: 14px 25px;
+	margin-top: 6%;
+	padding: 1% 2%;
 	text-decoration: none;
 	display: inline-block;
 }
@@ -17,13 +17,36 @@ a.maliste:hover, a.maliste:active {
 .push {
 	position: relative;
  	display: inline-block;
-	margin:5px auto;
-	padding: 6px 8px;
-	width: 172px;
-	height: 60px;
-	border-radius: 25px;
-	background-image: linear-gradient(bottom, rgba(255,255,255,.17) 0%, rgba(15,16,16,.17) 100%);
-	background-clip: padding-box;
+	margin:1% 0.5%;
+	padding: 1%;
+	width: 13%;
+}
+
+/* Reflet bouton */
+.genre-label:after {
+   position: absolute;
+   top: 9%;
+   left: 0;
+   width: 100%;
+   height: 90%;
+   border-radius: 0.7rem;
+   background-color:  rgba(255,255,255,.21) ;
+   content: "";
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+	position: absolute;
+	top: 26%;
+	left: -5%;
+	z-index: 20;
+	margin: -1% 0 0 9%;
+	width: 15%;
+	height: 60%;
+	border-radius: 0.2rem;
+	background-color: rgba(69, 75, 88, 1.000);
+	box-shadow: 0 0 6px rgba(245,245,245,.2), inset 0 0 8px rgba(15,16,16,.75);
+	appearance: none;
 }
 
 /* Intérieur bouton */
@@ -31,23 +54,17 @@ a.maliste:hover, a.maliste:active {
 	position: absolute;
 	z-index: 50;
 	display: block;
-	margin: 15px 0 0;
-	padding: 14px 18px;
-	width: 170px;
-	height: 45px;
-	border-radius: 14px;
+	padding: 7% 5% 5% 25%;
+	width: 100%;
+	height: 150%;
+	border-radius: 0.7rem;
 	background-color: #E5A90A;
-	background-image: linear-gradient(bottom, rgba(0,0,0,.24) -2.65%, rgba(255,255,255,.24) 97.35%);
-	background-clip: padding-box;
 	box-shadow: 0 2px 6px 2px rgba(15,16,16,.49),inset 0 3px rgba(255,255,255,0.75);
-	color: #fd341f;
-	text-align: left;
-	text-indent: 50px;
-	font-size: 20px;
-	line-height:28px;
+	font-size: 1vw;
 	cursor: pointer;
 	user-select: none;
 }
+
 
 .genre-label:hover {
 	background-color: #bbc4cf;
@@ -58,46 +75,12 @@ a.maliste:hover, a.maliste:active {
 	transform: scale(0.95);
 }
 
-/* Reflet bouton */
-.genre-label:after {
-	position: absolute;
-	top: 2px;
-	left: 0px;
-	width: 170px;
-	height: 40px;
-	border-radius: 14px 14px 14px 14px / 14px 14px 14px 14px;
-	background-color:  rgba(255,255,255,.21) ;
-	background-clip: padding-box;
-	content: "";
-}
-
-/* Checkbox */
-input[type="checkbox"].push-btn {
-	position: absolute;
-	left: 0;
-	z-index: 20;
-	display: inline-block;
-	float: left;
-	margin: -2px 20px 0 15px;
-	width: 33px;
-	height: 33px;
-	border-radius: 4px;
-	background-color: rgba(69, 75, 88, 1.000);
-	background-image: linear-gradient(bottom, rgba(235,235,235,.27) 0%, rgba(17,17,18,.27) 100%);
-	background-clip: padding-box;
-	box-shadow: 0 0 6px rgba(245,245,245,.2), inset 0 0 8px rgba(15,16,16,.75);
-	appearance: none;
-}
-
 /* Checkbox cochée */
-input[type="checkbox"].push-btn:checked:after {
+input[type="checkbox"]:checked:after {
 	position: absolute;
-	top: -2px;
-	left: 4px;
-	display: block;
+	top: -20%;
+	left: 20%;
 	color: white;
 	content: "✓";
-	text-shadow: 0px 1px 2px black;
-	font-weight: 100;
-	font-family: "Charcoal CY", sans-serif;
+	font-size: 1.5vw;
 }
