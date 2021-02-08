@@ -434,20 +434,23 @@ class UtilisateurDAO {
       // Choisir un genre à utiliser au hasard dans la liste des genres aimés
       genre = listeGenreAime[Math.floor(Math.random() * Math.floor(listeGenreAime.length))];
     }
+    console.log("Genre sélectionné : " + genre);
 
-    console.log("genre : " + localStorage.getItem(genre));
+    // Enregistrer le genre du film proposé
+    localStorage.setItem('genre', genre.toString());
+
     // Récupérer le numéro de la page de film à demander à l'API s'il existe
-    if (localStorage.getItem(genre) === null) {
-      localStorage.setItem(genre, '1');
+    if (localStorage.getItem(genre+'Page') === null) {
+      localStorage.setItem(genre+'Page', '1');
     }
 
-    this.choisirFilmASwiper(genre, idUtilisateur, localStorage.getItem(genre));
+    this.choisirFilmASwiper(genre, idUtilisateur, localStorage.getItem(genre+'Page'));
   }
 
   choisirFilmASwiper(genre, idUtilisateur, numeroPage) {
     console.log("UtilisateurDAO->choisirFilmASwiper()");
     // Effectuer la requête
-    let url = "https://api.themoviedb.org/3/discover/movie?api_key=108344e6b716107e3d41077a5ce57da2&language=fr-FR&include_adult=false&with_genres="+genre+"&page="+numeroPage;
+    let url = "https://api.themoviedb.org/3/discover/movie?api_key=108344e6b716107e3d41077a5ce57da2&language=fr-FR&include_adult=false&with_genres=" + genre + "&page=" + numeroPage;
     let request = new XMLHttpRequest();
     request.open("GET", url);
     request.responseType = "json";
@@ -455,38 +458,70 @@ class UtilisateurDAO {
 
     let utilisateurDAO = this;
     let filmASwiper;
-    // Recevoir la réponse de la requête
-    request.onload = async function() {
+
+    // Recevoir la réponse de la requête (liste de 20 films)
+    request.onload = async function () {
       let reponse = request.response;
-      // Si aucun film ne correspond aux genres sélectionnés
-      if (reponse["results"].length === 0) {
-        await utilisateurDAO.proposerFilmASwiper(idUtilisateur);
-      } else {
-        // Parcourir la liste des films tant qu'on n'a pas trouvé un film non swipé par l'utilisateur
-        for (let film of reponse["results"]) {
-          const filmPotentiel = await db.collection("Utilisateur").doc(idUtilisateur)
-              .collection("FilmSwipe").doc(film["id"].toString()).get();
-          if (!filmPotentiel.exists) {
+
+      // Vérifier si l'utilisateur a déjà swipé des films sur la page de la requête
+      if (localStorage.getItem(genre + 'IndexSurPage') === null) {
+        localStorage.setItem(genre + 'IndexSurPage', '1');
+      }
+
+      let indexSurPage = localStorage.getItem(genre + 'IndexSurPage');
+      console.log("Index sur page à la position : " + indexSurPage);
+
+      let filmASwiper = {
+        titre: reponse["results"][indexSurPage]["title"],
+        id: reponse["results"][indexSurPage]["id"],
+        annee: reponse["results"][indexSurPage]["release_date"].substring(0, 4),
+        description: reponse["results"][indexSurPage]["overview"],
+        affiche: "https://image.tmdb.org/t/p/w342/" + reponse["results"][indexSurPage]["poster_path"]
+      }
+
+      // Récupérer l'éventuel film correspondant dans la bd
+      let filmPotentiellementSwipe = await db.collection("Utilisateur").doc(idUtilisateur)
+          .collection("FilmSwipe").doc(reponse["results"][indexSurPage]["id"].toString()).get();
+
+      // S'il a déjà été swipé
+      if (filmPotentiellementSwipe.exists) {
+        console.log("Le film " + reponse["results"][indexSurPage]["title"] + "à la position " + indexSurPage + " a déjà été swipé");
+
+        indexSurPage = localStorage.getItem(genre + 'IndexSurPage');
+        localStorage.setItem(genre + 'IndexSurPage', (indexSurPage++).toString());
+
+        // Parcourir la liste des films depuis le début tant qu'on n'a pas trouvé un film non swipé par l'utilisateur
+        for (let i = 0; i < reponse["results"].length; i++) {
+          filmASwiper = await db.collection("Utilisateur").doc(idUtilisateur)
+              .collection("FilmSwipe").doc(reponse["results"][i]["id"].toString()).get();
+          // Si le film n'a pas été swipé
+          if (!filmASwiper.exists) {
+            console.log("Film non swipé trouvé à la position " + i);
             filmASwiper = {
-              titre: film["title"],
-              id: film["id"],
-              annee: film["release_date"].substring(0, 4),
-              description: film["overview"],
-              affiche: "https://image.tmdb.org/t/p/w342/" + film["poster_path"]
+              titre: reponse["results"][i]["title"],
+              id: reponse["results"][i]["id"],
+              annee: reponse["results"][i]["release_date"].substring(0, 4),
+              description: reponse["results"][i]["overview"],
+              affiche: "https://image.tmdb.org/t/p/w342/" + reponse["results"][i]["poster_path"]
             }
+            localStorage.setItem(genre+"IndexSurPage", i.toString());
             break;
           }
         }
-        // Si un film non swipé a été trouvé
-        if (filmASwiper) {
-          utilisateurDAO.actionRecevoirFilm(filmASwiper);
-          // Si tous les films ont déjà été swipés
-        } else {
-          // Parcourir les films de la page suivante
-          numeroPage++;
-          localStorage.setItem(genre, numeroPage);
-          utilisateurDAO.choisirFilmASwiper(genre, idUtilisateur, numeroPage);
-        }
+      }
+
+      // Si un film non swipé a été trouvé
+      if (filmASwiper) {
+        console.log("Film à swiper trouvé à la position " + localStorage.getItem(genre+'IndexSurPage'));
+        utilisateurDAO.actionRecevoirFilm(filmASwiper);
+
+        // Parcourir les films de la page suivante
+      } else {
+        console.log("Changement de page");
+        numeroPage++;
+        localStorage.setItem(genre+'Page', numeroPage);
+        localStorage.setItem(genre+"IndexSurPage", '1');
+        utilisateurDAO.choisirFilmASwiper(genre, idUtilisateur, numeroPage);
       }
     }
   }

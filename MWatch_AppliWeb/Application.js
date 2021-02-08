@@ -225,6 +225,15 @@ class Application {
 
   async actionGererSwipe(film, reponse) {
     console.log("Application->actionGererSwipe()");
+
+    // Mettre à jour le dernier film swipé
+    let genre = localStorage.getItem("genre");
+    let indexSurPage = localStorage.getItem(genre+"IndexSurPage");
+    console.log(indexSurPage);
+    console.log(indexSurPage++);
+    localStorage.setItem(genre+'IndexSurPage', indexSurPage.toString());
+    console.log("Nouvel index sur page : " + localStorage.getItem(genre+'IndexSurPage'));
+
     return await this.utilisateurDAO.gererSwipe(film, reponse);
   }
 
