@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="19fd17dd-f088-4c1c-9aca-a9714e96e367" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/donnee/UtilisateurDAO.js" beforeDir="false" afterPath="$PROJECT_DIR$/donnee/UtilisateurDAO.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MWatch/platforms/android/app/src/main/assets/www/donnee/UtilisateurDAO.js" beforeDir="false" afterPath="$PROJECT_DIR$/../MWatch/platforms/android/app/src/main/assets/www/donnee/UtilisateurDAO.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +72,7 @@
       <workItem from="1612212480490" duration="466000" />
       <workItem from="1612399178019" duration="603000" />
       <workItem from="1612522115076" duration="6253000" />
-      <workItem from="1612794468709" duration="2793000" />
+      <workItem from="1612794468709" duration="7794000" />
     </task>
     <servers />
   </component>

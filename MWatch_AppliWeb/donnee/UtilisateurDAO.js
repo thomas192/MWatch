@@ -435,7 +435,13 @@ class UtilisateurDAO {
       genre = listeGenreAime[Math.floor(Math.random() * Math.floor(listeGenreAime.length))];
     }
 
-    this.choisirFilmASwiper(genre, idUtilisateur, '1');
+    console.log("genre : " + localStorage.getItem(genre));
+    // Récupérer le numéro de la page de film à demander à l'API s'il existe
+    if (localStorage.getItem(genre) === null) {
+      localStorage.setItem(genre, '1');
+    }
+
+    this.choisirFilmASwiper(genre, idUtilisateur, localStorage.getItem(genre));
   }
 
   choisirFilmASwiper(genre, idUtilisateur, numeroPage) {
@@ -478,6 +484,7 @@ class UtilisateurDAO {
         } else {
           // Parcourir les films de la page suivante
           numeroPage++;
+          localStorage.setItem(genre, numeroPage);
           utilisateurDAO.choisirFilmASwiper(genre, idUtilisateur, numeroPage);
         }
       }
