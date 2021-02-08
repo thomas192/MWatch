@@ -422,35 +422,26 @@ class UtilisateurDAO {
     const genreAimeRef = await db.collection("GenreAime").doc(idUtilisateur).get();
 
     let listeGenreAime = [];
-    let listeGenreRequete = [];
+    let genre;
     // Si l'utilisateur n'a pas de genres aimés
     if (!genreAimeRef.exists) {
       // Choisir un genre au hasard dans la liste des genres existants
       let listeGenreExistant = this.listerGenre();
-      listeGenreRequete.push(listeGenreExistant[Math.floor(Math.random() * Math.floor(listeGenreExistant.length))].id);
-      // Si l'utilisateur a bien défini ses genres aimés
+      genre = listeGenreExistant[Math.floor(Math.random() * Math.floor(listeGenreExistant.length))].id;
+
     } else {
       listeGenreAime = genreAimeRef.data().listeGenreAime;
-      // Determiner le nombre de genres à utiliser pour la requête (5 maximum)
-      let nombreGenreRequete = 1 + (Math.floor(Math.random() * Math.floor(listeGenreAime.length - 1)) % 4);
-      // Choix au hasard des genres à utiliser pour la requête
-      for (let nb = 0; nb < nombreGenreRequete; nb++) {
-        // Choisir un genre à utiliser au hasard dans la liste des genres aimés
-        listeGenreRequete.push(listeGenreAime[Math.floor(Math.random() * Math.floor(listeGenreAime.length))]);
-      }
+      // Choisir un genre à utiliser au hasard dans la liste des genres aimés
+      genre = listeGenreAime[Math.floor(Math.random() * Math.floor(listeGenreAime.length))];
     }
 
-    let genres = "";
-    for (let genre of listeGenreRequete) {
-      genres += genre + ",";
-    }
-    this.choisirFilmASwiper(genres, idUtilisateur, 1);
+    this.choisirFilmASwiper(genre, idUtilisateur, '1');
   }
 
-  choisirFilmASwiper(genres, idUtilisateur, numeroPage) {
+  choisirFilmASwiper(genre, idUtilisateur, numeroPage) {
     console.log("UtilisateurDAO->choisirFilmASwiper()");
     // Effectuer la requête
-    let url = "https://api.themoviedb.org/3/discover/movie?api_key=108344e6b716107e3d41077a5ce57da2&language=fr-FR&include_adult=false&with_genres="+genres+"&page="+numeroPage;
+    let url = "https://api.themoviedb.org/3/discover/movie?api_key=108344e6b716107e3d41077a5ce57da2&language=fr-FR&include_adult=false&with_genres="+genre+"&page="+numeroPage;
     let request = new XMLHttpRequest();
     request.open("GET", url);
     request.responseType = "json";
@@ -487,7 +478,7 @@ class UtilisateurDAO {
         } else {
           // Parcourir les films de la page suivante
           numeroPage++;
-          utilisateurDAO.choisirFilmASwiper(genres, idUtilisateur, numeroPage);
+          utilisateurDAO.choisirFilmASwiper(genre, idUtilisateur, numeroPage);
         }
       }
     }
